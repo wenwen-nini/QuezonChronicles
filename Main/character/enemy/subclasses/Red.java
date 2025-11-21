@@ -10,6 +10,7 @@ public class Red extends Enemy{
 
     //PLAYERS MUST KILL THIS ENEMY BEFORE THE TIMER HITS 0 for balance have a lot of health
     private int tickingTimer = 5; // Countdown timer before explosion
+    private boolean hasExploded = false; // Track if explosion occurred
 
     public Red(Player player) {
         double levelScaler = (double) player.getLevel() / 4;
@@ -63,8 +64,13 @@ public class Red extends Enemy{
             
             // Red also dies from the explosion
             setHp(0);
+            hasExploded = true;
             String suicideText = getName() + " perishes in the explosion!";
             centerHub.printRightTextWithTypeWriter(textColor.YELLOW + suicideText + textColor.RESET);
         }
+    }
+
+    public boolean hasExploded() {
+        return hasExploded;
     }
 }

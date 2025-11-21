@@ -2,6 +2,7 @@ package Main.game;
 
 import java.util.Scanner;
 import Main.character.enemy.Enemy;
+import Main.character.enemy.subclasses.Red;
 import Main.character.player.Player;
 import Main.item.*;
 import Main.styles.printAlignmentHub.CenterHub;
@@ -121,11 +122,20 @@ public class BattleSystem {
         }
 
         if (!enemy.isAlive() && !player.isAlive()) {
+            // Check if Red exploded (special case - no rewards)
+            if (enemy instanceof Red && ((Red) enemy).hasExploded()) {
+                System.out.println(textColor.RED + "Both you and " + enemy.getName() + " perished in the explosion!" + textColor.RESET);
+                System.out.println(textColor.RED + "You gain no experience or loot from this battle!" + textColor.RESET);
+                player.resetProgress();
+                return;
+            }
+            
             System.out.println("Both you and " + enemy.getName() + " have fallen!");
             Item loot = enemy.dropLoot();
             if (loot != null) {
                 System.out.println("The " + enemy.getName() + " dropped " + loot.getName() + ", but you couldn't pick it up.");
             }
+            System.out.println(textColor.RED + "You gain no experience or loot from this battle!" + textColor.RESET);
             player.resetProgress();
             return;
         }
@@ -229,18 +239,30 @@ public class BattleSystem {
         enemy.enemyMove(player);
 
         if (!(enemy.isAlive())) {
-            player.addExp(enemy.getExpReward());
+            // Don't award exp if Red exploded (special case)
+            if (!(enemy instanceof Red && ((Red) enemy).hasExploded())) {
+                player.addExp(enemy.getExpReward());
+            }
         }
     }
 
     public void handleVictory(Player player, Enemy enemy) {
         // If both enemy and player died
         if (!enemy.isAlive() && !player.isAlive()) {
+            // Check if Red exploded (special case)
+            if (enemy instanceof Red && ((Red) enemy).hasExploded()) {
+                System.out.println(textColor.RED + "Both you and " + enemy.getName() + " perished in the explosion!" + textColor.RESET);
+                System.out.println(textColor.RED + "You gain no experience or loot from this battle!" + textColor.RESET);
+                player.resetProgress();
+                return;
+            }
+            
             System.out.println("Both you and " + enemy.getName() + " have fallen!");
             Item loot = enemy.dropLoot();
             if (loot != null) {
                 System.out.println("The " + enemy.getName() + " dropped " + loot.getName() + ", but you couldn't pick it up.");
             }
+            System.out.println(textColor.RED + "You gain no experience or loot from this battle!" + textColor.RESET);
             player.resetProgress();
             return;
         }

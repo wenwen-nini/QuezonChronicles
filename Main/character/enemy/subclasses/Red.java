@@ -11,8 +11,8 @@ public class Red extends Enemy{
     //PLAYERS MUST KILL THIS ENEMY BEFORE THE TIMER HITS 0 for balance have a lot of health
     private int tickingTimer = 5; // Countdown timer before explosion
 
-    public Red(Player player) {
-        double levelScaler = (double) player.getLevel() / 4;
+    public Red(int townIndex) {
+        double levelScaler = (townIndex + 1.0) / 2.0;
         setName("Bomb Devil Red");
         setMaxHp((int)Math.floor(85.0 * levelScaler));
         setHp((int)Math.floor(85.0 * levelScaler));

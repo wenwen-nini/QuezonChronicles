@@ -7,16 +7,17 @@ import Main.styles.printAlignmentHub.CenterHub;
 
 public class CoconutBrigade extends Enemy {
 
-    public CoconutBrigade() {
+    public CoconutBrigade(Player player) {
+        double levelScaler = (player.getLevel());
         setName("Coconut Brigade");
         // Mid game enemy - Town 3
-        setMaxHp(85);
-        setHp(85);
-        setAttackPower(16);
-        setDefense(6);
+        setMaxHp((int) (85 + Math.floor(levelScaler * 6 *1.6)));
+        setHp((int) (85 + Math.floor(levelScaler * 6 * 1.6)));
+        setAttackPower((int) (16 + Math.floor(levelScaler * 0.8 * 1.6)));
+        setDefense((int) (6 + Math.floor(levelScaler * 0.2 * 1.6)));
         setSpeed(8);
 
-        setExpReward(75);
+        setExpReward(100);
 
         setPossibleLoot(new Item[]{new Lambanog(), new Pinagong()});
     }

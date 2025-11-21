@@ -387,7 +387,7 @@ public class GameMenu {
             System.out.println("=====================================================================================================================================================");
             
             Town resumeTown = player.getChosenPath().equals("west") ? 
-                worldMap.buildWestPath() : worldMap.buildEastPath();
+                worldMap.buildWestPath(player) : worldMap.buildEastPath(player);
             
             // Navigate to the current town
             Town currentTown = resumeTown;
@@ -434,19 +434,19 @@ public class GameMenu {
             typeWriter.typeWriterFast(textColor.RED + "You chose the West Side path!" + textColor.RESET);
             player.setChosenPath("west");
             player.setCurrentTownIndex(0);
-            startingTown = worldMap.buildWestPath();
+            startingTown = worldMap.buildWestPath(player);
         } else if (choice == 2) {
             clearScreen.clear();
             typeWriter.typeWriterFast(textColor.BLUE + "You chose the East Side path!" + textColor.RESET);
             player.setChosenPath("east");
             player.setCurrentTownIndex(0);
-            startingTown = worldMap.buildEastPath();
+            startingTown = worldMap.buildEastPath(player);
         } else {
             clearScreen.clear();
             typeWriter.typeWriterFast("Invalid choice. Defaulting to West Side.");
             player.setChosenPath("west");
             player.setCurrentTownIndex(0);
-            startingTown = worldMap.buildWestPath();
+            startingTown = worldMap.buildWestPath(player);
         }
 
         startingTown.enterTown(player, 0);

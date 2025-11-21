@@ -7,17 +7,19 @@ import Main.styles.printAlignmentHub.CenterHub;
 
 public class SweetVendor extends Enemy {
 
-    public SweetVendor() {
+    public SweetVendor(Player player) {
         setName("Sweet Vendor Spirit");
+        
+        double levelScaler = (player.getLevel());
         // Mid-late game enemy - Town 4
-        setMaxHp(100);
-        setHp(100);
-        setAttackPower(21);
-        setDefense(8);
+        setMaxHp((int) (100 + Math.floor(levelScaler * 6 *1.9)));
+        setHp((int) (100 + Math.floor(levelScaler * 6 *1.9)));
+        setAttackPower((int) (21 + Math.floor(levelScaler * 0.8 * 1.9)));
+        setDefense((int) (8 + Math.floor(levelScaler * 0.2 * 1.9)));
         setSpeed(9);
 
         // Experience reward
-        setExpReward(90);
+        setExpReward(120);
 
         // Possible loot
         setPossibleLoot(new Item[]{new Bibingka(), new Panutsa()});

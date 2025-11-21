@@ -7,7 +7,7 @@ import Main.styles.printAlignmentHub.CenterHub;
 
 public class TiaongKnight extends Enemy {
 
-    public TiaongKnight() {
+    public TiaongKnight(Player player) {
         setName("Tiaong Knight");
         // Late game enemy - Town 5
         setMaxHp(120);

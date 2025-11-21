@@ -7,14 +7,15 @@ import Main.styles.printAlignmentHub.CenterHub;
 
 public class HarborSentinel extends Enemy {
 
-    public HarborSentinel() {
+    public HarborSentinel(Player player) {
         setName("Harbor Sentinel");
+        double levelScaler = (player.getLevel());
         // Miniboss - Town 2
-        setMaxHp(140);
-        setHp(140);
-        setAttackPower(20);
-        setDefense(8);
-        setSpeed(6);        
+        setMaxHp((int) (140 + Math.floor(levelScaler * 12 * 1.3)));
+        setHp((int) (140 + Math.floor(levelScaler * 12 * 1.3)));
+        setAttackPower((int) (20 + Math.floor(levelScaler * 0.8 * 1.3)));
+        setDefense((int) (8 + Math.floor(levelScaler * 0.2 * 1.3)));
+        setSpeed(6);
 
         setExpReward(150);
 

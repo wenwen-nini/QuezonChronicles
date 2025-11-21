@@ -7,13 +7,14 @@ import Main.styles.printAlignmentHub.CenterHub;
 
 public class DonMariano extends Enemy {
 
-    public DonMariano() {
+    public DonMariano(Player player) {
         setName("Don Mariano");
+        double levelScaler = player.getLevel();
         // Increased boss durability and loot value
-        setMaxHp(240);
-        setHp(240);
-        setAttackPower(28);
-        setDefense(12);
+        setMaxHp((int) (240 + Math.floor(player.getLevel() * 10 * 2.2)));
+        setHp((int) (240 + Math.floor(player.getLevel() * 10 * 2.2)));
+        setAttackPower((int) (28 + Math.floor(player.getLevel() * 0.8 * 2.2)));
+        setDefense((int) (12 + Math.floor(player.getLevel() * 0.2 * 2.2)));
         setSpeed(6);
         setSkillUsedTurn(2);
 

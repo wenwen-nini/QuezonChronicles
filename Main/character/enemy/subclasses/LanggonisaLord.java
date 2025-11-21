@@ -7,13 +7,14 @@ import Main.styles.printAlignmentHub.CenterHub;
 
 public class LanggonisaLord extends Enemy {
 
-    public LanggonisaLord() {
+    public LanggonisaLord(Player player) {
         setName("Langgonisa Lord");
+        double levelScaler = (player.getLevel());
         // Early game enemy - Town 1
-        setMaxHp(45);
-        setHp(45);
-        setAttackPower(8);
-        setDefense(2);
+        setMaxHp((int) (45 + Math.floor(levelScaler * 6 * 1.0)));
+        setHp((int) (45 + Math.floor(levelScaler * 6 * 1.0)));
+        setAttackPower((int) (8 + Math.floor(levelScaler * 0.8 * 1.0)));
+        setDefense((int)(2 + Math.floor(levelScaler * 0.2 * 1.0)));
         setSpeed(5);
 
         setExpReward(35);

@@ -7,16 +7,17 @@ import Main.styles.printAlignmentHub.CenterHub;
 
 public class HeritageWraith extends Enemy{
 
-    public HeritageWraith() {
+    public HeritageWraith(Player player) {
         setName("Heritage Wraith");
+        double levelScaler = (player.getLevel());
         // Mid game enemy - Town 3
-        setMaxHp(85);
-        setHp(85);
-        setAttackPower(16);
-        setDefense(6);
+        setMaxHp((int) (85 + Math.floor(levelScaler * 6 *1.6)));
+        setHp((int) (85 + Math.floor(levelScaler * 6 * 1.6)));
+        setAttackPower((int) (16 + Math.floor(levelScaler * 0.8 * 1.6)));
+        setDefense((int) (6 + Math.floor(levelScaler * 0.2 * 1.6)));
         setSpeed(8);
 
-        setExpReward(70);
+        setExpReward(100);
 
         // Possible loot
         setPossibleLoot(new Item[]{new Pinagong(), new Budin()});

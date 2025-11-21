@@ -7,13 +7,14 @@ import Main.styles.printAlignmentHub.CenterHub;
 
 public class LucenaPirate extends Enemy{
 
-    public LucenaPirate() {
+    public LucenaPirate(Player player) {
         setName("Lucena Pirate");
         // Early-mid game enemy - Town 2
-        setMaxHp(70);
-        setHp(70);
-        setAttackPower(14);
-        setDefense(5);
+        double levelScaler = (player.getLevel());
+        setMaxHp((int) (70 + Math.floor(levelScaler * 6 * 1.3)));
+        setHp((int) (70 + Math.floor(levelScaler * 6 * 1.3)));
+        setAttackPower((int) (14 + Math.floor(levelScaler * 0.8 * 1.3)));
+        setDefense((int) (5 + Math.floor(levelScaler * 0.2 * 1.3)));
         setSpeed(8);
 
         setExpReward(50);

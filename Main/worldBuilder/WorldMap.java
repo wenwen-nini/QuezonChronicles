@@ -3,6 +3,7 @@ package Main.worldBuilder;
 import Main.character.enemy.Enemy;
 import Main.character.enemy.subclasses.*;
 import Main.styles.textColor.TextColorHub;
+import Main.character.player.Player;
 
 public class WorldMap {
        
@@ -60,22 +61,22 @@ public class WorldMap {
                                         "entities roam. Few who venture eastward ever return, and those who do speak of colossal shapes beneath the waves and voices that echo from the deep.\n" + 
                                         "Real is a place for the brave… or the desperate.";
 
-    public static Town buildWestPath() {
+    public static Town buildWestPath(Player player) {
 
         Town lucban = new Town("Lucban", lucbanDescription,
-                new Enemy[]{new TanimGuardian(), new HabhabBandit(), new LanggonisaLord()}, null);
+                new Enemy[]{new TanimGuardian(player), new HabhabBandit(player), new LanggonisaLord(player)}, null);
 
         Town lucena = new Town("Lucena", lucenaDescription,
-                new Enemy[]{new PortRat(), new LucenaPirate()}, new HarborSentinel());
+                new Enemy[]{new PortRat(player), new LucenaPirate(player)}, new HarborSentinel(player));
 
         Town sariaya = new Town("Sariaya", sariayaDescription,
-                new Enemy[]{new BakeryGremlin(), new HeritageWraith(), new CoconutBrigade()}, null);
+                new Enemy[]{new BakeryGremlin(player), new HeritageWraith(player), new CoconutBrigade(player)}, null);
 
         Town candelaria = new Town("Candelaria", candelariaDescription,
-                new Enemy[]{new BibingkaElemental(), new SweetVendor(), new FlamingCandelarian()}, null);
+                new Enemy[]{new BibingkaElemental(player), new SweetVendor(player), new FlamingCandelarian(player)}, null);
 
         Town tiaong = new Town("Tiaong", tiaongDescription,
-                new Enemy[]{new PugonPhantom(), new TiaongKnight()}, new DonMariano());
+                new Enemy[]{new PugonPhantom(player), new TiaongKnight(player)}, new DonMariano(player));
 
         // Link sequence
         lucban.setNextTown(lucena);
@@ -86,7 +87,7 @@ public class WorldMap {
         return lucban;
     }
 
-    public static Town buildEastPath() {
+    public static Town buildEastPath(Player player) {
         Town gumaca = new Town("Gumaca", gumacaDescription,
                 new Enemy[]{new FestivalMask(), new KipingGolem(), new Sirena()}, null);
 

@@ -5,9 +5,9 @@
 **A Quezon Province-Inspired Console RPG Adventure**  
 
 <b>IT-2108:</b><br>
-Aguho, Alwynn<br>
+Aguho, Alwynn L.<br>
 Jamilano, John Red S.<br>
-Cortuna, Nhel Edward<br>
+Cortuna, Nhel Eduard B.<br>
 Mapalad, Nell John Cedrick J.<br>
 </div>
 

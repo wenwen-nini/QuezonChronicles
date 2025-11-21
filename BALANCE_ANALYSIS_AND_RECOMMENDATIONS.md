@@ -89,6 +89,7 @@ The game currently has **5 player classes** and **35+ enemy subclasses** distrib
 - **Scaling:** Mixed - most static, some level-scaled
 - **Examples:** BakeryGremlin (85 HP, 16 ATK), HeritageWraith (85 HP, 16 ATK)
 - **Issue:** Difficulty spike between towns is not managed properly
+- **Exceptions:** Eduard and Nell are excluded from scaling adjustments
 
 #### **Tier 3: Boss Enemies (Every 5th town + final)**
 - **Expected Level Range:** Varies
@@ -99,10 +100,12 @@ The game currently has **5 player classes** and **35+ enemy subclasses** distrib
   - HarborSentinel - UNKNOWN (not examined)
 
 #### **Special Cases: Level-Scaled Enemies**
-- **Alwynn**: `HP = 85 * (playerLevel / 4)`, `ATK = 10 * (playerLevel / 4)`
-- **Red**: `HP = 85 * (playerLevel / 4)`, `ATK = 16 * (playerLevel / 4)`
+- **Alwynn**: `HP = 85 * (playerLevel / 4)`, `ATK = 10 * (playerLevel / 4)` **(EXCLUDED from adjustments)**
+- **Red**: `HP = 85 * (playerLevel / 4)`, `ATK = 16 * (playerLevel / 4)` **(EXCLUDED from adjustments)**
 
-**Major Issue:** Only 2 out of 35+ enemies use level scaling! This is a CRITICAL problem.
+**Note:** Eduard and Nell are also excluded from proposed scaling adjustments.
+
+**Major Issue:** Only 2 out of 35+ enemies use level scaling! This is a CRITICAL problem (excluding 4 exempted enemies, only ~31 enemies need scaling implementation).
 
 ### Enemy Difficulty Analysis
 
@@ -112,8 +115,10 @@ The game currently has **5 player classes** and **35+ enemy subclasses** distrib
 | Sirena | 45 | 8 | 2 | 5 | No | 35 | ❌ None |
 | BakeryGremlin | 85 | 16 | 6 | 8 | No | 60 | ❌ None |
 | HeritageWraith | 85 | 16 | 6 | 8 | No | 70 | ❌ None |
-| Alwynn | 85×(L/4) | 10×(L/4) | 6 | 8 | No | 350 | ✓ Level |
-| Red | 85×(L/4) | 16×(L/4) | 6 | 8 | No | 500 | ✓ Level |
+| Alwynn | 85×(L/4) | 10×(L/4) | 6 | 8 | No | 350 | ✓ Level (EXCLUDED) |
+| Red | 85×(L/4) | 16×(L/4) | 6 | 8 | No | 500 | ✓ Level (EXCLUDED) |
+| Eduard | TBD | TBD | TBD | TBD | No | TBD | (EXCLUDED) |
+| Nell | TBD | TBD | TBD | TBD | No | TBD | (EXCLUDED) |
 | DonMariano | 240 | 28 | 12 | 6 | Yes | 2000 | ❌ None |
 | QueenAmihan | 240 | 28 | 12 | 20 | Yes | 3000 | ❌ None |
 
@@ -362,6 +367,7 @@ Randomly select tier based on:
 
 ### 🔴 CRITICAL (Do First)
 1. **Implement Enemy Level Scaling** - Without this, content is unbalanced
+   - **Applies to:** All enemies EXCEPT Eduard, Alwynn, Red, and Nell
 2. **Fix Boss Stats** - Prevent instant-deaths or trivial wins
 3. **Normalize Class Speed Growth** - Turn order is fundamental to balance
 

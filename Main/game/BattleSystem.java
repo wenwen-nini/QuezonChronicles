@@ -241,6 +241,7 @@ public class BattleSystem {
             if (loot != null) {
                 System.out.println("The " + enemy.getName() + " dropped " + loot.getName() + ", but you couldn't pick it up.");
             }
+            player.resetProgress();
             return;
         }
         // If enemy is dead and player is alive -> normal victory

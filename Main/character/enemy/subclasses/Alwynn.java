@@ -26,10 +26,11 @@ public class Alwynn extends Enemy{
     @Override
     public void enemyMove(Player player) {
         String text = getName() + " uses Quezon Zigzag Fury!";
-        centerHub.printRightTextWithTypeWriter(text);
+        centerHub.printRightTextWithTypeWriter(textColor.GREEN + text + textColor.RESET);
         
         String confuseText = getName() + " dashes in a chaotic zigzag pattern, confusing " + player.getName() + " before striking multiple times!";
-        centerHub.printRightTextWithTypeWriter(confuseText);
+        centerHub.printRightTextWithTypeWriter(textColor.GREEN + confuseText + textColor.RESET);
+        centerHub.printRightTextWithTypeWriter(textColor.GREEN + "Marceline toh boy!" + textColor.RESET);
 
         int numberOfHits = 3;
         int totalDamage = 0;

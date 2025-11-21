@@ -8,7 +8,7 @@ public class TypeWriter {
         for (char c : text.toCharArray()) {
             System.out.print(c);
             try {
-                Thread.sleep(1);
+                Thread.sleep(13);
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
             }

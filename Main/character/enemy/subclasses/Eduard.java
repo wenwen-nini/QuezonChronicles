@@ -26,10 +26,10 @@ public class Eduard extends Enemy{
     @Override
     public void enemyMove(Player player) {
         String text = getName() + " uses Aladdin's Carpet Specter!";
-        centerHub.printRightTextWithTypeWriter(text);
+        centerHub.printRightTextWithTypeWriter(textColor.ORANGE + text + textColor.RESET);
         
         String attackText = getName() + " dives on its flying carpet and crashes into " + player.getName() + " with force!";
-        centerHub.printRightTextWithTypeWriter(attackText);
+        centerHub.printRightTextWithTypeWriter(textColor.ORANGE + attackText + textColor.RESET);
 
         int baseDamage = getAttackPower();// High attack power
         if (baseDamage < 0) baseDamage = 0;

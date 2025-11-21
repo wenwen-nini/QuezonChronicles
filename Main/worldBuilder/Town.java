@@ -85,25 +85,25 @@ public class Town {
             switch (choice) {
                 case 1:
                     double chances = Math.random();
-                    if (chances <= 1 && enemiesDefeated < (enemies != null ? enemies.length : 0)) { //FOR SPECIAL ENEMY SPAWN
+                    if (chances <= 0.10 && enemiesDefeated < (enemies != null ? enemies.length : 0)) { //FOR SPECIAL ENEMY SPAWN
                         clearScreen.clear();
                         double bossChance = Math.random();
                         if (bossChance <= 0.25) {
-                            Enemy enemy = new Alwynn(player);
+                            Enemy enemy = new Alwynn(townIndex);
                             text = "A wild " + enemy.getName() + " appeared!";
                             typeWriter.typeWriterFast(textColor.GREEN + text + textColor.RESET);
                             typeWriter.typeWriterFast(textColor.GREEN + "Bro followed you all the way from the Atimonan!" + textColor.RESET);
                             new BattleSystem().BattleStart(player, enemy);
                         }
                         else if (bossChance > 0.25 && bossChance <= 0.5) {
-                            Enemy enemy = new Eduard(player);
+                            Enemy enemy = new Eduard(townIndex);
                             text = "A wild " + enemy.getName() + " appeared!";
                             typeWriter.typeWriterFast(textColor.ORANGE + text + textColor.RESET);
                             typeWriter.typeWriterFast(textColor.ORANGE + "Careful—he might try to bargain, charm, or steal your loot." + textColor.RESET);
                             new BattleSystem().BattleStart(player, enemy);
                         }
                         else if (bossChance > 0.5 && bossChance <= 0.75) {
-                            Enemy enemy = new Nell(player);
+                            Enemy enemy = new Nell(townIndex);
                             text = "A wild " + enemy.getName() + " appeared!";
                             typeWriter.typeWriterFast(textColor.CYAN + text + textColor.RESET);
                             typeWriter.typeWriterFast(textColor.CYAN + "You didn’t see him coming—he’s from Sariaya, after all." + textColor.RESET);
@@ -111,7 +111,7 @@ public class Town {
                         }
 
                         else if (bossChance > 0.75 && bossChance <= 1) {
-                            Enemy enemy = new Red(player);
+                            Enemy enemy = new Red(townIndex);
                             text = "A wild " + enemy.getName() + " appeared!";
                             typeWriter.typeWriterFast(textColor.RED + text + textColor.RESET);
                             typeWriter.typeWriterFast(textColor.RED + "A rumble echoes... sparks ignite..."+ textColor.RESET);

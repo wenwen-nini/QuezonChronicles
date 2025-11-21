@@ -8,8 +8,8 @@ import Main.styles.textColor.TextColorHub;
 
 public class Alwynn extends Enemy{
 
-    public Alwynn(Player player) {
-        double levelScaler = (double) player.getLevel() / 4;
+    public Alwynn(int townIndex) {
+        double levelScaler = (townIndex + 1.0) / 2.0;
         setName("All in Alwynn");
         setMaxHp((int)Math.floor(85.0 * levelScaler));
         setHp((int)Math.floor(85.0 * levelScaler));

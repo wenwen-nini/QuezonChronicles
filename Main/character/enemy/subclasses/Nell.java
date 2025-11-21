@@ -8,8 +8,8 @@ import Main.styles.textColor.TextColorHub;
 
 public class Nell extends Enemy{
 
-    public Nell(Player player) {
-        double levelScaler = (double) player.getLevel() / 4;
+    public Nell(int townIndex) {
+        double levelScaler = (townIndex + 1.0) / 2.0;
         setName("Sariayan Ninja Nell");
         setMaxHp((int)Math.floor(85.0 * levelScaler));
         setHp((int)Math.floor(85.0 * levelScaler));

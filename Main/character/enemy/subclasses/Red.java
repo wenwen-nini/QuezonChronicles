@@ -12,8 +12,8 @@ public class Red extends Enemy{
     private int tickingTimer = 5; // Countdown timer before explosion
     private boolean hasExploded = false; // Track if explosion occurred
 
-    public Red(Player player) {
-        double levelScaler = (double) player.getLevel() / 4;
+    public Red(int townIndex) {
+        double levelScaler = (townIndex + 1.0) / 2.0;
         setName("Bomb Devil Red");
         setMaxHp((int)Math.floor(85.0 * levelScaler));
         setHp((int)Math.floor(85.0 * levelScaler));

@@ -126,12 +126,14 @@ public class BattleSystem {
             if (loot != null) {
                 System.out.println("The " + enemy.getName() + " dropped " + loot.getName() + ", but you couldn't pick it up.");
             }
+            player.resetProgress();
             return;
         }
 
         handleVictory(player, enemy);
 
         if (!player.isAlive()) {
+            player.resetProgress();
             System.out.println(textColor.RED + "Game over! You have been slained!" + textColor.RESET);
             return;
         }

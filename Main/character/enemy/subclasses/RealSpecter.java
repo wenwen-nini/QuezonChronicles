@@ -7,13 +7,14 @@ import Main.styles.printAlignmentHub.CenterHub;
 
 public class RealSpecter extends Enemy {
 
-    public RealSpecter() {
+    public RealSpecter(Player player) {
         setName("Real Specter");
+        double levelScaler = (player.getLevel());
         // Late game enemy - Town 5 (East)
-        setMaxHp(120);
-        setHp(120);
-        setAttackPower(25);
-        setDefense(10);
+        setMaxHp((int) (120 + Math.floor(levelScaler * 6 * 2.2)));
+        setHp((int) (120 + Math.floor(levelScaler * 6 * 2.2)));
+        setAttackPower((int) (26 + Math.floor(levelScaler * 0.8 * 2.2)));
+        setDefense((int) (10 + Math.floor(levelScaler * 0.2 * 2.2)));
         setSpeed(10);
 
         setExpReward(120);

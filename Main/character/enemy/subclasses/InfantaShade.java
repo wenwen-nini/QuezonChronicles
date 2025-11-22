@@ -7,13 +7,14 @@ import Main.styles.printAlignmentHub.CenterHub;
 
 public class InfantaShade extends Enemy {
 
-    public InfantaShade() {
+    public InfantaShade(Player player) {
         setName("Infanta Shade");
+        double levelScaler = (player.getLevel());
         // Mid-late game enemy - Town 4 (East)
-        setMaxHp(100);
-        setHp(100);
-        setAttackPower(21);
-        setDefense(8);
+        setMaxHp((int) (100 + Math.floor(levelScaler * 6 *1.9)));
+        setHp((int) (100 + Math.floor(levelScaler * 6 *1.9)));
+        setAttackPower((int) (21 + Math.floor(levelScaler * 0.8 * 1.9)));
+        setDefense((int) (8 + Math.floor(levelScaler * 0.2 * 1.9)));
         setSpeed(9);
 
         setExpReward(95);

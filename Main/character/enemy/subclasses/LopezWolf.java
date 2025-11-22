@@ -7,13 +7,14 @@ import Main.styles.printAlignmentHub.CenterHub;
 
 public class LopezWolf extends Enemy{
 
-    public LopezWolf() {
+    public LopezWolf(Player player) {
         setName("Lopez Wolf");
+        double levelScaler = (player.getLevel());
         // Early-mid game enemy - Town 2 (East)
-        setMaxHp(70);
-        setHp(70);
-        setAttackPower(14);
-        setDefense(5);
+        setMaxHp((int) (70 + Math.floor(levelScaler * 6 * 1.3)));
+        setHp((int) (70 + Math.floor(levelScaler * 6 * 1.3)));
+        setAttackPower((int) (14 + Math.floor(levelScaler * 0.8 * 1.3)));
+        setDefense((int) (5 + Math.floor(levelScaler * 0.2 * 1.3)));
         setSpeed(8);
 
         setExpReward(50);

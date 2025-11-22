@@ -7,8 +7,9 @@ import Main.styles.printAlignmentHub.CenterHub;
 
 public class FestivalMask extends Enemy {
 
-    public FestivalMask() {
+    public FestivalMask(Player player) {
         setName("Festival Mask");
+        double levelScaler = (player.getLevel());
         // Early game enemy - Town 1 (East)
         setMaxHp(45);
         setHp(45);

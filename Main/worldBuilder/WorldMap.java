@@ -89,19 +89,19 @@ public class WorldMap {
 
     public static Town buildEastPath(Player player) {
         Town gumaca = new Town("Gumaca", gumacaDescription,
-                new Enemy[]{new FestivalMask(), new KipingGolem(), new Sirena()}, null);
+                new Enemy[]{new FestivalMask(player), new KipingGolem(player), new Sirena(player)}, null);
 
         Town lopez = new Town("Lopez", lopezDescription,
-                new Enemy[]{new SumanMimic(), new LopezWolf()}, new OldTrainSpirit());
+                new Enemy[]{new SumanMimic(player), new LopezWolf(player)}, new OldTrainSpirit(player));
 
         Town calauag = new Town("Calauag", calauagDescription,
-                new Enemy[]{new FisherRogue(), new SeaWidow(), new CalauagBandit()}, null);
+                new Enemy[]{new FisherRogue(player), new SeaWidow(player), new CalauagBandit(player)}, null);
 
         Town infanta = new Town("Infanta", infantaDescription,
-                new Enemy[]{new ForestNymph(), new HoneyGuardian(), new InfantaShade()}, null);
+                new Enemy[]{new ForestNymph(player), new HoneyGuardian(player), new InfantaShade(player)}, null);
 
         Town real = new Town("Real", realDescription,
-                new Enemy[]{new WaveFiend(), new RealSpecter()}, new QueenAmihan());
+                new Enemy[]{new WaveFiend(player), new RealSpecter(player)}, new QueenAmihan(player));
 
         // Link sequence
         gumaca.setNextTown(lopez);

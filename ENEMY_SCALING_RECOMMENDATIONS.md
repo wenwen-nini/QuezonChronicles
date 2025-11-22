@@ -208,6 +208,32 @@ Expected at Level 5: HP: 200, ATK: 26, DEF: 10
 
 Justification: Minibosses should be 2-2.5x harder than regular enemies
 ```
+
+---
+
+#### Enemy: OldTrainSpirit (MINIBOSS)
+**Current Stats:** HP: 160, ATK: 28, DEF: 11, SPD: 5
+**Analysis:** Strong miniboss with stun + charge damage (Town 2 boss)
+**Recommendation:**
+```
+Base Stats:
+  HP: 160
+  ATK: 28
+  DEF: 11
+  SPD: 5
+  Exp: 400
+
+Scaling Formula (Miniboss - different curve):
+  HP = 160 + (playerLevel * 16)
+  ATK = 28 + (playerLevel * 1.5)
+  DEF = 11 + (playerLevel * 0.4)
+  SPD = 5 (Fixed)
+
+Expected at Level 5: HP: 240, ATK: 36, DEF: 13
+
+Justification: 2.5-3x harder than regular Tier 2 enemies
+This should be challenging but possible at level 5-6
+```
 ---
 
 ### TIER 3 ENEMIES (Town 3 - Level 6-8)

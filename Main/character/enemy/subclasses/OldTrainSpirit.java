@@ -7,13 +7,14 @@ import Main.styles.printAlignmentHub.CenterHub;
 
 public class OldTrainSpirit extends Enemy {
 
-    public OldTrainSpirit() {
+    public OldTrainSpirit(Player player) {
         setName("Old Train Spirit");
+        double levelScaler = (player.getLevel());
         // Tougher miniboss with stun and charge
-        setMaxHp(160);
-        setHp(160);
-        setAttackPower(28);
-        setDefense(11);
+        setMaxHp((int) (160 + Math.floor(levelScaler * 6 * 1.3)));
+        setHp((int) (160 + Math.floor(levelScaler * 6 * 1.3)));
+        setAttackPower((int) (28 + Math.floor(levelScaler * 0.8 * 1.3)));
+        setDefense((int) (11 + Math.floor(levelScaler * 0.2 * 1.3)));
         setSpeed(5);
 
         setExpReward(400);

@@ -17,7 +17,7 @@ public class Eduard extends Enemy{
         setDefense(6);
         setSpeed(8);
 
-        setExpReward(330);
+        setExpReward(100);
 
         // Possible loot
         setPossibleLoot(new Item[]{new MountainHoney(), new Turon()});

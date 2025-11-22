@@ -17,7 +17,7 @@ public class Alwynn extends Enemy{
         setDefense(6);
         setSpeed(8);
 
-        setExpReward(350);
+        setExpReward(100);
 
         // Possible loot
         setPossibleLoot(new Item[]{new Chami(), new CocoJam()});

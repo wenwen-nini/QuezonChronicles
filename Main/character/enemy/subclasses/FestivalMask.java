@@ -17,7 +17,7 @@ public class FestivalMask extends Enemy {
         setSpeed(5);
         setSkillUsedTurn(2);
 
-        setExpReward(25);
+        setExpReward(50);
 
         // Possible loot
         setPossibleLoot(new Item[]{new Tinuto(), new PugonCoffee()});

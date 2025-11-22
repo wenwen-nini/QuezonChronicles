@@ -127,8 +127,8 @@ public class Thief extends Player{
         // Thief gains small max HP and stamina but grows in speed and critical damage
         setMaxHp(getMaxHp() + 7);
         setHp(getHp() + 7);
-        setStamina(getStamina() + 4);
-        setMaxStamina(getMaxStamina() + 4);
+        setStamina(getStamina() + 6);
+        setMaxStamina(getMaxStamina() + 6);
         setDefense(getDefense() + 1);
         setAttackPower(getAttackPower() + 3);
         setSpeed(getSpeed() + 1);

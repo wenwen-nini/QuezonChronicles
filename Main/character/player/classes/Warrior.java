@@ -13,20 +13,20 @@ public class Warrior extends Player{
 
     public Warrior(String name){
         setName(name);
-        // Balanced base stats for Warrior (tank)
-        setMaxHp(140);
-        setHp(140);
-        setStamina(50);
-        setMaxStamina(50);
-        setDefense(12);
-        setAttackPower(16);
-        setSpeed(5);
+        
+        setMaxHp(120);
+        setHp(120);
+        setStamina(30);
+        setMaxStamina(30);
+        setDefense(10);
+        setAttackPower(14);
+        setSpeed(6);
         description =
                 "Forged in battle and tempered by hardship, the Warrior stands as the steadfast heart of every fight. Born from the rugged hills and wide plains,\n" +
                 "Warriors embody the courage of those who fight not for glory, but for karangalan (honor) and kapwa (others).";
 
         // Capture base stats for proper reset behavior
-        setBaseStats(140, 50, 50, 0, 0, 12, 16, 5);
+        setBaseStats(120, 30, 30, 0, 0, 10, 14, 6);
         setUsesMp(false);
 
         setMoves(new String[] {"1. Slash(Basic + no stamina required.)",
@@ -131,8 +131,8 @@ public class Warrior extends Player{
         // Warrior grows in HP and stamina quickly, modest increases in damage and defense
         setMaxHp(getMaxHp() + 12);
         setHp(getHp() + 12);
-        setStamina(getStamina() + 5);
-        setMaxStamina(getMaxStamina() + 5);
+        setStamina(getStamina() + 6);
+        setMaxStamina(getMaxStamina() + 6);
         setDefense(getDefense() + 2);
         setAttackPower(getAttackPower() + 2);
         setSpeed(getSpeed() + 0);

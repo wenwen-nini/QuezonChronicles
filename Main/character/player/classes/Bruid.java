@@ -14,10 +14,10 @@ public class Bruid extends Player {
 	public Bruid(String name) {
 		setName(name);
 		// Balanced base stats for Bruid (support / hybrid)
-		setMaxHp(100);
-		setHp(100);
-		setMp(80);
-		setMaxMp(80);
+		setMaxHp(90);
+		setHp(90);
+		setMp(70);
+		setMaxMp(70);
 		setDefense(8);
 		setAttackPower(14);
 		setSpeed(6);
@@ -27,7 +27,7 @@ public class Bruid extends Player {
 				"They are both protectors and pranksters of the wild, often seen communing with their leafy kin while humming folk tunes from the provinces.";
 
 		// Capture base stats for proper reset behavior
-		setBaseStats(100, 0, 0, 80, 80, 8, 14, 6);
+		setBaseStats(90, 0, 0, 70, 70, 8, 14, 6);
 		setUsesMp(true);
    
   		setMoves(new String[] {"1. Banana Strike (Basic + no mana required)", 
@@ -127,8 +127,8 @@ public class Bruid extends Player {
 		// Bruid grows moderately in HP & MP and increases defense and attack steadily
 		setMaxHp(getMaxHp() + 9);
 		setHp(getHp() + 9);
-		setMp(getMp() + 7);
-		setMaxMp(getMaxMp() + 7);
+		setMp(getMp() + 8);
+		setMaxMp(getMaxMp() + 8);
 		setDefense(getDefense() + 2);
 		setAttackPower(getAttackPower() + 2);
 		setSpeed(getSpeed() + 0);

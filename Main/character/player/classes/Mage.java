@@ -16,8 +16,8 @@ public class Mage extends Player {
       // Balanced base stats for Mage (glass cannon / caster)
       setMaxHp(70);
       setHp(70);
-      setMp(120);
-      setMaxMp(120);
+      setMp(80);
+      setMaxMp(80);
       setDefense(6);
       setAttackPower(14);
       setSpeed(18);
@@ -27,13 +27,13 @@ public class Mage extends Player {
             "Mages have discovered the secret arcane energy within pastries and pastries alone.";
 
       // Capture base stats for proper reset behavior
-      setBaseStats(70, 0, 0, 120, 120, 6, 14, 18);
+      setBaseStats(70, 0, 0, 80, 80, 6, 14, 18);
       setUsesMp(true);
    
   		setMoves(new String[] {"1. Fire Ball (Basic + no mana required)", 
    			"2. LambaShield (Creates a barrier that reduces incoming damage by 30% for 2 turns. 10 MP)", 
             "3. Mana Surge (Regenerates 25 MP instantly.)",
-            "4. Pinagong Storm (Calls down hard pinagong breads on all enemies, deals heavy damage. 18 MP)"});
+            "4. Pinagong Storm (Calls down hard pinagong breads on all enemies, deals heavy damage. 15 MP)"});
    }
 
 	@Override
@@ -79,8 +79,8 @@ public class Mage extends Player {
             }
 
          case 4:
-            if (getMp() >= 18) {
-               setMp(getMp() - 18);
+            if (getMp() >= 15) {
+               setMp(getMp() - 15);
                text = "\n" + getName() + " cast a Pinagong Storm!";
                typeWriter.typeWriterFast(text);
                int damage = getAttackPower() + (int)(getAttackPower() * 0.5);

@@ -16,7 +16,7 @@ public class KipingGolem extends Enemy {
         setDefense(2);
         setSpeed(5);
 
-        setExpReward(30);
+        setExpReward(50);
 
         // Possible loot
         setPossibleLoot(new Item[]{new Tinuto(), new PugonCoffee()});

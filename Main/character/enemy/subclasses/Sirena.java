@@ -17,7 +17,7 @@ public class Sirena extends Enemy {
         setSpeed(5);
         setSkillUsedTurn(3);
 
-        setExpReward(35);
+        setExpReward(50);
 
         // Possible loot
         setPossibleLoot(new Item[]{new Tinuto(), new PugonCoffee()});

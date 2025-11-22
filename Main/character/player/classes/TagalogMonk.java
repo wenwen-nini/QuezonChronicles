@@ -19,7 +19,7 @@ public class TagalogMonk extends Player {
       setStamina(50);
       setMaxStamina(50);
       setDefense(8);
-      setAttackPower(18);
+      setAttackPower(15);
       setSpeed(8);
       description =
                "Steeped in the ancient traditions of the Tagalog highlands and lowlands, the Tagalog Monk embodies harmony between body, spirit, and the land.\n" +
@@ -133,10 +133,10 @@ public class TagalogMonk extends Player {
       // Monk grows in HP and stamina and gains attack steadily
       setMaxHp(getMaxHp() + 10);
       setHp(getHp() + 10);
-      setStamina(getStamina() + 4);
-         setMaxStamina(getMaxStamina() + 4);
+      setStamina(getStamina() + 5);
+         setMaxStamina(getMaxStamina() + 5);
       setDefense(getDefense() + 1);
-      setAttackPower(getAttackPower() + 3);
+      setAttackPower(getAttackPower() + 2);
       setSpeed(getSpeed() + 0);
 	}
 

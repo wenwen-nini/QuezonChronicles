@@ -54,7 +54,7 @@ public class Thief extends Player{
                     text = "\n" + getName() + " used Critical Edge!";
                     typeWriter.typeWriterFast(text);
                     setStamina(getStamina() - 10);
-                    target.takeDamage(getAttackPower() * 1.5);
+                    target.takeDamage((int)(getAttackPower() * 1.3));
                     skillUsedTurn();
                     setLastActionSucceeded(true);
                 }

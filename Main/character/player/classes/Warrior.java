@@ -16,17 +16,17 @@ public class Warrior extends Player{
         
         setMaxHp(120);
         setHp(120);
-        setStamina(30);
-        setMaxStamina(30);
-        setDefense(10);
-        setAttackPower(14);
+        setStamina(60);
+        setMaxStamina(60);
+        setDefense(9);
+        setAttackPower(9);
         setSpeed(6);
         description =
                 "Forged in battle and tempered by hardship, the Warrior stands as the steadfast heart of every fight. Born from the rugged hills and wide plains,\n" +
                 "Warriors embody the courage of those who fight not for glory, but for karangalan (honor) and kapwa (others).";
 
         // Capture base stats for proper reset behavior
-        setBaseStats(120, 30, 30, 0, 0, 10, 14, 6);
+        setBaseStats(120, 60, 60, 0, 0, 9, 9, 6);
         setUsesMp(false);
 
         setMoves(new String[] {"1. Slash(Basic + no stamina required.)",

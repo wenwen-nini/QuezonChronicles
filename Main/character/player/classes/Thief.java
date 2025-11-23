@@ -14,13 +14,13 @@ public class Thief extends Player{
     public Thief(String name){
         setName(name);
         // Balanced base stats for Thief (high speed & crit, glassy)
-        setMaxHp(85);
-        setHp(85);
+        setMaxHp(70);
+        setHp(70);
         setStamina(60);
         setMaxStamina(60);
-        setDefense(5);
-        setAttackPower(18);
-        setSpeed(14);
+        setDefense(3);
+        setAttackPower(15);
+        setSpeed(15);
         description =
                 "Swift, sly, and sharp as a blade hidden beneath a cloak, the Thief dances between the lines of law and survival.\n" +
                 "Born from the bustling streets, back alleys, and midnight markets, Thieves are experts in deception, timing, and taking what the world refuses to give.\n\n" +
@@ -29,7 +29,7 @@ public class Thief extends Player{
                 "In a world ruled by power, the Thief survives through diskarte.";
 
         // Capture base stats for proper reset behavior
-        setBaseStats(85, 60, 60, 0, 0, 5, 18, 14);
+        setBaseStats(70, 60, 60, 0, 0, 3, 15, 15);
         setUsesMp(false);
 
         setMoves(new String[] {"1. Stab (Basic + no stamina required)",
@@ -54,7 +54,7 @@ public class Thief extends Player{
                     text = "\n" + getName() + " used Critical Edge!";
                     typeWriter.typeWriterFast(text);
                     setStamina(getStamina() - 10);
-                    target.takeDamage(getAttackPower() * 2);
+                    target.takeDamage(getAttackPower() * 1.5);
                     skillUsedTurn();
                     setLastActionSucceeded(true);
                 }

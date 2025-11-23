@@ -16,18 +16,18 @@ public class TagalogMonk extends Player {
       // Balanced base stats for Tagalog Monk (balanced melee hybrid)
       setMaxHp(110);
       setHp(110);
-      setStamina(50);
-      setMaxStamina(50);
+      setStamina(60);
+      setMaxStamina(60);
       setDefense(8);
-      setAttackPower(15);
-      setSpeed(8);
+      setAttackPower(9);
+      setSpeed(5);
       description =
                "Steeped in the ancient traditions of the Tagalog highlands and lowlands, the Tagalog Monk embodies harmony between body, spirit, and the land.\n" +
                "Guided by pananampalataya (faith) and disiplina (discipline), these warriors channel the strength of their ancestors\n" +
                "from the mountains of the North to the plains of the heart of Luzon.";
 
       // Capture base stats for proper reset behavior
-      setBaseStats(110, 50, 50, 0, 0, 8, 18, 8);
+      setBaseStats(110, 60, 60, 0, 0, 8, 9, 5);
       setUsesMp(false);
    
   		setMoves(new String[] {"1. Suntok ni Apo (basic + no stamina required)", 

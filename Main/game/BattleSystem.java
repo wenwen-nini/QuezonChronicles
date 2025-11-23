@@ -23,6 +23,20 @@ public class BattleSystem {
 
     public BattleSystem() { }
 
+    // Calculate exp with RNG multiplier (1.5 to 2.0) and town multiplier
+    private int calculateExpReward(Player player, Enemy enemy) {
+        int baseExp = enemy.getExpReward();
+        double rngMultiplier = 1.5 + (Math.random() * 0.5); // Random between 1.5 and 2.0
+        
+        // Town multiplier: Town 0 = 1.0x, Town 1 = 1.3x, Town 2 = 1.6x, Town 3 = 1.9x, Town 4 = 2.2x
+        float[] townMultipliers = {1.0f, 1.3f, 1.6f, 1.9f, 2.2f};
+        int townIndex = Math.min(player.getCurrentTownIndex(), 4); // Cap at index 4
+        float townMultiplier = townMultipliers[townIndex];
+        
+        int finalExp = (int)(baseExp * rngMultiplier * townMultiplier);
+        return finalExp;
+    }
+
     public void BattleStart(Player player, Enemy enemy) {
 
         boolean playerInitiative = false;
@@ -241,7 +255,8 @@ public class BattleSystem {
         if (!(enemy.isAlive())) {
             // Don't award exp if Red exploded (special case)
             if (!(enemy instanceof Red && ((Red) enemy).hasExploded())) {
-                player.addExp(enemy.getExpReward());
+                int expAwarded = calculateExpReward(player, enemy);
+                player.addExp(expAwarded);
             }
         }
     }
@@ -271,8 +286,9 @@ public class BattleSystem {
             clearScreen.clear();
             String text = "You defeated " + enemy.getName() + "!";
             typeWriter.typeWriterFast(textColor.GREEN + text + textColor.RESET); 
-            player.addExp(enemy.getExpReward());
-            text = "You gained " + enemy.getExpReward() + " Exp from the battle!";
+            int expAwarded = calculateExpReward(player, enemy);
+            player.addExp(expAwarded);
+            text = "You gained " + expAwarded + " Exp from the battle!";
             typeWriter.typeWriterFast(textColor.PURPLE + text + textColor.RESET);
             Item loot = enemy.dropLoot();
             if (loot != null) {

@@ -17,7 +17,7 @@ public class Jm extends Enemy {
         setDefense(12);
         setSpeed(15);
 
-        setExpReward(100);
+        setExpReward(300);
 
         setPossibleLoot(new Item[]{new SinigangHipon(), new TropicalBreezeJuice()});
     }

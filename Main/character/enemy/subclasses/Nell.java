@@ -17,7 +17,7 @@ public class Nell extends Enemy{
         setDefense(3);
         setSpeed(8);
 
-        setExpReward(100);
+        setExpReward(300);
 
         // Possible loot
         setPossibleLoot(new Item[]{new BananaChips(), new DriedFishSnack()});

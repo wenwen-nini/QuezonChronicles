@@ -54,7 +54,7 @@ public class Thief extends Player{
                     text = "\n" + getName() + " used Critical Edge!";
                     typeWriter.typeWriterFast(text);
                     setStamina(getStamina() - 10);
-                    target.takeDamage((int)(getAttackPower() * 1.3));
+                    target.takeDamage((int)(getAttackPower() * 1.6));
                     skillUsedTurn();
                     setLastActionSucceeded(true);
                 }
@@ -125,13 +125,13 @@ public class Thief extends Player{
 	@Override 
 	public void levelStats() {
         // Thief gains small max HP and stamina but grows in speed and critical damage
-        setMaxHp(getMaxHp() + 7);
-        setHp(getHp() + 7);
-        setStamina(getStamina() + 6);
-        setMaxStamina(getMaxStamina() + 6);
-        setDefense(getDefense() + 1);
-        setAttackPower(getAttackPower() + 3);
-        setSpeed(getSpeed() + 1);
+        setMaxHp(getMaxHp() + 15);
+        setHp(getHp() + 15);
+        setStamina(getStamina() + 12);
+        setMaxStamina(getMaxStamina() + 12);
+        setDefense(getDefense() + 2);
+        setAttackPower(getAttackPower() + 5);
+        setSpeed(getSpeed() + 2);
 	}
 
     public static void skillUsedTurn() {

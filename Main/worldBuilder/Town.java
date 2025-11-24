@@ -86,7 +86,7 @@ public class Town {
             switch (choice) {
                 case 1:
                     double chances = Math.random();
-                    if (chances <= 1 && enemiesDefeated < (enemies != null ? enemies.length : 0)) { //FOR SPECIAL ENEMY SPAWN
+                    if (chances <= 0.15 && enemiesDefeated < (enemies != null ? enemies.length : 0)) { //FOR SPECIAL ENEMY SPAWN
                         clearScreen.clear();
                         typeWriter.typeWriterFast("A special enemy have spawned during your exploration!");
                         double bossChance = Math.random();

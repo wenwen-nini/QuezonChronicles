@@ -9,8 +9,8 @@ public class Thief extends Player{
 
     private CenterHub centerHub = new CenterHub();
 
-    public static int skillUsedTurnForSkill3 = 0;
-    public static int skillUsedTurnForSkill4 = 0;
+    public int skillUsedTurnForSkill3 = 0;
+    public int skillUsedTurnForSkill4 = 0;
 
     public Thief(String name){
         setName(name);
@@ -147,7 +147,7 @@ public class Thief extends Player{
         setSpeed(getSpeed() + 2);
 	}
 
-    public static void skillUsedTurnForSkill3() {
+    public void skillUsedTurnForSkill3() {
       if (skillUsedTurnForSkill3 <= 0) {
          skillUsedTurnForSkill3 = 0;
       }
@@ -159,7 +159,7 @@ public class Thief extends Player{
       }
    }
 
-   public static void skillUsedTurnForSkill4() {
+   public void skillUsedTurnForSkill4() {
 	  if (skillUsedTurnForSkill4 <= 0) {
 		 skillUsedTurnForSkill4 = 0;
 	  }

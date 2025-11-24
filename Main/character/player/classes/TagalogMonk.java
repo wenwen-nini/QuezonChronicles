@@ -9,7 +9,7 @@ public class TagalogMonk extends Player {
 
    private CenterHub centerHub = new CenterHub();
 
-   public static int skillUsedTurn;
+   public int skillUsedTurn;
    
    public TagalogMonk(String name) {
       setName(name);
@@ -141,7 +141,7 @@ public class TagalogMonk extends Player {
       setSpeed(getSpeed() + 0);
 	}
 
-   public static void skillUsedTurn() {
+   public void skillUsedTurn() {
       if (skillUsedTurn <= 0) {
          skillUsedTurn = 0;
       }

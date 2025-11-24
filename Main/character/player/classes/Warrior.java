@@ -9,7 +9,7 @@ public class Warrior extends Player{
 
     private CenterHub centerHub = new CenterHub();
 
-    public static int skillUsedTurn;
+    public int skillUsedTurn;
 
     public Warrior(String name){
         setName(name);
@@ -139,7 +139,7 @@ public class Warrior extends Player{
 	}
 
 
-    public static void skillUsedTurn() {
+    public void skillUsedTurn() {
       if (skillUsedTurn <= 0) {
          skillUsedTurn = 0;
       }

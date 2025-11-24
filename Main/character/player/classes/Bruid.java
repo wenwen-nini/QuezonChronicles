@@ -7,10 +7,10 @@ import Main.styles.animationHub.TypeWriter;
 
 public class Bruid extends Player {
 
-	private static CenterHub centerHub = new CenterHub();
+	private CenterHub centerHub = new CenterHub();
 
-	public static int skillUsedTurnForSkill2 = 0;
-	public static int skillUsedTurnForSkill3 = 0;
+	public int skillUsedTurnForSkill2 = 0;
+	public int skillUsedTurnForSkill3 = 0;
 
 	public Bruid(String name) {
 		setName(name);
@@ -150,7 +150,7 @@ public class Bruid extends Player {
 		setSpeed(getSpeed() + 0);
 	}
 
-	public static void skillUsedTurnForSkill2() {
+	public void skillUsedTurnForSkill2() {
       if (skillUsedTurnForSkill2 <= 0) {
          skillUsedTurnForSkill2 = 0;
       }
@@ -162,7 +162,7 @@ public class Bruid extends Player {
       }
    }
 
-   public static void skillUsedTurnForSkill3() {
+   public void skillUsedTurnForSkill3() {
 	  if (skillUsedTurnForSkill3 <= 0) {
 		 skillUsedTurnForSkill3 = 0;
 	  }

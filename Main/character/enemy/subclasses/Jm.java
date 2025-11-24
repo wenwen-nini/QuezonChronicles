@@ -34,7 +34,7 @@ public class Jm extends Enemy {
         }
         if (windUp == 0) {
             if (Math.random() < 0.3) {
-                doubleDamage = getAttackPower() * 2;
+                int doubleDamage = getAttackPower() * 2;
                 if (doubleDamage < 0) doubleDamage = 0;
                 String text = getName() + "'s Kamehameha hits critically!";
                 centerHub.printRightTextWithTypeWriter(text);

@@ -157,7 +157,7 @@ public class Bruid extends Player {
       else {
          skillUsedTurnForSkill2--;
          if (skillUsedTurnForSkill2 == 0) {
-            System.out.println("Front Shield is ready!");
+            typeWriter.typeWriterFast("Front Shield is ready!");
          }
       }
    }
@@ -169,7 +169,7 @@ public class Bruid extends Player {
 	  else {
 		 skillUsedTurnForSkill3--;
 		 if (skillUsedTurnForSkill3 == 0) {
-			System.out.println("Mana Grove is ready!");
+			typeWriter.typeWriterFast("Mana Grove is ready!");
 		 }
 	  }
    }

@@ -146,7 +146,7 @@ public class Warrior extends Player{
       else {
          skillUsedTurn--;
          if (skillUsedTurn == 0) {
-            System.out.println("Second Wind is ready!");
+            typeWriter.typeWriterFast("Second Wind is ready!");
          }
       }
    }

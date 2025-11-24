@@ -150,4 +150,31 @@ public abstract class Enemy extends Character {
                 break;             
         }
     }
+
+    public void stealRandomItem(Player player) {
+        Item[] inventory = player.getInventory();
+        int nonEmptyCount = 0;
+        for (Item item : inventory) {
+            if (item != null) {
+                nonEmptyCount++;
+            }
+        }
+
+        if (nonEmptyCount == 0) {
+            String text = getName() + " tried to steal an item, but " + player.getName() + "'s inventory is empty!";
+            centerHub.printRightTextWithTypeWriter(textColor.YELLOW + text + textColor.RESET);
+            return;
+        }
+
+        int randomIndex;
+        do {
+            randomIndex = (int)(Math.random() * inventory.length);
+        } while (inventory[randomIndex] == null);
+
+        Item stolenItem = inventory[randomIndex];
+        inventory[randomIndex] = null;
+
+        String text = getName() + " just stole a " + stolenItem.getName() + " from " + player.getName() + "!";
+        centerHub.printRightTextWithTypeWriter(textColor.YELLOW + text + textColor.RESET);
+    }
 }

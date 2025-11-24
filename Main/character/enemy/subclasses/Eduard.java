@@ -8,7 +8,7 @@ import Main.styles.textColor.TextColorHub;
 
 public class Eduard extends Enemy{
 
-    public Eduard(int townIndex) {
+    public Eduard(int townIndex, Player player) {
         double levelScaler = (townIndex + 1.0) / 2.0;
         setName("Aladdin of Mindoro, Eduard");
         setMaxHp((int)Math.floor(85.0 * levelScaler));
@@ -55,6 +55,11 @@ public class Eduard extends Enemy{
                 centerHub.printRightTextWithTypeWriter(textColor.YELLOW + player.getName() + " is stunned by the impact!" + textColor.RESET);
                 setSkillUsedTurn(3);
             }
+        }
+
+        // 20% chance to steal a random item from player's inventory
+        if (Math.random() < 0.2) {
+            stealRandomItem(player);
         }
     }
 }

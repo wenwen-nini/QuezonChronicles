@@ -36,7 +36,7 @@ public class Nell extends Enemy{
 
     @Override
     public void takeDamage(int amount) {
-        double dodgeChance = 0.4;
+        double dodgeChance = 0.45;
         double dodgeRoll = Math.random();
         
         if (dodgeRoll < dodgeChance) {

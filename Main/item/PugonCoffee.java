@@ -7,7 +7,7 @@ public class PugonCoffee extends Item {
 
     public PugonCoffee() {
         setName(textColor.YELLOW + "Pugon Coffee" + textColor.RESET);
-        setDescription("(A strong brew that energizes the drinker, granting +2 Speed for the next turn.)");
+        setDescription("(A strong brew that energizes the drinker, granting +2 Speed)");
     }
 
     @Override

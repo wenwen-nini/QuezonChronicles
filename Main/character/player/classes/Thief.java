@@ -35,7 +35,7 @@ public class Thief extends Player{
 
         setMoves(new String[] {"1. Stab (Basic + no stamina required)",
                                 "2. Critical Edge (One strong hit that always lands critical damage (Cost: 10 Stamina))",
-                                "3. Vanish (Become invisible for 2 turns. Avoid all attacks (Cost: 15 Stamina))",
+                                "3. Vanish (Throws Smoke Bomb that vanishes the Thief, giving 80% to dodge all attacks for 2 turns. (Cost: 15 Stamina))",
                                 "4. Looter's Instinct (regains small HP/stamina on successful steals)"});
         }   
 
@@ -74,10 +74,12 @@ public class Thief extends Player{
                         setLastActionSucceeded(false);
                         break;
                     }
+                    setStamina(getStamina() - 15);
                     text = "\n" + getName() + " used Vanish!";
                     typeWriter.typeWriterFast(text);
-                    addTemporaryDefenseBoost(100, 2);
-                    setStamina(getStamina() - 15);
+                    text = getName() + " threw a Smoke Bomb and vanished from sight, giving 80% to dodge all attacks for 2 turns!";
+                    typeWriter.typeWriterFast(text);
+                    addDodgeTurns(2);
                     skillUsedTurnForSkill3 = 2;
                     skillUsedTurnForSkill4();
                     setLastActionSucceeded(true);
@@ -152,7 +154,7 @@ public class Thief extends Player{
       else {
          skillUsedTurnForSkill3--;
          if (skillUsedTurnForSkill3 == 0) {
-            System.out.println("Vanish is ready!");
+            typeWriter.typeWriterFast("Vanish is ready!");
          }
       }
    }
@@ -164,7 +166,7 @@ public class Thief extends Player{
 	  else {
 		 skillUsedTurnForSkill4--;
 		 if (skillUsedTurnForSkill4 == 0) {
-			System.out.println("Looter's Instinct is ready!");
+			typeWriter.typeWriterFast("Looter's Instinct is ready!");
 		 }
 	  }
    }

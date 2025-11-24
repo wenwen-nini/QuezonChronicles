@@ -131,6 +131,16 @@ public abstract class Player extends Character {
   }
 
   public void takeDamage(int amount) {
+    if (getDodgeTurns() > 0) {
+      if (Math.random() < 0.8) {
+        String text = getName() + " dodged the attack!";
+        centerHub.printRightTextWithTypeWriter(text);
+        reduceDodgeTurns();
+        return;
+      }
+      reduceDodgeTurns();
+    }
+
     int reducedDamage = Math.max(0, amount - getDefense());
     setHp(getHp() - reducedDamage);
     String text = getName() + " took " + String.valueOf(reducedDamage) + " damage.";

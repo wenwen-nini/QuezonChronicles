@@ -224,6 +224,7 @@ public class BattleSystem {
                     if (itemIndex == -1) {
                         clearScreen.clear();
                         System.out.println("Item use cancelled.");
+                        printCombatStatus(player, enemy);
                     }
                     else if (itemIndex < -1 || itemIndex >= inventory.length || inventory[itemIndex] == null) {
                         clearScreen.clear();

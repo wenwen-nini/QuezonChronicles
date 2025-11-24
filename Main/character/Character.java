@@ -5,6 +5,7 @@ import Main.styles.animationHub.TypeWriter;
 public abstract class Character {
   private String name;
   private int maxHp, hp, stamina, mp, attackPower, defense, speed, maxStamina, maxMp;
+  private int dodgeTurns = 0;
 
   //Debuff Attributes
   public String[] activeDebuffs = new String[3];
@@ -147,6 +148,24 @@ public abstract class Character {
         isStunned = true;
         break;
       }
+    }
+  }
+
+  public int getDodgeTurns() {
+    return dodgeTurns;
+  }
+
+  public void setDodgeTurns(int turns) {
+    dodgeTurns = turns;
+  }
+
+  public void addDodgeTurns(int turns) {
+    dodgeTurns += turns;
+  }
+
+  public void reduceDodgeTurns() {
+    if (dodgeTurns > 0) {
+      dodgeTurns--;
     }
   }
 }

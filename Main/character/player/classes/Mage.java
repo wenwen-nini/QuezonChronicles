@@ -151,7 +151,7 @@ public class Mage extends Player {
       else {
          skillUsedTurnForSkill2--;
          if (skillUsedTurnForSkill2 == 0) {
-            System.out.println("LambaShield is ready!");
+            typeWriter.typeWriterFast("LambaShield is ready!");
          }
       }
    }
@@ -163,7 +163,7 @@ public class Mage extends Player {
 	  else {
 		 skillUsedTurnForSkill3--;
 		 if (skillUsedTurnForSkill3 == 0) {
-			System.out.println("Mana Surge is ready!");
+			typeWriter.typeWriterFast("Mana Surge is ready!");
 		 }
 	  }
    }

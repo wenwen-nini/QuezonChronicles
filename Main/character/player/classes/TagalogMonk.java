@@ -148,7 +148,7 @@ public class TagalogMonk extends Player {
       else {
          skillUsedTurn--;
          if (skillUsedTurn == 0) {
-            System.out.println("Dasal ng Katahimikan is ready!");
+            typeWriter.typeWriterFast("Dasal ng Katahimikan is ready!");
          }
       }
    }

@@ -13,12 +13,10 @@ public class Turon extends Item {
     @Override
     public void useItem(Player player) {
         int attackBoostAmount = 15;
-        int duration = 5;
+        int duration = 2;
         
-        //check if the class uses stamina or mp
-
-        System.out.println(player.getName() + "ate the turon!");
-        System.out.println(player.getName() + "gains a temporary attack damage boost.");
+        text = player.getName() + "ate the turon!";
+        typeWriter.typeWriterFast(text);
 
         player.addTemporaryAttackBoost(15, 5);
     }

@@ -19,7 +19,7 @@ public class TiaongKnight extends Enemy {
         setExpReward(120);
 
         // Possible loot
-        setPossibleLoot(new Item[]{new Tinuto(), new PugonCoffee()});
+        setPossibleLoot(new Item[]{new Tinuto(), new Turon()});
     }
 
     @Override

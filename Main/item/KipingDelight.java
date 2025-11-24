@@ -7,7 +7,7 @@ public class KipingDelight extends Item {
 
     public KipingDelight() {
         setName(textColor.GREEN + "Kiping Delight" + textColor.RESET);
-        setDescription("(A flat, crunchy, and sweet bread.) ");
+        setDescription("(A flat, crunchy, and sweet bread that gives health and defense boost for 2 turns.) ");
     }
 
     @Override
@@ -16,8 +16,8 @@ public class KipingDelight extends Item {
         int defenseBoost = 4;
         int duration = 2;
 
-        System.out.println(player.getName() + " ate the Kiping Delight!");
-        System.out.println(player.getName() + " has temporarily increased their Defense by 4! Healed by 25!");
+        text = player.getName() + " ate the Kiping Delight!";
+        typeWriter.typeWriterFast(text);
         player.heal(healthBoost);
         player.addTemporaryDefenseBoost(defenseBoost, duration);
     }

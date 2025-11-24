@@ -13,8 +13,10 @@ public class BananaChips extends Item {
     @Override
     public void useItem(Player player) {
 
-        System.out.println(player.getName() + " ate the Banana Chips!");
-        System.out.println(player.getName() + " increased their speed by 2!");
+        text = player.getName() + " ate the Banana Chips!";
+        typeWriter.typeWriterFast(text);
+        text = player.getName() + " increased their speed by 2!";
+        typeWriter.typeWriterFast(text);
         player.addSpeed(2);
     }
 }

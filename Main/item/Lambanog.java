@@ -15,15 +15,13 @@ public class Lambanog extends Item {
         int staminaBoost = 15;
         
         //check if the class uses stamina or mp
-
-        System.out.println(player.getName() + "drinks the Lambanog!");
+        text = player.getName() + "drinks the Lambanog!";
+        typeWriter.typeWriterFast(text);
         if (!player.getUsesMp()) {
             player.addStamina(staminaBoost);
-            System.out.println(player.getName() + "restored 15 amount of stamina!");
         }
         else {
             player.addMp(staminaBoost);
-            System.out.println(player.getName() + "restored 15 amount of mp!");
         }
     }
 }

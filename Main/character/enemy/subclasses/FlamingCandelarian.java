@@ -19,7 +19,7 @@ public class FlamingCandelarian extends Enemy {
 
         setExpReward(100);
 
-        setPossibleLoot(new Item[]{new Bibingka(), new Panutsa()});
+        setPossibleLoot(new Item[]{new Bibingka(), new Lambanog()});
     }
 
     @Override

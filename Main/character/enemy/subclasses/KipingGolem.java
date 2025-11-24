@@ -20,7 +20,7 @@ public class KipingGolem extends Enemy {
         setExpReward(50);
 
         // Possible loot
-        setPossibleLoot(new Item[]{new Tinuto(), new PugonCoffee()});
+        setPossibleLoot(new Item[]{new BananaChips(), new KipingDelight()});
     }
     
     @Override

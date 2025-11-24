@@ -6,7 +6,7 @@ import Main.styles.textColor.TextColorHub;
 public class LopezCocoaDrink extends Item {
 
     public LopezCocoaDrink() {
-        setName(textColor.ORANGE + "LopezCocoaDrink" + textColor.RESET);
+        setName(textColor.ORANGE + "Lopez Cocoa Drink" + textColor.RESET);
         setDescription("(+2 defense for 2 turns))");
     }
 
@@ -15,8 +15,8 @@ public class LopezCocoaDrink extends Item {
         int defenseboost = 5;
         int duration = 2;
 
-        System.out.println(player.getName() + " drinks the Lopez Cocoa Drink!");
-        System.out.println(player.getName() + " gained a temporary defense buff for 2 rounds!");
+        text = player.getName() + " drinks the Lopez Cocoa Drink!";
+        typeWriter.typeWriterFast(text);
         player.addTemporaryDefenseBoost(5, 2);
     }
 }

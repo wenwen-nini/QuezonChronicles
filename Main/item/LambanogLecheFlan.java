@@ -15,7 +15,8 @@ public class LambanogLecheFlan extends Item {
         int healBoost = 15;
         int duration = 2;
 
-        System.out.println(player.getName() + " has drunk the Lambanog Leche Flan!");
+        text = player.getName() + " has drunk the Lambanog Leche Flan!";
+        typeWriter.typeWriterFast(text);
 
         player.heal(healBoost);
         player.applyDebuff("defense down", duration);

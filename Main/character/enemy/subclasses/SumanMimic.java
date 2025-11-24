@@ -20,7 +20,7 @@ public class SumanMimic extends Enemy {
         setExpReward(40);
 
         // Possible loot
-        setPossibleLoot(new Item[]{new Tinuto(), new PugonCoffee()});
+        setPossibleLoot(new Item[]{new SumanIbos(), new LopezCocoaDrink()});
     }
 
     @Override

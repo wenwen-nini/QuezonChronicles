@@ -21,7 +21,7 @@ public class Sirena extends Enemy {
         setExpReward(50);
 
         // Possible loot
-        setPossibleLoot(new Item[]{new Tinuto(), new PugonCoffee()});
+        setPossibleLoot(new Item[]{new KipingDelight(), new BananaChips()});
     }
 
     @Override

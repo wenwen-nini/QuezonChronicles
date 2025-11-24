@@ -312,7 +312,7 @@ public abstract class Player extends Character {
             case "burn":
                 text = getName() + " takes 2 burn damage!";
                 centerHub.printRightTextWithTypeWriter(text);
-                takeDamage(2);
+                takeDamage(getDefense() + 2);
                 break;
             case "absorb":
                 text = getName() + " feels weaker! Health had been absored by 2";
@@ -322,7 +322,7 @@ public abstract class Player extends Character {
             case "defense down":
                 text = getName() + " feels weaker! Defense temporarily reduced.";
                 centerHub.printRightTextWithTypeWriter(text);
-                setDefense(getDefense() - 1);
+                setDefense(getDefense() - 2);
                 break;
             case "attack down":
                 text = getName() + " feels their strength fade!";

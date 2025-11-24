@@ -21,7 +21,7 @@ public class FestivalMask extends Enemy {
         setExpReward(50);
 
         // Possible loot
-        setPossibleLoot(new Item[]{new Tinuto(), new PugonCoffee()});
+        setPossibleLoot(new Item[]{new KipingDelight(), new BananaChips()});
     }
     @Override
     public void enemyMove(Player player) {
@@ -35,10 +35,10 @@ public class FestivalMask extends Enemy {
             double confuseChance = 0.4;
             if (Math.random() <= confuseChance){
                 player.applyDebuff("confusion", 2);
-                player.takeDamage(damage);
+                player.takeDamage(damage + player.getDefense());
                 setSkillUsedTurn(2);
-            }else {
-                player.takeDamage(damage);
+            } else {
+                player.takeDamage(damage + player.getDefense());
             }
         } else {
             updateSkillUsedTurn(); // count down until the skill can be used
@@ -49,7 +49,7 @@ public class FestivalMask extends Enemy {
         if (chance < 0.15) { // 15% chance for extra confusion feedback
             text = player.getName() + " hits themselves in confusion!";
             centerHub.printRightTextWithTypeWriter(text);
-            player.takeDamage(3);
+            player.takeDamage(3 + player.getDefense());
         }
     }
 }

@@ -7,7 +7,7 @@ public class AdobongPusit extends Item {
 
     public AdobongPusit() {
         setName(textColor.GREEN + "Adobong Pusit" + textColor.RESET);
-        setDescription("(A savory squid dish that restores +10hp and grants +3 Attack Power per turn for 2 turns.)");
+        setDescription("(A savory squid dish that restores +10hp and grants +3 Defense Boost per turn for 2 turns.)");
     }
 
     @Override
@@ -16,8 +16,8 @@ public class AdobongPusit extends Item {
         int defenseBoost = 3;
         int duration = 2;
 
-        System.out.println(player.getName() + " ate the Adobong Pusit!");
-        System.out.println(player.getName() + " has temporarily increased their Defense by 3 for 2 turns!");
+        text = player.getName() + " ate the Adobong Pusit!";
+        typeWriter.typeWriterFast(text);
         player.heal(healthBoost);
         player.addTemporaryDefenseBoost(defenseBoost, duration);
     }

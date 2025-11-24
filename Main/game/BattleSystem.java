@@ -73,7 +73,7 @@ public class BattleSystem {
             }
             else {
                 String text = "\nEnemy goes first!";
-                centerHub.printRightText(textColor.RED + text + textColor.RESET);
+                centerHub.printRightTextWithTypeWriter(textColor.RED + text + textColor.RESET);
                 enemy.checkStunned();
                 if (!enemy.getIsStunned()) {
                     enemyTurn(player, enemy);
@@ -99,6 +99,7 @@ public class BattleSystem {
                     }
                 }
                 else {
+                    printCombatStatus(player, enemy);
                     playerTurn(player, enemy);
                     player.updateDebuffs();
                     enemy.updateDebuffs();
@@ -140,7 +141,6 @@ public class BattleSystem {
             if (enemy instanceof Red && ((Red) enemy).hasExploded()) {
                 System.out.println(textColor.RED + "Both you and " + enemy.getName() + " perished in the explosion!" + textColor.RESET);
                 System.out.println(textColor.RED + "You gain no experience or loot from this battle!" + textColor.RESET);
-                player.resetProgress();
                 return;
             }
             
@@ -150,14 +150,12 @@ public class BattleSystem {
                 System.out.println("The " + enemy.getName() + " dropped " + loot.getName() + ", but you couldn't pick it up.");
             }
             System.out.println(textColor.RED + "You gain no experience or loot from this battle!" + textColor.RESET);
-            player.resetProgress();
             return;
         }
 
         handleVictory(player, enemy);
 
         if (!player.isAlive()) {
-            player.resetProgress();
             System.out.println(textColor.RED + "Game over! You have been slained!" + textColor.RESET);
             return;
         }

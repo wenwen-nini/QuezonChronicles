@@ -283,6 +283,12 @@ public abstract class Player extends Character {
             centerHub.printRightTextWithTypeWriter(text);
             return;
         }
+        else if (activeDebuffs[i].equals(type)) {
+            debuffTurns[i] = Math.max(debuffTurns[i], turns);
+            String text = getName() + "'s " + type + " duration refreshed to " + debuffTurns[i] + " turns!";
+            centerHub.printRightTextWithTypeWriter(text);
+            return;
+        }
     }
     centerHub.printRightTextWithTypeWriter("Too many debuffs active!");
   }

@@ -47,11 +47,11 @@ public class Warrior extends Player{
                 break;
 
             case 2:
-                if (getStamina() >= 5){
+                if (getStamina() >= 8){
                     text = "\n" + getName() + " used Cleave!";
                     typeWriter.typeWriterFast(text);
                     setStamina(getStamina() - 5);
-                    target.takeDamage((int) (getAttackPower() * 1.5));
+                    target.takeDamage((int) Math.floor((getAttackPower() * 1.5)));
                     skillUsedTurn();
                     setLastActionSucceeded(true);
                     break;
@@ -63,7 +63,7 @@ public class Warrior extends Player{
                 break;
 
             case 3:
-                if (getStamina() >= 3){
+                if (getStamina() >= 5){
                     text = "\n" + getName() + " used Shield Bash!";
                     typeWriter.typeWriterFast(text);
                     target.takeDamage((int) (getAttackPower() * 0.5));

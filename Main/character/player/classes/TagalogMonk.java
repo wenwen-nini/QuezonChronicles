@@ -31,7 +31,7 @@ public class TagalogMonk extends Player {
       setUsesMp(false);
    
   		setMoves(new String[] {"1. Suntok ni Apo (basic + no stamina required)", 
-   			"2. Bugso ng Loob (The monk releases a surge of inner energy, increasing attack power by 40% and dealing strong damage to a single enemy. (Cost: 10 Stamina))", 
+   			"2. Bugso ng Loob (The monk releases a surge of inner energy, increasing attack power by 60% and dealing strong damage to a single enemy. (Cost: 10 Stamina))", 
             "3. Karma Strike (A powerful counterattack imbued with spiritual justice. Deals heavy damage and has a small chance to stun the target. (Cost: 15 Stamina))",
             "4. Dasal ng Katahimikan (The monk prays calmly amid battle, restoring a portion of HP and stamina while reducing incoming damage by 25% for 1 turn)"});
    }
@@ -52,7 +52,7 @@ public class TagalogMonk extends Player {
                   text = "\n" + getName() + " used Bugso ng Loob!";
                   typeWriter.typeWriterFast(text);
                   setStamina(getStamina() - 10);
-                  int boostDamage = getAttackPower() + (int)(getAttackPower() * 0.4);
+                  int boostDamage = getAttackPower() + (int) Math.floor((getAttackPower() * 0.6));
                   target.takeDamage(boostDamage);
                   setLastActionSucceeded(true);
                }

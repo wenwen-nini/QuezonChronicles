@@ -58,6 +58,7 @@ public class Town {
                 System.out.println("Resetting your progress and returning to the main menu...");
                 // Reset player progress on death
                 player.resetProgress();
+                enemiesDefeated = 0;
                 break;
             }
             int totalCount = (enemies != null ? enemies.length : 0) + (boss != null ? 1 : 0);
@@ -87,6 +88,7 @@ public class Town {
                     double chances = Math.random();
                     if (chances <= 0.10 && enemiesDefeated < (enemies != null ? enemies.length : 0)) { //FOR SPECIAL ENEMY SPAWN
                         clearScreen.clear();
+                        typeWriter.typeWriterFast("A special enemy have spawned during your exploration!");
                         double bossChance = Math.random();
                         if (bossChance <= 0.25) {
                             Enemy enemy = new Alwynn(townIndex);

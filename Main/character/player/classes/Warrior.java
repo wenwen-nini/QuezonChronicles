@@ -94,7 +94,7 @@ public class Warrior extends Player{
                     typeWriter.typeWriterFast(text);
                     heal(15);
                     addStamina(10);
-                    skillUsedTurn = 3;
+                    skillUsedTurn = 2;
                     setLastActionSucceeded(true);
                     break;
                 }

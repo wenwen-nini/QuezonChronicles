@@ -83,32 +83,37 @@ public class BattleSystem {
         }
 
         while (player.isAlive() && enemy.isAlive()) {
+
+            enemy.updateDebuffs();
+            player.checkStunned();
+            player.updateDebuffs();
+            enemy.checkStunned();
+
             if (playerInitiative) {
-                enemy.checkStunned();
                 if (!enemy.getIsStunned()) {
                     // Enemy goes first this round. If their action kills the player,
                     // we should not run the player's turn. Likewise, if enemy is
                     // dead before the player's turn, skip the player's turn.
                     enemyTurn(player, enemy);
-                    enemy.updateDebuffs();
-                    player.updateDebuffs();
+                    
                     player.updateTurnEffects();
                     if (player.isAlive() && enemy.isAlive()) {
                         printCombatStatus(player, enemy);
-                        playerTurn(player, enemy);
+                        if (!player.getIsStunned()) {
+                            playerTurn(player, enemy);
+                        }
                     }
                 }
                 else {
                     printCombatStatus(player, enemy);
-                    playerTurn(player, enemy);
-                    player.updateDebuffs();
-                    enemy.updateDebuffs();
+                    if (!player.getIsStunned()) {
+                        playerTurn(player, enemy);
+                    }
                     player.updateTurnEffects();
                 }
             }
             else {
                 printCombatStatus(player, enemy);
-                player.checkStunned();
                 if (!player.getIsStunned()) {
                     // Player acts first. If the player kills the enemy, don't let
                     // the (now dead) enemy take a turn.
@@ -118,8 +123,6 @@ public class BattleSystem {
                         if (!enemy.getIsStunned()) {
                             enemyTurn(player, enemy);
                         }
-                        enemy.updateDebuffs();
-                        player.updateDebuffs();
                         player.updateTurnEffects();
                         
                     }
@@ -129,8 +132,6 @@ public class BattleSystem {
                     printCombatStatus(player, enemy);
                     enemyTurn(player, enemy);
                     enemy.updateSkillUsedTurn();
-                    enemy.updateDebuffs();
-                    player.updateDebuffs();
                     player.updateTurnEffects();
                 }
             }

@@ -70,9 +70,9 @@ public class TagalogMonk extends Player {
 			      int boostDamage = getAttackPower() + (int)(getAttackPower() * 0.2);
                target.takeDamage(boostDamage);
                double stunChance = Math.random();
-                  if (stunChance < 0.15) {
+                  if (stunChance < 0.25) {
                      System.out.println(target.getName() + " is stunned!");
-                     target.applyDebuff("stun", 1);
+                     target.applyDebuff("stun", 2);
                   }
                setLastActionSucceeded(true);
             }
@@ -97,6 +97,7 @@ public class TagalogMonk extends Player {
                addStamina(1);
                addTemporaryDefenseBoost((int)(getDefense() * 0.25), 2);
                skillUsedTurn = 2;
+               skillUsedTurn();
                setLastActionSucceeded(true);
                break;
             }

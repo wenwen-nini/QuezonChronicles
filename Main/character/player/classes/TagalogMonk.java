@@ -94,7 +94,7 @@ public class TagalogMonk extends Player {
                text = getName() + "'s has healed and gained stamina!";
                typeWriter.typeWriterFast(text);
                heal((int)(getHp() * 0.3));
-               addStamina(1);
+               addStamina(25);
                addTemporaryDefenseBoost((int)(getDefense() * 0.25), 2);
                skillUsedTurn = 2;
                skillUsedTurn();

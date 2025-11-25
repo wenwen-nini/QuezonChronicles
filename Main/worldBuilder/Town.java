@@ -86,7 +86,7 @@ public class Town {
             switch (choice) {
                 case 1:
                     double chances = Math.random();
-                    if (chances <= 0.15 && enemiesDefeated < (enemies != null ? enemies.length : 0)) { //FOR SPECIAL ENEMY SPAWN
+                    if (chances <= 0.09 && enemiesDefeated < (enemies != null ? enemies.length : 0)) { //FOR SPECIAL ENEMY SPAWN
                         clearScreen.clear();
                         typeWriter.typeWriterFast("A special enemy have spawned during your exploration!");
                         double bossChance = Math.random();
@@ -128,6 +128,7 @@ public class Town {
                         if (enemies != null && enemiesDefeated < enemies.length) {
                             clearScreen.clear();
                             Enemy enemy = enemies[enemiesDefeated];
+                            enemy.scaleToPlayer(player, townIndex);
                             text = "A wild " + enemy.getName() + " appeared!";
                             typeWriter.typeWriterFast(textColor.GREEN + text + textColor.RESET);
                             new BattleSystem().BattleStart(player, enemy);
@@ -136,6 +137,7 @@ public class Town {
                         } else if (boss != null && enemiesDefeated == (enemies != null ? enemies.length : 0)) {
                             clearScreen.clear();
                             typeWriter.typeWriterFast(textColor.RED + "\nYou've reached the boss battle!" + textColor.RESET);
+                            boss.scaleToPlayer(player, townIndex);
                             typeWriter.typeWriterFast(textColor.RED + "\nThe boss of " + name + " appears: " + boss.getName() + "!" + textColor.RESET);
                             new BattleSystem().BattleStart(player, boss);
                             enemiesDefeated++;

@@ -2,6 +2,11 @@ package Main.character.enemy;
 
 import Main.character.Character;
 import Main.character.player.Player;
+import Main.character.player.classes.Bruid;
+import Main.character.player.classes.Mage;
+import Main.character.player.classes.TagalogMonk;
+import Main.character.player.classes.Thief;
+import Main.character.player.classes.Warrior;
 import Main.item.*;
 import Main.styles.printAlignmentHub.CenterHub;
 import Main.styles.animationHub.TypeWriter;
@@ -17,7 +22,114 @@ public abstract class Enemy extends Character {
     private Item[] possibleLoot = new Item[2];
     private int skillUsedTurn;
 
+    // Scaling support
+    private boolean baseStatsCaptured = false;
+    private int baseMaxHp;
+    private int baseAttackPower;
+    private int baseDefense;
+    private int baseSpeed;
+
     public abstract void enemyMove(Player player);
+
+    private void captureBaseStatsIfNeeded() {
+        if (!baseStatsCaptured) {
+            baseStatsCaptured = true;
+            baseMaxHp = getMaxHp();
+            baseAttackPower = getAttackPower();
+            baseDefense = getDefense();
+            baseSpeed = getSpeed();
+        }
+    }
+
+    public void scaleToPlayer(Player player, int townIndex) {
+        if (player == null) {
+            return;
+        }
+        captureBaseStatsIfNeeded();
+
+        int playerLevel = Math.max(1, player.getLevel());
+        if (isSpecialEncounter()) {
+            return;
+        }
+
+        double levelFactor = 1.0 + 0.04 * (playerLevel - 1);
+        double[] townMultipliers = getTownMultipliers(townIndex);
+
+        double targetHp = player.getMaxHp() * townMultipliers[0] * levelFactor;
+        double targetAttack = player.getAttackPower() * townMultipliers[1] * levelFactor;
+        double targetDefense = Math.max(0, player.getDefense() * townMultipliers[2] * levelFactor);
+        int newSpeed = (int)Math.max(1, Math.round(baseSpeed + Math.min(3, townIndex)));
+
+        int newMaxHp = (int)Math.max(1, Math.round(Math.max(baseMaxHp, targetHp)));
+        int newAttack = (int)Math.max(1, Math.round(Math.max(baseAttackPower, targetAttack)));
+        int newDefense = (int)Math.max(0, Math.round(Math.max(baseDefense, targetDefense)));
+
+        double[] classBiases = getClassBiases(player);
+        newMaxHp = (int)Math.max(1, Math.round(newMaxHp * classBiases[0]));
+        newAttack = (int)Math.max(1, Math.round(newAttack * classBiases[1]));
+        newDefense = (int)Math.max(0, Math.round(newDefense * classBiases[2]));
+        newSpeed = (int)Math.max(1, Math.round(newSpeed * classBiases[3]));
+
+        int defenseBuffer = Math.max(4, Math.min(18, 4 + (playerLevel / 2) + townIndex * 2));
+        int minAttack = player.getDefense() + defenseBuffer;
+        if (newAttack < minAttack) {
+            newAttack = minAttack;
+        }
+
+        setMaxHp(newMaxHp);
+        setHp(newMaxHp);
+        setAttackPower(newAttack);
+        setDefense(newDefense);
+        setSpeed(newSpeed);
+    }
+
+    protected boolean isSpecialEncounter() {
+        return false;
+    }
+
+    private double[] getClassBiases(Player player) {
+        double hpBias = 1.0;
+        double atkBias = 1.0;
+        double defBias = 1.0;
+        double spdBias = 1.0;
+
+        if (player instanceof Mage) {
+            hpBias = 0.94;
+            atkBias = 0.9;
+            defBias = 0.92;
+            spdBias = 1.05;
+        } else if (player instanceof Thief) {
+            hpBias = 0.96;
+            atkBias = 0.92;
+            defBias = 0.93;
+            spdBias = 1.08;
+        } else if (player instanceof Bruid) {
+            hpBias = 0.98;
+            atkBias = 0.95;
+            defBias = 0.98;
+            spdBias = 1.0;
+        } else if (player instanceof TagalogMonk) {
+            hpBias = 1.0;
+            atkBias = 1.0;
+            defBias = 1.02;
+            spdBias = 1.02;
+        } else if (player instanceof Warrior) {
+            hpBias = 1.03;
+            atkBias = 1.1;
+            defBias = 1.05;
+            spdBias = 0.98;
+        }
+
+        return new double[]{hpBias, atkBias, defBias, spdBias};
+    }
+
+    private double[] getTownMultipliers(int townIndex) {
+        int capped = Math.max(0, Math.min(townIndex, 4));
+        double[] hpMultipliers = {0.75, 0.9, 1.05, 1.2, 1.35};
+        double[] atkMultipliers = {0.8, 0.95, 1.1, 1.25, 1.4};
+        double[] defMultipliers = {0.9, 1.0, 1.1, 1.2, 1.3};
+        return new double[]{hpMultipliers[capped], atkMultipliers[capped], defMultipliers[capped]};
+    }
 
     public Item dropLoot() {
         if (possibleLoot == null || possibleLoot.length == 0) {

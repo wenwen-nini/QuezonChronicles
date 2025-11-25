@@ -126,7 +126,15 @@ public abstract class Player extends Character {
     level++;
     String text = "You have leveled up to: " + level;
     typeWriter.typeWriterFast(textColor.YELLOW + text + textColor.RESET);
-    nextExpLevel += 50;
+    int expIncrement;
+    if (level < 5) {
+      expIncrement = 60;
+    } else if (level < 10) {
+      expIncrement = 80;
+    } else {
+      expIncrement = 110;
+    }
+    nextExpLevel += expIncrement;
     levelStats();
   }
 
@@ -141,7 +149,7 @@ public abstract class Player extends Character {
       reduceDodgeTurns();
     }
 
-    int reducedDamage = Math.max(0, amount - getDefense());
+    int reducedDamage = amount <= 0 ? 0 : Math.max(1, amount - getDefense());
     setHp(getHp() - reducedDamage);
     String text = getName() + " took " + String.valueOf(reducedDamage) + " damage.";
     centerHub.printRightTextWithTypeWriter(text);

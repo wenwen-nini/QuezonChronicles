@@ -32,11 +32,11 @@ public class PortRat extends Enemy{
     int baseDamage = getAttackPower();
     if (baseDamage < 0) baseDamage = 0;
 
-    // Critical hit mechanic
-    double critChance = 0.2;
+    // Critical hit mechanic (rarer and softer to avoid spikes)
+    double critChance = 0.12;
     double critRoll = Math.random();
     if (critRoll < critChance) {
-        baseDamage *= 2; // Critical hit doubles damage
+        baseDamage = (int)Math.round(baseDamage * 1.5); // Moderated crit to keep fight fair
         centerHub.printRightTextWithTypeWriter(textColor.RED + "Critical hit!" + textColor.RESET);
     }
 

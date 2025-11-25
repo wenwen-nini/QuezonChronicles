@@ -15,11 +15,11 @@ public class Mage extends Player {
    public Mage(String name) {
       setName(name);
       // Balanced base stats for Mage (glass cannon / caster)
-      setMaxHp(80);
-      setHp(80);
+      setMaxHp(90);
+      setHp(90);
       setMp(95);
       setMaxMp(95);
-      setDefense(6);
+      setDefense(7);
       setAttackPower(18);
       setSpeed(6);
       description =
@@ -28,7 +28,7 @@ public class Mage extends Player {
             "Mages have discovered the secret arcane energy within pastries and pastries alone.";
 
       // Capture base stats for proper reset behavior
-      setBaseStats(80, 0, 0, 80, 80, 6, 18, 6);
+      setBaseStats(90, 0, 0, 95, 95, 7, 18, 6);
       setUsesMp(true);
    
   		setMoves(new String[] {"1. Fire Ball (Basic + no mana required)", 
@@ -135,11 +135,11 @@ public class Mage extends Player {
 	@Override
    public void levelStats() {
       // Mage grows in MP faster than HP and becomes more potent with spells
-      setMaxHp(getMaxHp() + 9);
-      setHp(getHp() + 9);
+      setMaxHp(getMaxHp() + 12);
+      setHp(getHp() + 12);
       setMp(getMp() + 12);
       setMaxMp(getMaxMp() + 12); 
-      setDefense(getDefense() + 2);
+      setDefense(getDefense() + 3);
       setAttackPower(getAttackPower() + 4);
       setSpeed(getSpeed() + 2);
 	}

@@ -26,10 +26,10 @@ public class BattleSystem {
     // Calculate exp with RNG multiplier (1.5 to 2.0) and town multiplier
     private int calculateExpReward(Player player, Enemy enemy) {
         int baseExp = enemy.getExpReward();
-        double rngMultiplier = 1.5 + (Math.random() * 0.5); // Random between 1.5 and 2.0
+        double rngMultiplier = 1.2 + (Math.random() * 0.3); // Random between 1.2 and 1.5
         
-        // Town multiplier: Town 0 = 1.0x, Town 1 = 1.3x, Town 2 = 1.6x, Town 3 = 1.9x, Town 4 = 2.2x
-        float[] townMultipliers = {1.0f, 1.3f, 1.6f, 1.9f, 2.2f};
+        // Town multiplier: Town 0 = 1.0x, Town 1 = 1.15x, Town 2 = 1.3x, Town 3 = 1.5x, Town 4 = 1.7x
+        float[] townMultipliers = {1.0f, 1.15f, 1.3f, 1.5f, 1.7f};
         int townIndex = Math.min(player.getCurrentTownIndex(), 4); // Cap at index 4
         float townMultiplier = townMultipliers[townIndex];
         

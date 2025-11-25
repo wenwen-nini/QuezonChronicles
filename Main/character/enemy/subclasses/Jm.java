@@ -22,7 +22,6 @@ public class Jm extends Enemy {
         setPossibleLoot(new Item[]{new SinigangHipon(), new TropicalBreezeJuice()});
     }
 
-    @Override
     public void enemyMove(Player player) {
 
 

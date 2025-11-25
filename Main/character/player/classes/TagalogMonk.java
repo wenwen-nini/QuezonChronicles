@@ -14,20 +14,20 @@ public class TagalogMonk extends Player {
    public TagalogMonk(String name) {
       setName(name);
       // Balanced base stats for Tagalog Monk (balanced melee hybrid)
-      setMaxHp(110);
-      setHp(110);
-      setStamina(60);
-      setMaxStamina(60);
-      setDefense(8);
-      setAttackPower(9);
-      setSpeed(5);
+      setMaxHp(105);
+      setHp(105);
+      setStamina(65);
+      setMaxStamina(65);
+      setDefense(9);
+      setAttackPower(11);
+      setSpeed(9);
       description =
                "Steeped in the ancient traditions of the Tagalog highlands and lowlands, the Tagalog Monk embodies harmony between body, spirit, and the land.\n" +
                "Guided by pananampalataya (faith) and disiplina (discipline), these warriors channel the strength of their ancestors\n" +
                "from the mountains of the North to the plains of the heart of Luzon.";
 
       // Capture base stats for proper reset behavior
-      setBaseStats(110, 60, 60, 0, 0, 8, 9, 5);
+      setBaseStats(105, 65, 65, 0, 0, 9, 11, 9);
       setUsesMp(false);
    
   		setMoves(new String[] {"1. Suntok ni Apo (basic + no stamina required)", 
@@ -132,13 +132,13 @@ public class TagalogMonk extends Player {
 	@Override
    public void levelStats() {
       // Monk grows in HP and stamina and gains attack steadily
-      setMaxHp(getMaxHp() + 10);
-      setHp(getHp() + 10);
-      setStamina(getStamina() + 5);
-         setMaxStamina(getMaxStamina() + 5);
-      setDefense(getDefense() + 1);
+      setMaxHp(getMaxHp() + 12);
+      setHp(getHp() + 12);
+      setStamina(getStamina() + 7);
+      setMaxStamina(getMaxStamina() + 7);
+      setDefense(getDefense() + 2);
       setAttackPower(getAttackPower() + 2);
-      setSpeed(getSpeed() + 0);
+      setSpeed(getSpeed() + 2);
 	}
 
    public void skillUsedTurn() {

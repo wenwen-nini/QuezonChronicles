@@ -129,13 +129,13 @@ public class Warrior extends Player{
 	@Override 
 	public void levelStats() {
         // Warrior grows in HP and stamina quickly, modest increases in damage and defense
-        setMaxHp(getMaxHp() + 12);
-        setHp(getHp() + 12);
-        setStamina(getStamina() + 6);
-        setMaxStamina(getMaxStamina() + 6);
+        setMaxHp(getMaxHp() + 14);
+        setHp(getHp() + 14);
+        setStamina(getStamina() + 5);
+        setMaxStamina(getMaxStamina() + 5);
         setDefense(getDefense() + 2);
         setAttackPower(getAttackPower() + 2);
-        setSpeed(getSpeed() + 0);
+        setSpeed(getSpeed() + 2);
 	}
 
 

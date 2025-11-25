@@ -15,20 +15,20 @@ public class Mage extends Player {
    public Mage(String name) {
       setName(name);
       // Balanced base stats for Mage (glass cannon / caster)
-      setMaxHp(75);
-      setHp(75);
-      setMp(80);
-      setMaxMp(80);
-      setDefense(5);
-      setAttackPower(16);
-      setSpeed(8);
+      setMaxHp(80);
+      setHp(80);
+      setMp(95);
+      setMaxMp(95);
+      setDefense(6);
+      setAttackPower(18);
+      setSpeed(6);
       description =
             "Masters of the mystical arts and occasional bakery enthusiasts, Mages command the elements with pure intellect — and sometimes pure chaos.\n" +
             "These spellcasters channel the raw forces of fire, mana, and… baked goods? Yes, through years of study (and late-night merienda),\n" +
             "Mages have discovered the secret arcane energy within pastries and pastries alone.";
 
       // Capture base stats for proper reset behavior
-      setBaseStats(75, 0, 0, 80, 80, 5, 16, 8);
+      setBaseStats(80, 0, 0, 80, 80, 6, 18, 6);
       setUsesMp(true);
    
   		setMoves(new String[] {"1. Fire Ball (Basic + no mana required)", 
@@ -135,13 +135,13 @@ public class Mage extends Player {
 	@Override
    public void levelStats() {
       // Mage grows in MP faster than HP and becomes more potent with spells
-      setMaxHp(getMaxHp() + 6);
-      setHp(getHp() + 6);
-      setMp(getMp() + 10);
-       setMaxMp(getMaxMp() + 10); 
-      setDefense(getDefense() + 1);
-      setAttackPower(getAttackPower() + 3);
-      setSpeed(getSpeed() + 0);
+      setMaxHp(getMaxHp() + 9);
+      setHp(getHp() + 9);
+      setMp(getMp() + 12);
+      setMaxMp(getMaxMp() + 12); 
+      setDefense(getDefense() + 2);
+      setAttackPower(getAttackPower() + 4);
+      setSpeed(getSpeed() + 2);
 	}
 
    public void skillUsedTurnForSkill2() {

@@ -216,7 +216,7 @@ public abstract class Enemy extends Character {
             applyDebuffEffect(activeDebuffs[i]);
 
             if (debuffTurns[i] <= 0) {
-                String text = " wore off!";
+                String text = "Stun wore off!";
                 typeWriter.typeWriterFast(text);
                 activeDebuffs[i] = null;
             }

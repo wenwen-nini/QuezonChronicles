@@ -20,7 +20,7 @@ public class RealSpecter extends Enemy {
         setExpReward(120);
 
         // Possible loot
-        setPossibleLoot(new Item[]{new Tinuto(), new PugonCoffee()});
+        setPossibleLoot(new Item[]{new SinigangHipon(), new Lambanog()});
     }
 
     @Override

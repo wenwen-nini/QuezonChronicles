@@ -14,7 +14,8 @@ public class DriedFishSnack extends Item {
     public void useItem(Player player) {
         int attackBoostAmount = 2;
 
-        System.out.println(player.getName() + " ate the Dried Fish Snack!");
+        text = player.getName() + " ate the Dried Fish Snack!";
+        typeWriter.typeWriterFast(text);
         player.addTemporaryAttackBoost(attackBoostAmount, 2);
     }
 }

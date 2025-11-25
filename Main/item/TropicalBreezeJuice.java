@@ -7,7 +7,7 @@ public class TropicalBreezeJuice extends Item {
 
     public TropicalBreezeJuice() {
         setName(textColor.ORANGE + "Tropical Breeze Juice" + textColor.RESET);
-        setDescription("(Begin a heroic journey where every decision alters your fate. Gives you stamina and speed.)");
+        setDescription("(Begin a heroic journey where every decision alters your fate. Gives you stamina/mp and speed.)");
     }
 
     @Override
@@ -17,14 +17,13 @@ public class TropicalBreezeJuice extends Item {
         
         //check if the class uses stamina or mp
 
-        System.out.println(player.getName() + "ate the Mountain Honey!");
+        text = player.getName() + "drunk the Tropical Breeze Juice!";
+        typeWriter.typeWriterFast(text);
         if (!player.getUsesMp()) {
             player.addStamina(staminaBoost);
-            System.out.println(player.getName() + "restored 15 amount of stamina!");
         }
         else {
-        player.addMp(staminaBoost);
-        System.out.println(player.getName() + "restored 15 amount of mp!");
+            player.addMp(staminaBoost);
         }
         player.addSpeed(speed);
     }

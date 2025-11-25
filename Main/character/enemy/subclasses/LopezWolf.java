@@ -20,7 +20,7 @@ public class LopezWolf extends Enemy{
         setExpReward(50);
 
         // Possible loot
-        setPossibleLoot(new Item[]{new Tinuto(), new PugonCoffee()});
+        setPossibleLoot(new Item[]{new LopezCocoaDrink(), new SumanIbos()});
     }
 
     @Override

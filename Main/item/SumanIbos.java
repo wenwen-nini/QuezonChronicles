@@ -14,8 +14,8 @@ public class SumanIbos extends Item {
     public void useItem(Player player) {
         int healBoost = 30;
 
-        System.out.println(player.getName() + " ate the Suman sa Ibos!");
-        System.out.println(player.getName() + " has healed by +30hp.");
+        text = player.getName() + " ate the Suman sa Ibos!";
+        typeWriter.typeWriterFast(text);
         player.heal(healBoost);
     }
 }

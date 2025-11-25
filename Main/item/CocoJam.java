@@ -7,24 +7,24 @@ public class CocoJam extends Item {
 
     public CocoJam() {
         setName(textColor.ORANGE + "Coco Jam" + textColor.RESET);
-        setDescription("(A sweet Lucena delicacy that restores Stamina. (For Stamina users only))");
+        setDescription("(A sweet Lucena delicacy that restores Stamina/Mp.)");
     }
 
     @Override
     public void useItem(Player player) {
 
-        int staminaBoost = 15;
+        int resourceBoost = 15;
         
         //check if the class uses stamina or mp
-
-        System.out.println(player.getName() + " eats a Coco Jam!");
-        System.out.println(player.getName() + "restores 15 amount of stamina!");
+        
+        text = player.getName() + " eats a Coco Jam!";
+        typeWriter.typeWriterFast(text);
 
         if (!player.getUsesMp()) {
-            player.addStamina(staminaBoost);
+            player.addStamina(resourceBoost);
         }
         else {
-        player.addMp(staminaBoost);
+        player.addMp(resourceBoost);
         }
     }
 }

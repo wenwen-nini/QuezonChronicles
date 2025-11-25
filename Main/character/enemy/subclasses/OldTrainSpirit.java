@@ -20,7 +20,7 @@ public class OldTrainSpirit extends Enemy {
         setExpReward(400);
 
         // Possible loot
-        setPossibleLoot(new Item[]{new Tinuto(), new PugonCoffee()});
+        setPossibleLoot(new Item[]{new LopezCocoaDrink(), new Turon()});
     }
 
     @Override

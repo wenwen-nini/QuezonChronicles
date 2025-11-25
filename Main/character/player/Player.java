@@ -131,6 +131,16 @@ public abstract class Player extends Character {
   }
 
   public void takeDamage(int amount) {
+    if (getDodgeTurns() > 0) {
+      if (Math.random() < 0.8) {
+        String text = getName() + " dodged the attack!";
+        centerHub.printRightTextWithTypeWriter(text);
+        reduceDodgeTurns();
+        return;
+      }
+      reduceDodgeTurns();
+    }
+
     int reducedDamage = Math.max(0, amount - getDefense());
     setHp(getHp() - reducedDamage);
     String text = getName() + " took " + String.valueOf(reducedDamage) + " damage.";
@@ -283,6 +293,12 @@ public abstract class Player extends Character {
             centerHub.printRightTextWithTypeWriter(text);
             return;
         }
+        else if (activeDebuffs[i].equals(type)) {
+            debuffTurns[i] = Math.max(debuffTurns[i], turns);
+            String text = getName() + "'s " + type + " duration refreshed to " + debuffTurns[i] + " turns!";
+            centerHub.printRightTextWithTypeWriter(text);
+            return;
+        }
     }
     centerHub.printRightTextWithTypeWriter("Too many debuffs active!");
   }
@@ -312,7 +328,7 @@ public abstract class Player extends Character {
             case "burn":
                 text = getName() + " takes 2 burn damage!";
                 centerHub.printRightTextWithTypeWriter(text);
-                takeDamage(2);
+                takeDamage(getDefense() + 2);
                 break;
             case "absorb":
                 text = getName() + " feels weaker! Health had been absored by 2";
@@ -322,7 +338,7 @@ public abstract class Player extends Character {
             case "defense down":
                 text = getName() + " feels weaker! Defense temporarily reduced.";
                 centerHub.printRightTextWithTypeWriter(text);
-                setDefense(getDefense() - 1);
+                setDefense(getDefense() - 2);
                 break;
             case "attack down":
                 text = getName() + " feels their strength fade!";

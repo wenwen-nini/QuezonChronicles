@@ -20,7 +20,7 @@ public class SumanMimic extends Enemy {
         setExpReward(40);
 
         // Possible loot
-        setPossibleLoot(new Item[]{new Tinuto(), new PugonCoffee()});
+        setPossibleLoot(new Item[]{new SumanIbos(), new LopezCocoaDrink()});
     }
 
     @Override
@@ -32,9 +32,8 @@ public class SumanMimic extends Enemy {
         player.takeDamage(damage);
 
         int healAmount = 2;
-        heal(healAmount);
-
         String text = getName() + " absorbs energy from the hit and heals " + healAmount + " HP!";
         centerHub.printRightTextWithTypeWriter(text);
+        heal(healAmount);
     }
 }

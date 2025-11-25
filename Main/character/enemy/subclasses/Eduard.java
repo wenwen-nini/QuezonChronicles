@@ -8,7 +8,7 @@ import Main.styles.textColor.TextColorHub;
 
 public class Eduard extends Enemy{
 
-    public Eduard(int townIndex) {
+    public Eduard(int townIndex, Player player) {
         double levelScaler = (townIndex + 1.0) / 2.0;
         setName("Aladdin of Mindoro, Eduard");
         setMaxHp((int)Math.floor(85.0 * levelScaler));
@@ -36,10 +36,10 @@ public class Eduard extends Enemy{
 
         player.takeDamage(baseDamage);
 
-        // 50% chance to stun player for 1 turn (only if not already stunned)
-        double stunChance = 0.5;
+        // 50% chance to stun player for 2 turns (only if not already stunned and skill is not on cooldown)
+        double stunChance = 0.7;
         double stunRoll = Math.random();
-        if (stunRoll < stunChance) {
+        if (stunRoll < stunChance && getSkillUsedTurn() <= 0) {
             // Check if player already has stun debuff
             boolean alreadyStunned = false;
             String[] debuffs = player.getActiveDebuffs();
@@ -53,7 +53,13 @@ public class Eduard extends Enemy{
             if (!alreadyStunned) {
                 player.applyDebuff("stun", 2);
                 centerHub.printRightTextWithTypeWriter(textColor.YELLOW + player.getName() + " is stunned by the impact!" + textColor.RESET);
+                setSkillUsedTurn(3);
             }
+        }
+
+        // 20% chance to steal a random item from player's inventory
+        if (Math.random() < 0.2) {
+            stealRandomItem(player);
         }
     }
 }

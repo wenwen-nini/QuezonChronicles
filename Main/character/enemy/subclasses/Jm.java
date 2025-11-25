@@ -13,8 +13,8 @@ public class Jm extends Enemy {
         setName("Super Sariayan Jm");
         setMaxHp(280);
         setHp(280);
-        setAttackPower(12);
-        setDefense(12);
+        setAttackPower(15);
+        setDefense(15);
         setSpeed(15);
 
         setExpReward(300);
@@ -33,14 +33,22 @@ public class Jm extends Enemy {
             return;
         }
         if (windUp == 0) {
-            String text = getName() + " unleashes a powerful Kamehameha wave!";
-            centerHub.printRightTextWithTypeWriter(text);
-            int baseDamage = getAttackPower();
-            if (baseDamage < 0) baseDamage = 0;
-
-            player.takeDamage(baseDamage);
-
-            windUp = 2;
+            if (Math.random() < 0.3) {
+                int doubleDamage = getAttackPower() * 2;
+                if (doubleDamage < 0) doubleDamage = 0;
+                String text = getName() + "'s Kamehameha hits critically!";
+                centerHub.printRightTextWithTypeWriter(text);
+                player.takeDamage(doubleDamage);
+                windUp = 2;
+            }
+            else {
+                String text = getName() + " unleashes a powerful Kamehameha wave!";
+                centerHub.printRightTextWithTypeWriter(text);
+                int baseDamage = getAttackPower();
+                if (baseDamage < 0) baseDamage = 0;
+                player.takeDamage(baseDamage);
+                windUp = 2;
+            }
         }
     }
 }

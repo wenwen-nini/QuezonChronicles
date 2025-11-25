@@ -7,9 +7,10 @@ import Main.styles.textColor.TextColorHub;
 
 public class Mage extends Player {
    
-   private static CenterHub centerHub = new CenterHub();
+   private CenterHub centerHub = new CenterHub();
 
-   public static int skillUsedTurn;
+   public int skillUsedTurnForSkill2 = 0;
+   public int skillUsedTurnForSkill3 = 0;
 
    public Mage(String name) {
       setName(name);
@@ -43,17 +44,25 @@ public class Mage extends Player {
             String text = "\n" + getName() + " cast a Fire Ball!";
             typeWriter.typeWriterFast(text);
             target.takeDamage(getAttackPower());
-            skillUsedTurn();
+            skillUsedTurnForSkill2();
+            skillUsedTurnForSkill3();
             setLastActionSucceeded(true);
             break;
 
          case 2:
             if (getMp() >= 10) {
+               if (skillUsedTurnForSkill2 > 0){
+                  text = "You just used LambaShield. Cannot use for " + skillUsedTurnForSkill2 + " more turn(s).";
+                  typeWriter.typeWriterFast(text);
+                  setLastActionSucceeded(false);
+                  break;
+               }
                text = "\n" + getName() + " cast a LambaShield!";
                typeWriter.typeWriterFast(text);
                setMp(getMp() - 10);
                addTemporaryDefenseBoost((int)(getDefense() * 0.30), 2);
-               skillUsedTurn();
+               skillUsedTurnForSkill2 = 2;
+               skillUsedTurnForSkill3();
                setLastActionSucceeded(true);
             }
             else {
@@ -62,8 +71,8 @@ public class Mage extends Player {
             break;
 
          case 3:
-            if(skillUsedTurn > 0){
-               text = "You just used Mana Surge. Cannot use for " + skillUsedTurn + " more turn(s).";
+            if(skillUsedTurnForSkill3 > 0){
+               text = "You just used Mana Surge. Cannot use for " + skillUsedTurnForSkill3 + " more turn(s).";
                typeWriter.typeWriterFast(text);
                setLastActionSucceeded(false);
                break;
@@ -73,7 +82,8 @@ public class Mage extends Player {
                typeWriter.typeWriterFast(text);
                addMp(25);
                System.out.println("Mana Restored by 25 points!");
-               skillUsedTurn = 2;
+               skillUsedTurnForSkill3 = 2;
+               skillUsedTurnForSkill2();
                setLastActionSucceeded(true); 
                break;
             }
@@ -85,7 +95,8 @@ public class Mage extends Player {
                typeWriter.typeWriterFast(text);
                int damage = getAttackPower() + (int)(getAttackPower() * 0.5);
 				   target.takeDamage(damage);
-               skillUsedTurn();
+               skillUsedTurnForSkill2();
+               skillUsedTurnForSkill3();
                setLastActionSucceeded(true);
             }
             else {
@@ -133,15 +144,27 @@ public class Mage extends Player {
       setSpeed(getSpeed() + 0);
 	}
 
-   public static void skillUsedTurn() {
-      if (skillUsedTurn <= 0) {
-         skillUsedTurn = 0;
+   public void skillUsedTurnForSkill2() {
+      if (skillUsedTurnForSkill2 <= 0) {
+         skillUsedTurnForSkill2 = 0;
       }
       else {
-         skillUsedTurn--;
-         if (skillUsedTurn == 0) {
-            System.out.println("Mana Surge is ready!");
+         skillUsedTurnForSkill2--;
+         if (skillUsedTurnForSkill2 == 0) {
+            typeWriter.typeWriterFast("LambaShield is ready!");
          }
       }
+   }
+
+   public void skillUsedTurnForSkill3() {
+	  if (skillUsedTurnForSkill3 <= 0) {
+		 skillUsedTurnForSkill3 = 0;
+	  }
+	  else {
+		 skillUsedTurnForSkill3--;
+		 if (skillUsedTurnForSkill3 == 0) {
+			typeWriter.typeWriterFast("Mana Surge is ready!");
+		 }
+	  }
    }
 }

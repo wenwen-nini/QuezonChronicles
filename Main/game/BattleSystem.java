@@ -73,7 +73,7 @@ public class BattleSystem {
             }
             else {
                 String text = "\nEnemy goes first!";
-                centerHub.printRightText(textColor.RED + text + textColor.RESET);
+                centerHub.printRightTextWithTypeWriter(textColor.RED + text + textColor.RESET);
                 enemy.checkStunned();
                 if (!enemy.getIsStunned()) {
                     enemyTurn(player, enemy);
@@ -83,31 +83,37 @@ public class BattleSystem {
         }
 
         while (player.isAlive() && enemy.isAlive()) {
+
+            enemy.updateDebuffs();
+            player.checkStunned();
+            player.updateDebuffs();
+            enemy.checkStunned();
+
             if (playerInitiative) {
-                enemy.checkStunned();
                 if (!enemy.getIsStunned()) {
                     // Enemy goes first this round. If their action kills the player,
                     // we should not run the player's turn. Likewise, if enemy is
                     // dead before the player's turn, skip the player's turn.
                     enemyTurn(player, enemy);
-                    enemy.updateDebuffs();
-                    player.updateDebuffs();
+                    
                     player.updateTurnEffects();
                     if (player.isAlive() && enemy.isAlive()) {
                         printCombatStatus(player, enemy);
-                        playerTurn(player, enemy);
+                        if (!player.getIsStunned()) {
+                            playerTurn(player, enemy);
+                        }
                     }
                 }
                 else {
-                    playerTurn(player, enemy);
-                    player.updateDebuffs();
-                    enemy.updateDebuffs();
+                    printCombatStatus(player, enemy);
+                    if (!player.getIsStunned()) {
+                        playerTurn(player, enemy);
+                    }
                     player.updateTurnEffects();
                 }
             }
             else {
                 printCombatStatus(player, enemy);
-                player.checkStunned();
                 if (!player.getIsStunned()) {
                     // Player acts first. If the player kills the enemy, don't let
                     // the (now dead) enemy take a turn.
@@ -117,8 +123,6 @@ public class BattleSystem {
                         if (!enemy.getIsStunned()) {
                             enemyTurn(player, enemy);
                         }
-                        enemy.updateDebuffs();
-                        player.updateDebuffs();
                         player.updateTurnEffects();
                         
                     }
@@ -128,8 +132,6 @@ public class BattleSystem {
                     printCombatStatus(player, enemy);
                     enemyTurn(player, enemy);
                     enemy.updateSkillUsedTurn();
-                    enemy.updateDebuffs();
-                    player.updateDebuffs();
                     player.updateTurnEffects();
                 }
             }
@@ -140,7 +142,6 @@ public class BattleSystem {
             if (enemy instanceof Red && ((Red) enemy).hasExploded()) {
                 System.out.println(textColor.RED + "Both you and " + enemy.getName() + " perished in the explosion!" + textColor.RESET);
                 System.out.println(textColor.RED + "You gain no experience or loot from this battle!" + textColor.RESET);
-                player.resetProgress();
                 return;
             }
             
@@ -150,14 +151,12 @@ public class BattleSystem {
                 System.out.println("The " + enemy.getName() + " dropped " + loot.getName() + ", but you couldn't pick it up.");
             }
             System.out.println(textColor.RED + "You gain no experience or loot from this battle!" + textColor.RESET);
-            player.resetProgress();
             return;
         }
 
         handleVictory(player, enemy);
 
         if (!player.isAlive()) {
-            player.resetProgress();
             System.out.println(textColor.RED + "Game over! You have been slained!" + textColor.RESET);
             return;
         }
@@ -225,6 +224,7 @@ public class BattleSystem {
                     if (itemIndex == -1) {
                         clearScreen.clear();
                         System.out.println("Item use cancelled.");
+                        printCombatStatus(player, enemy);
                     }
                     else if (itemIndex < -1 || itemIndex >= inventory.length || inventory[itemIndex] == null) {
                         clearScreen.clear();

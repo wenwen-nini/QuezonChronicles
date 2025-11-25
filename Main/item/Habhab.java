@@ -13,16 +13,16 @@ public class Habhab extends Item {
     @Override
     public void useItem(Player player) {
     int healBoost = 25;
-    int staminaBoost = 10;
+    int resourceBoost = 10;
 
-    System.out.println(player.getName() + " eats a Habhab!");
-    System.out.println(player.getName() + " restored 25 HP and 10 Stamina!");
+    text = player.getName() + " eats a Habhab!";
+    typeWriter.typeWriterFast(text);
     player.heal(healBoost);
     if (!player.getUsesMp()) {
-            player.addStamina(staminaBoost);
+            player.addStamina(resourceBoost);
         }
         else {
-        player.addMp(staminaBoost);
+        player.addMp(resourceBoost);
         }
     }
 }

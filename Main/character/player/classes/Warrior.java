@@ -9,7 +9,7 @@ public class Warrior extends Player{
 
     private CenterHub centerHub = new CenterHub();
 
-    public static int skillUsedTurn;
+    public int skillUsedTurn;
 
     public Warrior(String name){
         setName(name);
@@ -47,11 +47,11 @@ public class Warrior extends Player{
                 break;
 
             case 2:
-                if (getStamina() >= 5){
+                if (getStamina() >= 8){
                     text = "\n" + getName() + " used Cleave!";
                     typeWriter.typeWriterFast(text);
                     setStamina(getStamina() - 5);
-                    target.takeDamage((int) (getAttackPower() * 1.5));
+                    target.takeDamage((int) Math.floor((getAttackPower() * 1.5)));
                     skillUsedTurn();
                     setLastActionSucceeded(true);
                     break;
@@ -63,7 +63,7 @@ public class Warrior extends Player{
                 break;
 
             case 3:
-                if (getStamina() >= 3){
+                if (getStamina() >= 5){
                     text = "\n" + getName() + " used Shield Bash!";
                     typeWriter.typeWriterFast(text);
                     target.takeDamage((int) (getAttackPower() * 0.5));
@@ -94,7 +94,7 @@ public class Warrior extends Player{
                     typeWriter.typeWriterFast(text);
                     heal(15);
                     addStamina(10);
-                    skillUsedTurn = 3;
+                    skillUsedTurn = 2;
                     setLastActionSucceeded(true);
                     break;
                 }
@@ -139,14 +139,14 @@ public class Warrior extends Player{
 	}
 
 
-    public static void skillUsedTurn() {
+    public void skillUsedTurn() {
       if (skillUsedTurn <= 0) {
          skillUsedTurn = 0;
       }
       else {
          skillUsedTurn--;
          if (skillUsedTurn == 0) {
-            System.out.println("Second Wind is ready!");
+            typeWriter.typeWriterFast("Second Wind is ready!");
          }
       }
    }

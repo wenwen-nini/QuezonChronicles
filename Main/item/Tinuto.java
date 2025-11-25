@@ -15,7 +15,8 @@ public class Tinuto extends Item {
     public void useItem(Player player) {
         int maxHp = player.getMaxHp();
 
-        System.out.print(player.getName() + " eats a Tinuto and restores full HP!");
+        text = player.getName() + " eats a Tinuto and restores full HP!";
+        typeWriter.typeWriterFast(text);
         player.setHp(maxHp);
     }
 }

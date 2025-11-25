@@ -7,19 +7,17 @@ public class Turon extends Item {
 
     public Turon() {
         setName(textColor.RED + "Turon" + textColor.RESET);
-        setDescription("(Local delicacy. Gives you additional damage.)");
+        setDescription("(Local delicacy. Gives you additional damage. (OP +15 Attack for 2 turns))");
     }
 
     @Override
     public void useItem(Player player) {
         int attackBoostAmount = 15;
-        int duration = 5;
+        int duration = 2;
         
-        //check if the class uses stamina or mp
+        text = player.getName() + " ate the turon!";
+        typeWriter.typeWriterFast(text);
 
-        System.out.println(player.getName() + "ate the turon!");
-        System.out.println(player.getName() + "gains a temporary attack damage boost.");
-
-        player.addTemporaryAttackBoost(15, 5);
+        player.addTemporaryAttackBoost(attackBoostAmount, duration);
     }
 }

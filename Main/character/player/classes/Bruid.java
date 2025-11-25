@@ -7,9 +7,10 @@ import Main.styles.animationHub.TypeWriter;
 
 public class Bruid extends Player {
 
-	private static CenterHub centerHub = new CenterHub();
+	private CenterHub centerHub = new CenterHub();
 
-	public static int skillUsedTurn;
+	public int skillUsedTurnForSkill2 = 0;
+	public int skillUsedTurnForSkill3 = 0;
 
 	public Bruid(String name) {
 		setName(name);
@@ -29,6 +30,8 @@ public class Bruid extends Player {
 		// Capture base stats for proper reset behavior
 		setBaseStats(95, 0, 0, 70, 70, 8, 13, 6);
 		setUsesMp(true);
+
+		
    
   		setMoves(new String[] {"1. Banana Strike (Basic + no mana required)", 
    							"2. Front Shield (Banana tree fronds wrap around the character, reducing incoming damage by 25% for 2 turns. 10 MP)", 
@@ -44,27 +47,34 @@ public class Bruid extends Player {
 			typeWriter.typeWriterFast(text);
 			target.takeDamage(getAttackPower());
 			setLastActionSucceeded(true);
-            skillUsedTurn();
+            skillUsedTurnForSkill2();
+			skillUsedTurnForSkill3();
 			break;
 
 		case 2:
 			if (getMp() >= 10) {
+				if (skillUsedTurnForSkill2 > 0){
+					text = "You just used Front Shield. Cannot use for " + skillUsedTurnForSkill2 + " more turn(s).";
+					typeWriter.typeWriterFast(text);
+					setLastActionSucceeded(false);
+					break;
+				}
 				text = "\n" + getName() + " used Front Shield!";
 				typeWriter.typeWriterFast(text);
 				setMp(getMp() - 10);
 				addTemporaryDefenseBoost((int)(getDefense() * 0.25), 2);
 				setLastActionSucceeded(true);
-				skillUsedTurn();
+				skillUsedTurnForSkill2 = 2;
+				skillUsedTurnForSkill3();
 			}
 			else {
 				setLastActionSucceeded(false);
-				
 			}
 			break;
 
 		case 3:
-			if(skillUsedTurn > 0){
-               text = "You just used Mana Grove. Cannot use for " + skillUsedTurn + " more turn(s).";
+			if(skillUsedTurnForSkill3 > 0){
+               text = "You just used Mana Grove. Cannot use for " + skillUsedTurnForSkill3 + " more turn(s).";
                typeWriter.typeWriterFast(text);
                setLastActionSucceeded(false);
                break;
@@ -74,20 +84,26 @@ public class Bruid extends Player {
                typeWriter.typeWriterFast(text);
                addMp(25);
                System.out.println("Mana Restored by 25 points!");
-               skillUsedTurn = 2;
+               skillUsedTurnForSkill3 = 2;
+			   skillUsedTurnForSkill2();
                setLastActionSucceeded(true); 
                break;
             }
 
 		case 4:
 			if (getMp() >= 15) {
+				setMp(getMp() - 15);
 				text = "\n" + getName() + " used Puso ng Saging!";
 				typeWriter.typeWriterFast(text);
-				setMp(getMp() - 15);
 				int damage = getAttackPower() + (int)(getAttackPower() * 0.5);
 				target.takeDamage(damage);
+				if (Math.random() < 0.2) {
+					target.applyDebuff("stun", 2);
+					typeWriter.typeWriterFast(text);
+				}
 				setLastActionSucceeded(true);
-				skillUsedTurn();
+				skillUsedTurnForSkill2();
+				skillUsedTurnForSkill3();
 			}
 			else {
 				setLastActionSucceeded(false);
@@ -134,15 +150,27 @@ public class Bruid extends Player {
 		setSpeed(getSpeed() + 0);
 	}
 
-	public static void skillUsedTurn() {
-      if (skillUsedTurn <= 0) {
-         skillUsedTurn = 0;
+	public void skillUsedTurnForSkill2() {
+      if (skillUsedTurnForSkill2 <= 0) {
+         skillUsedTurnForSkill2 = 0;
       }
       else {
-         skillUsedTurn--;
-         if (skillUsedTurn == 0) {
-            System.out.println("Recovering Grove is ready!");
+         skillUsedTurnForSkill2--;
+         if (skillUsedTurnForSkill2 == 0) {
+            typeWriter.typeWriterFast("Front Shield is ready!");
          }
       }
+   }
+
+   public void skillUsedTurnForSkill3() {
+	  if (skillUsedTurnForSkill3 <= 0) {
+		 skillUsedTurnForSkill3 = 0;
+	  }
+	  else {
+		 skillUsedTurnForSkill3--;
+		 if (skillUsedTurnForSkill3 == 0) {
+			typeWriter.typeWriterFast("Mana Grove is ready!");
+		 }
+	  }
    }
 }

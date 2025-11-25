@@ -1,2 +1,4 @@
 Main/game/GameMenu.java
 Main/worldBuilder/Town.java
+*.class
+out/

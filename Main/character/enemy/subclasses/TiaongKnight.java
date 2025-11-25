@@ -9,8 +9,9 @@ public class TiaongKnight extends Enemy {
 
     public TiaongKnight(Player player) {
         setName("Tiaong Knight");
+        double levelScaler = player.getLevel();
         // Late game enemy - Town 5
-        setMaxHp(120);
+        setMaxHp((int)(120 + Math.floor(0 * 6 * 1.2)));
         setHp(120);
         setAttackPower(25);
         setDefense(10);

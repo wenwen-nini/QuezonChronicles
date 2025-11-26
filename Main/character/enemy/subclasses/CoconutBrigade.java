@@ -33,7 +33,7 @@ public class CoconutBrigade extends Enemy {
         double critChance = 0.14;
         if(Math.random() < critChance){
             centerHub.printRightTextWithTypeWriter(textColor.RED + "Critical hit!" + textColor.RESET);
-            baseDamage = (int)Math.Floor(baseDamage * 1.2);
+            baseDamage = (int)Math.floor(baseDamage * 1.2);
         }
 
         player.takeDamage(baseDamage);

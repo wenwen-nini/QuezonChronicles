@@ -313,16 +313,21 @@ public abstract class Player extends Character {
 
   public void updateDebuffs() {
     for (int i = 0; i < activeDebuffs.length; i++) {
-        if (activeDebuffs[i] != null) {
-            debuffTurns[i]--;
-            applyDebuffEffect(activeDebuffs[i]);
-
-            if (debuffTurns[i] <= 0) {
-                String text = activeDebuffs[i] + " wore off!";
-                centerHub.printRightTextWithTypeWriter(text);
-                activeDebuffs[i] = null;
-            }
+      if (activeDebuffs[i] != null) {
+        // Stun is handled when the character attempts to act (consumeStunTurn),
+        // so skip decrementing or applying its effect here to avoid double-counting.
+        if (activeDebuffs[i].equalsIgnoreCase("stun")) {
+          continue;
         }
+        debuffTurns[i]--;
+        applyDebuffEffect(activeDebuffs[i]);
+
+        if (debuffTurns[i] <= 0) {
+          String text = activeDebuffs[i] + " wore off!";
+          centerHub.printRightTextWithTypeWriter(text);
+          activeDebuffs[i] = null;
+        }
+      }
     }
   }
 

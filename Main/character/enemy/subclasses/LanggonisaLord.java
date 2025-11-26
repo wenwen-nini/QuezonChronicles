@@ -39,13 +39,6 @@ public class LanggonisaLord extends Enemy {
                 player.applyDebuff("burn", 2);
                 setSkillUsedTurn(2);
             }
-            else {
-                updateSkillUsedTurn();
-            }
-        }
-
-        if (getSkillUsedTurn() > 0) {
-            updateSkillUsedTurn();
         }
     }
 }

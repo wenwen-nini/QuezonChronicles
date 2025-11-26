@@ -77,13 +77,6 @@ public abstract class Enemy extends Character {
         newDefense = (int)Math.max(0, Math.round(newDefense * classBiases[2]));
         newSpeed = (int)Math.max(1, Math.round(newSpeed * classBiases[3]));
 
-        if (isWestLateTown(player, townIndex)) {
-            double[] westNerf = getWestLateTownAdjustments();
-            newMaxHp = (int)Math.max(1, Math.round(newMaxHp * westNerf[0]));
-            newAttack = (int)Math.max(1, Math.round(newAttack * westNerf[1]));
-            newDefense = (int)Math.max(0, Math.round(newDefense * westNerf[2]));
-        }
-
         double damageMultiplier = getDamageMultiplierForTown(townIndex);
         newAttack = (int)Math.max(1, Math.round(newAttack * damageMultiplier));
 
@@ -176,18 +169,6 @@ public abstract class Enemy extends Character {
         return multipliers[capped];
     }
 
-    private boolean isWestLateTown(Player player, int townIndex) {
-        String path = player.getChosenPath();
-        if (path == null) {
-            return false;
-        }
-        return townIndex >= 2 && path.equalsIgnoreCase("west");
-    }
-
-    private double[] getWestLateTownAdjustments() {
-        return new double[]{0.94, 0.9, 0.93};
-    }
-
     public Item dropLoot() {
         if (possibleLoot == null || possibleLoot.length == 0) {
             return null;
@@ -262,6 +243,12 @@ public abstract class Enemy extends Character {
             typeWriter.typeWriterFast(text);
             return;
         }
+        else if (activeDebuffs[i].equalsIgnoreCase(type)) {
+            debuffTurns[i] = Math.max(debuffTurns[i], turns);
+            String text = getName() + "'s " + type + " duration refreshed to " + debuffTurns[i] + " turns!";
+            typeWriter.typeWriterFast(text);
+            return;
+        }
     }
     typeWriter.typeWriterFast("Too many debuffs active!");
   }
@@ -269,11 +256,16 @@ public abstract class Enemy extends Character {
   public void updateDebuffs() {
     for (int i = 0; i < activeDebuffs.length; i++) {
         if (activeDebuffs[i] != null) {
+            // Stun is handled when the character attempts to act (consumeStunTurn),
+            // so skip decrementing or applying its effect here to avoid double-counting.
+            if (activeDebuffs[i].equalsIgnoreCase("stun")) {
+                continue;
+            }
             debuffTurns[i]--;
             applyDebuffEffect(activeDebuffs[i]);
 
             if (debuffTurns[i] <= 0) {
-                String text = "Stun wore off!";
+                String text = activeDebuffs[i] + " wore off!";
                 typeWriter.typeWriterFast(text);
                 activeDebuffs[i] = null;
             }

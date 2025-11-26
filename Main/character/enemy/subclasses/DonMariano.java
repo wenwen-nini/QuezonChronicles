@@ -42,19 +42,13 @@ public class DonMariano extends Enemy {
                 player.applyDebuff("burn", 2);
                 setSkillUsedTurn(2);
             }
-            else {
-                updateSkillUsedTurn();
-            }
         }
-
         if (Math.random() <= healChance) {
             int healAmount = (int) (player.getAttackPower() * 0.5);
             heal(healAmount);
             centerHub.printRightTextWithTypeWriter("Don Mariano absorbs " + String.valueOf(healAmount) + " damage from " + player.getName() + "!");
         }
 
-        if (getSkillUsedTurn() > 0) {
-            updateSkillUsedTurn();
-        }
+        // cooldown is decremented centrally by the BattleSystem after enemyTurn
     }
 }

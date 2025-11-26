@@ -44,8 +44,7 @@ public class BattleSystem {
         if (player.getSpeed() > enemy.getSpeed()) {
             printCombatStatus(player, enemy);
             typeWriter.typeWriterFast(textColor.ORANGE + "\nPlayer goes first!" + textColor.RESET);
-            player.checkStunned();
-            if (!player.getIsStunned()) {
+            if (!player.consumeStunTurn()) {
                 playerTurn(player, enemy);
                 playerInitiative = true;
             }
@@ -54,10 +53,8 @@ public class BattleSystem {
         else if (enemy.getSpeed() > player.getSpeed()) {
             String text = "\nEnemy goes first!";
             centerHub.printRightTextWithTypeWriter(textColor.RED + text + textColor.RESET);
-            enemy.checkStunned();
-            if (!enemy.getIsStunned()) {
+            if (!enemy.consumeStunTurn()) {
                 enemyTurn(player, enemy);
-                enemy.updateSkillUsedTurn();
             }
         }
         else {
@@ -65,8 +62,7 @@ public class BattleSystem {
             if (chances < 0.5) {
                 printCombatStatus(player, enemy);
                 typeWriter.typeWriterFast(textColor.ORANGE + "\nPlayer goes first!" + textColor.RESET);
-                player.checkStunned();
-                if (!player.getIsStunned()) {
+                if (!player.consumeStunTurn()) {
                     playerTurn(player, enemy);
                 }
                 playerInitiative = true;
@@ -74,39 +70,39 @@ public class BattleSystem {
             else {
                 String text = "\nEnemy goes first!";
                 centerHub.printRightTextWithTypeWriter(textColor.RED + text + textColor.RESET);
-                enemy.checkStunned();
-                if (!enemy.getIsStunned()) {
+                if (!enemy.consumeStunTurn()) {
                     enemyTurn(player, enemy);
-                    enemy.updateSkillUsedTurn();
                 }
             }
         }
 
         while (player.isAlive() && enemy.isAlive()) {
 
+            // Update debuff effects and durations for both combatants first,
+            // then recalculate stunned state so debuffs take effect immediately.
+            player.updateDebuffs();
             enemy.updateDebuffs();
             player.checkStunned();
-            player.updateDebuffs();
             enemy.checkStunned();
 
             if (playerInitiative) {
-                if (!enemy.getIsStunned()) {
+                if (!enemy.consumeStunTurn()) {
                     // Enemy goes first this round. If their action kills the player,
                     // we should not run the player's turn. Likewise, if enemy is
                     // dead before the player's turn, skip the player's turn.
                     enemyTurn(player, enemy);
-                    
+
                     player.updateTurnEffects();
                     if (player.isAlive() && enemy.isAlive()) {
                         printCombatStatus(player, enemy);
-                        if (!player.getIsStunned()) {
+                        if (!player.consumeStunTurn()) {
                             playerTurn(player, enemy);
                         }
                     }
                 }
                 else {
                     printCombatStatus(player, enemy);
-                    if (!player.getIsStunned()) {
+                    if (!player.consumeStunTurn()) {
                         playerTurn(player, enemy);
                     }
                     player.updateTurnEffects();
@@ -114,24 +110,24 @@ public class BattleSystem {
             }
             else {
                 printCombatStatus(player, enemy);
-                if (!player.getIsStunned()) {
+                if (!player.consumeStunTurn()) {
                     // Player acts first. If the player kills the enemy, don't let
                     // the (now dead) enemy take a turn.
                     playerTurn(player, enemy);
                     if (player.isAlive() && enemy.isAlive()) {
-                        enemy.checkStunned();
-                        if (!enemy.getIsStunned()) {
+                        if (!enemy.consumeStunTurn()) {
                             enemyTurn(player, enemy);
                         }
                         player.updateTurnEffects();
-                        
+
                     }
                 }
                 else {
                     clearScreen.clear();
                     printCombatStatus(player, enemy);
-                    enemyTurn(player, enemy);
-                    enemy.updateSkillUsedTurn();
+                    if (!enemy.consumeStunTurn()) {
+                        enemyTurn(player, enemy);
+                    }
                     player.updateTurnEffects();
                 }
             }
@@ -259,6 +255,8 @@ public class BattleSystem {
                 player.addExp(expAwarded);
             }
         }
+        // decrement enemy skill cooldown each time it takes a turn
+        enemy.updateSkillUsedTurn();
     }
 
     public void handleVictory(Player player, Enemy enemy) {

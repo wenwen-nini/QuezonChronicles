@@ -91,6 +91,25 @@ public abstract class Character {
     return isStunned;
   }
 
+  // When a character's turn arrives, consume one turn of stun if present.
+  // Returns true if the character was stunned and their turn is consumed (i.e., they cannot act).
+  public boolean consumeStunTurn() {
+    for (int i = 0; i < activeDebuffs.length; i++) {
+      String debuff = activeDebuffs[i];
+      if (debuff != null && debuff.equalsIgnoreCase("stun")) {
+        // apply effect message
+        applyDebuffEffect("stun");
+        debuffTurns[i]--;
+        if (debuffTurns[i] <= 0) {
+          activeDebuffs[i] = null;
+          typeWriter.typeWriterFast("Stun wore off!");
+        }
+        return true;
+      }
+    }
+    return false;
+  }
+
 	//setters for Stats
   public void setName(String newName) {
     name = newName;
@@ -144,7 +163,7 @@ public abstract class Character {
   public void checkStunned() {
     isStunned = false;
     for (String debuff : activeDebuffs) {
-      if (debuff != null && (debuff.equalsIgnoreCase("stun") || debuff.equalsIgnoreCase("confusion"))) {
+      if (debuff != null && debuff.equalsIgnoreCase("stun")) {
         isStunned = true;
         break;
       }

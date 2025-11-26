@@ -31,22 +31,25 @@ public class FestivalMask extends Enemy {
 
         // Base damage
         int damage = getAttackPower();
-        if (getSkillUsedTurn() > 0) {
-            double confuseChance = 0.4;
-            if (Math.random() <= confuseChance){
+        double confuseChance = 0.4;
+        if (getSkillUsedTurn() <= 0) {
+            // skill ready
+            if (Math.random() <= confuseChance) {
                 player.applyDebuff("confusion", 2);
-                player.takeDamage(damage + player.getDefense());
-                updateSkillUsedTurn();
+                player.takeDamage(damage);
             } else {
                 player.takeDamage(damage);
             }
+            // set cooldown (2 turns)
+            setSkillUsedTurn(2);
         } else {
-            setSkillUsedTurn(2); // count down until the skill can be used
+            // perform normal attack while skill is on cooldown
+            player.takeDamage(damage);
         }
 
         // Optional chance flavor (adds variety)
         double chance = Math.random();
-        if (chance <= 0.15) { // 15% chance for extra confusion feedback
+        if (chance <= 0.35) { // 35% chance for extra confusion feedback
             text = player.getName() + " hits themselves in confusion!";
             centerHub.printRightTextWithTypeWriter(text);
             player.takeDamage(3 + player.getDefense());

@@ -36,7 +36,7 @@ public class Alwynn extends Enemy{
         int totalDamage = 0;
 
         // High critical hit chance
-        double critChance = 0.4;
+        double critChance = 0.28;
 
         for (int i = 0; i < numberOfHits; i++) {
             int baseDamage = getAttackPower();

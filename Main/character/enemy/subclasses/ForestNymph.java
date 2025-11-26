@@ -29,7 +29,7 @@ public class ForestNymph extends Enemy {
         centerHub.printRightTextWithTypeWriter(text);
 
         //healherself
-        heal(18);
+        heal(12);
         player.takeDamage(getAttackPower());
     }
 }

@@ -34,10 +34,10 @@ public class TanimGuardian extends Enemy {
     if (baseDamage < 0) baseDamage = 0;
     
     // Critical hit mechanic
-    double critChance = 0.2;
+    double critChance = 0.14;
     double critRoll = Math.random();
     if (critRoll < critChance) {
-        baseDamage *= 2; // Critical hit doubles damage
+        baseDamage = (int)Math.floor (baseDamage * 1.1); // Critical hit doubles damage
         centerHub.printRightTextWithTypeWriter(textColor.RED + "Critical hit!" + textColor.RESET);
     }
 

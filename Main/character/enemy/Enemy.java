@@ -24,6 +24,7 @@ public abstract class Enemy extends Character {
 
     // Scaling support
     private boolean baseStatsCaptured = false;
+    private boolean baseStatsAdjusted = false;
     private int baseMaxHp;
     private int baseAttackPower;
     private int baseDefense;
@@ -51,8 +52,9 @@ public abstract class Enemy extends Character {
         if (isSpecialEncounter()) {
             return;
         }
+        applySubclassBaseReduction(townIndex);
 
-        double levelFactor = 1.0 + 0.04 * (playerLevel - 1);
+        double levelFactor = 1.0 + 0.03 * (playerLevel - 1);
         double[] townMultipliers = getTownMultipliers(townIndex);
 
         double targetHp = player.getMaxHp() * townMultipliers[0] * levelFactor;
@@ -64,13 +66,18 @@ public abstract class Enemy extends Character {
         int newAttack = (int)Math.max(1, Math.round(Math.max(baseAttackPower, targetAttack)));
         int newDefense = (int)Math.max(0, Math.round(Math.max(baseDefense, targetDefense)));
 
+        double[] townBaseWeakness = getTownBaseWeakness(townIndex);
+        newMaxHp = (int)Math.max(1, Math.round(newMaxHp * townBaseWeakness[0]));
+        newAttack = (int)Math.max(1, Math.round(newAttack * townBaseWeakness[1]));
+        newDefense = (int)Math.max(0, Math.round(newDefense * townBaseWeakness[2]));
+
         double[] classBiases = getClassBiases(player);
         newMaxHp = (int)Math.max(1, Math.round(newMaxHp * classBiases[0]));
         newAttack = (int)Math.max(1, Math.round(newAttack * classBiases[1]));
         newDefense = (int)Math.max(0, Math.round(newDefense * classBiases[2]));
         newSpeed = (int)Math.max(1, Math.round(newSpeed * classBiases[3]));
 
-        int defenseBuffer = Math.max(4, Math.min(18, 4 + (playerLevel / 2) + townIndex * 2));
+        int defenseBuffer = Math.max(2, Math.min(12, 2 + (playerLevel / 3) + Math.max(0, townIndex - 1)));
         int minAttack = player.getDefense() + defenseBuffer;
         if (newAttack < minAttack) {
             newAttack = minAttack;
@@ -123,12 +130,34 @@ public abstract class Enemy extends Character {
         return new double[]{hpBias, atkBias, defBias, spdBias};
     }
 
+    private void applySubclassBaseReduction(int townIndex) {
+        if (baseStatsAdjusted) {
+            return;
+        }
+        int capped = Math.max(0, Math.min(townIndex, 4));
+        double[] hpFactors = {0.88, 0.92, 0.95, 0.97, 1.0};
+        double[] atkFactors = {0.82, 0.88, 0.92, 0.95, 1.0};
+        double[] defFactors = {0.85, 0.9, 0.93, 0.95, 1.0};
+        baseMaxHp = (int)Math.max(1, Math.round(baseMaxHp * hpFactors[capped]));
+        baseAttackPower = (int)Math.max(1, Math.round(baseAttackPower * atkFactors[capped]));
+        baseDefense = (int)Math.max(0, Math.round(baseDefense * defFactors[capped]));
+        baseStatsAdjusted = true;
+    }
+
     private double[] getTownMultipliers(int townIndex) {
         int capped = Math.max(0, Math.min(townIndex, 4));
-        double[] hpMultipliers = {0.75, 0.9, 1.05, 1.2, 1.35};
-        double[] atkMultipliers = {0.8, 0.95, 1.1, 1.25, 1.4};
-        double[] defMultipliers = {0.9, 1.0, 1.1, 1.2, 1.3};
+        double[] hpMultipliers = {0.65, 0.85, 1.0, 1.15, 1.3};
+        double[] atkMultipliers = {0.7, 0.88, 1.03, 1.18, 1.33};
+        double[] defMultipliers = {0.85, 0.95, 1.05, 1.15, 1.25};
         return new double[]{hpMultipliers[capped], atkMultipliers[capped], defMultipliers[capped]};
+    }
+
+    private double[] getTownBaseWeakness(int townIndex) {
+        int capped = Math.max(0, Math.min(townIndex, 2));
+        double[] hpFactors = {0.85, 0.9, 1.0};
+        double[] atkFactors = {0.8, 0.88, 1.0};
+        double[] defFactors = {0.85, 0.9, 1.0};
+        return new double[]{hpFactors[capped], atkFactors[capped], defFactors[capped]};
     }
 
     public Item dropLoot() {

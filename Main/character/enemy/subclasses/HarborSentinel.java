@@ -31,9 +31,9 @@ public class HarborSentinel extends Enemy {
         int attackPower = getAttackPower();
 
         // Critical hit mechanic
-        double critChance = 0.15;
+        double critChance = 0.1;
         if (Math.random() < critChance) {
-            attackPower *= 2;
+            attackPower = (int)Math.floor(attackPower * 1.1);
             centerHub.printRightTextWithTypeWriter(textColor.RED + "Critical hit!" + textColor.RESET);
         }
 

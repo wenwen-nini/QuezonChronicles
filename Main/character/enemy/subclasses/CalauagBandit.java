@@ -31,9 +31,9 @@ public class CalauagBandit extends Enemy {
         int attackPower = getAttackPower();
 
         // Critical hit mechanic
-        double critChance = 0.2; // 20% chance
+        double critChance = 0.14; // 14% chance
         if (Math.random() < critChance) {
-            attackPower *= 2;
+            attackPower = (int)Math.floor(attackPower * 1.2);
             centerHub.printRightTextWithTypeWriter(textColor.RED + "Critical hit!" + textColor.RESET);
         }
 

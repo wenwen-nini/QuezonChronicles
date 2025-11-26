@@ -13,7 +13,7 @@ public class HabhabBandit extends Enemy{
         // Early game enemy - Town 1
         setMaxHp((int) (45 + Math.floor(levelScaler * 6 * 1.0)));
         setHp((int) (45 + Math.floor(levelScaler * 6 * 1.0)));
-        setAttackPower((int) (8 + Math.floor(levelScaler * 0.8 * 1.0)));
+        setAttackPower((int) (6 + Math.floor(levelScaler * 0.8 * 1.0)));
         setDefense((int)(2 + Math.floor(levelScaler * 0.2 * 1.0)));
         setSpeed(5);
 
@@ -32,10 +32,10 @@ public class HabhabBandit extends Enemy{
     if (baseDamage < 0) baseDamage = 0;
 
     // Critical hit mechanic
-    double critChance = 0.2;
+    double critChance = 0.08;
     double critRoll = Math.random();
     if (critRoll < critChance) {
-        baseDamage *= 2; // Critical hit doubles damage
+        baseDamage = (int)Math.floor (baseDamage * 1.1); // Critical hit doubles damage
         centerHub.printRightTextWithTypeWriter(textColor.RED + "Critical hit!" + textColor.RESET);
     }
 

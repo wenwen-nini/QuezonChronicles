@@ -32,10 +32,10 @@ public class LopezWolf extends Enemy{
     if (baseDamage < 0) baseDamage = 0;
 
     // Critical hit mechanic
-    double critChance = 0.2;
+    double critChance = 0.14;
     double critRoll = Math.random();
     if (critRoll < critChance) {
-        baseDamage *= 2;
+        baseDamage = (int)Math.floor (baseDamage * 1.2);
         centerHub.printRightTextWithTypeWriter(textColor.RED + "Critical hit!" + textColor.RESET);
     }
 

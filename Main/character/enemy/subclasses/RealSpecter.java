@@ -31,9 +31,9 @@ public class RealSpecter extends Enemy {
         int attackPower = getAttackPower();
 
         //Critical Damage
-        double critChance = 0.5; //50% chance
+        double critChance = 0.35; //35% chance
         if (Math.random() < critChance) {
-        attackPower *= 2;
+        attackPower = (int)Math.floor (attackPower * 1.5);
         centerHub.printRightTextWithTypeWriter(textColor.RED + "Critical hit!" + textColor.RESET);
 }
         // Deal damage

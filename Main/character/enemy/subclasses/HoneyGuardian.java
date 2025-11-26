@@ -31,9 +31,9 @@ public class HoneyGuardian extends Enemy {
         int attackPower = getAttackPower();
 
         // Critical hit mechanic
-        double critChance = 0.2; // 20% chance
+        double critChance = 0.05; // 14% chance
         if (Math.random() < critChance) {
-            attackPower *= 2;
+            attackPower = (int)Math.floor(attackPower * 1.1);
             centerHub.printRightTextWithTypeWriter(textColor.RED + "Critical hit!" + textColor.RESET);
         }
 
@@ -41,7 +41,7 @@ public class HoneyGuardian extends Enemy {
         player.takeDamage(attackPower);
 
         //poison
-        double poisonChance = 0.3;
+        double poisonChance = 0.25;
         if (Math.random() < poisonChance) {
             centerHub.printRightTextWithTypeWriter(text);
             player.applyDebuff("Poison", 2);

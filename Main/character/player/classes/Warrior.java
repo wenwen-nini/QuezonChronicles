@@ -69,7 +69,7 @@ public class Warrior extends Player{
                     target.takeDamage((int) (getAttackPower() * 0.5));
                     double stunChance = 0.25;
                     if(Math.random() <= stunChance){
-                        target.applyDebuff("stun", 3);
+                        target.applyDebuff("stun", 4);
                     }
                     setStamina(getStamina() - 3);
                     setLastActionSucceeded(true);

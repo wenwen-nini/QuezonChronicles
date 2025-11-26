@@ -51,7 +51,7 @@ public class Eduard extends Enemy{
             }
             
             if (!alreadyStunned) {
-                player.applyDebuff("stun", 2);
+                player.applyDebuff("stun", 3);
                 centerHub.printRightTextWithTypeWriter(textColor.YELLOW + player.getName() + " is stunned by the impact!" + textColor.RESET);
                 setSkillUsedTurn(3);
             }

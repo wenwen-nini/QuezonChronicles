@@ -97,7 +97,7 @@ public class Bruid extends Player {
 				int damage = getAttackPower() + (int)(getAttackPower() * 0.5);
 				target.takeDamage(damage);
 				if (Math.random() < 0.2) {
-					target.applyDebuff("stun", 2);
+					target.applyDebuff("stun", 3);
 					typeWriter.typeWriterFast(text);
 				}
 				setLastActionSucceeded(true);

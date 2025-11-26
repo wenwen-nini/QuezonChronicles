@@ -72,7 +72,7 @@ public class TagalogMonk extends Player {
                double stunChance = Math.random();
                   if (stunChance < 0.25) {
                      System.out.println(target.getName() + " is stunned!");
-                     target.applyDebuff("stun", 2);
+                     target.applyDebuff("stun", 3);
                   }
                setLastActionSucceeded(true);
             }

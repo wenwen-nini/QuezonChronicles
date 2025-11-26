@@ -14,7 +14,7 @@ public class PortRat extends Enemy{
 
         setMaxHp((int) (70 + Math.floor(levelScaler * 6 * 1.3)));
         setHp((int) (70 + Math.floor(levelScaler * 6 * 1.3)));
-        setAttackPower((int) (14 + Math.floor(levelScaler * 0.8 * 1.3)));
+        setAttackPower((int) (10 + Math.floor(levelScaler * 0.8 * 1.3)));
         setDefense((int) (5 + Math.floor(levelScaler * 0.2 * 1.3)));
         setSpeed(8);
 

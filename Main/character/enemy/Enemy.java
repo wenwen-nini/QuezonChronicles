@@ -54,7 +54,7 @@ public abstract class Enemy extends Character {
         }
         applySubclassBaseReduction(townIndex);
 
-        double levelFactor = 1.0 + 0.03 * (playerLevel - 1);
+        double levelFactor = 1.0 + 0.028 * (playerLevel - 1);
         double[] townMultipliers = getTownMultipliers(townIndex);
 
         double targetHp = player.getMaxHp() * townMultipliers[0] * levelFactor;
@@ -77,7 +77,10 @@ public abstract class Enemy extends Character {
         newDefense = (int)Math.max(0, Math.round(newDefense * classBiases[2]));
         newSpeed = (int)Math.max(1, Math.round(newSpeed * classBiases[3]));
 
-        int defenseBuffer = Math.max(2, Math.min(12, 2 + (playerLevel / 3) + Math.max(0, townIndex - 1)));
+        double damageMultiplier = getDamageMultiplierForTown(townIndex);
+        newAttack = (int)Math.max(1, Math.round(newAttack * damageMultiplier));
+
+        int defenseBuffer = Math.max(1, Math.min(9, 2 + (playerLevel / 4) + Math.max(0, townIndex - 1)));
         int minAttack = player.getDefense() + defenseBuffer;
         if (newAttack < minAttack) {
             newAttack = minAttack;
@@ -135,9 +138,9 @@ public abstract class Enemy extends Character {
             return;
         }
         int capped = Math.max(0, Math.min(townIndex, 4));
-        double[] hpFactors = {0.88, 0.92, 0.95, 0.97, 1.0};
-        double[] atkFactors = {0.82, 0.88, 0.92, 0.95, 1.0};
-        double[] defFactors = {0.85, 0.9, 0.93, 0.95, 1.0};
+        double[] hpFactors = {0.9, 0.94, 0.98, 1.02, 1.05};
+        double[] atkFactors = {0.86, 0.9, 0.95, 1.0, 1.04};
+        double[] defFactors = {0.86, 0.9, 0.95, 1.0, 1.03};
         baseMaxHp = (int)Math.max(1, Math.round(baseMaxHp * hpFactors[capped]));
         baseAttackPower = (int)Math.max(1, Math.round(baseAttackPower * atkFactors[capped]));
         baseDefense = (int)Math.max(0, Math.round(baseDefense * defFactors[capped]));
@@ -154,10 +157,16 @@ public abstract class Enemy extends Character {
 
     private double[] getTownBaseWeakness(int townIndex) {
         int capped = Math.max(0, Math.min(townIndex, 2));
-        double[] hpFactors = {0.85, 0.9, 1.0};
+        double[] hpFactors = {0.84, 0.92, 1.0};
         double[] atkFactors = {0.8, 0.88, 1.0};
-        double[] defFactors = {0.85, 0.9, 1.0};
+        double[] defFactors = {0.85, 0.92, 1.0};
         return new double[]{hpFactors[capped], atkFactors[capped], defFactors[capped]};
+    }
+
+    private double getDamageMultiplierForTown(int townIndex) {
+        int capped = Math.max(0, Math.min(townIndex, 4));
+        double[] multipliers = {0.82, 0.88, 0.94, 0.98, 1.02};
+        return multipliers[capped];
     }
 
     public Item dropLoot() {

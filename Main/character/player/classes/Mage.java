@@ -15,20 +15,20 @@ public class Mage extends Player {
    public Mage(String name) {
       setName(name);
       // Balanced base stats for Mage (glass cannon / caster)
-      setMaxHp(90);
-      setHp(90);
-      setMp(95);
-      setMaxMp(95);
-      setDefense(7);
-      setAttackPower(18);
-      setSpeed(6);
+      setMaxHp(100);
+      setHp(100);
+      setMp(110);
+      setMaxMp(110);
+      setDefense(8);
+      setAttackPower(20);
+      setSpeed(7);
       description =
             "Masters of the mystical arts and occasional bakery enthusiasts, Mages command the elements with pure intellect — and sometimes pure chaos.\n" +
             "These spellcasters channel the raw forces of fire, mana, and… baked goods? Yes, through years of study (and late-night merienda),\n" +
             "Mages have discovered the secret arcane energy within pastries and pastries alone.";
 
       // Capture base stats for proper reset behavior
-      setBaseStats(90, 0, 0, 95, 95, 7, 18, 6);
+      setBaseStats(100, 0, 0, 110, 110, 8, 20, 7);
       setUsesMp(true);
    
   		setMoves(new String[] {"1. Fire Ball (Basic + no mana required)", 

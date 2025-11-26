@@ -13,7 +13,7 @@ public class LongganisangLucban extends Item {
     @Override
     public void useItem(Player player) {
         int attackBoost = 5;
-        int duration = 2;
+        int duration = 3;
 
         text = player.getName() + " eats a Longganisang Lucban!";
         typeWriter.typeWriterFast(text);

@@ -14,19 +14,19 @@ public class Warrior extends Player{
     public Warrior(String name){
         setName(name);
         
-        setMaxHp(120);
-        setHp(120);
-        setStamina(60);
-        setMaxStamina(60);
-        setDefense(9);
-        setAttackPower(9);
-        setSpeed(6);
+        setMaxHp(135);
+        setHp(135);
+        setStamina(70);
+        setMaxStamina(70);
+        setDefense(10);
+        setAttackPower(17);
+        setSpeed(7);
         description =
                 "Forged in battle and tempered by hardship, the Warrior stands as the steadfast heart of every fight. Born from the rugged hills and wide plains,\n" +
                 "Warriors embody the courage of those who fight not for glory, but for karangalan (honor) and kapwa (others).";
 
         // Capture base stats for proper reset behavior
-        setBaseStats(120, 60, 60, 0, 0, 9, 9, 6);
+        setBaseStats(135, 70, 70, 0, 0, 10, 17, 7);
         setUsesMp(false);
 
         setMoves(new String[] {"1. Slash(Basic + no stamina required.)",

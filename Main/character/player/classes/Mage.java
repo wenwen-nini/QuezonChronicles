@@ -81,7 +81,6 @@ public class Mage extends Player {
                text = "\n" + getName() + " cast a Mana Surge!";
                typeWriter.typeWriterFast(text);
                addMp(25);
-               System.out.println("Mana Restored by 25 points!");
                skillUsedTurnForSkill3 = 2;
                skillUsedTurnForSkill2();
                setLastActionSucceeded(true); 

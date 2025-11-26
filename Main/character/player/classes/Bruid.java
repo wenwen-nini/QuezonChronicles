@@ -83,7 +83,6 @@ public class Bruid extends Player {
                text = "\n" + getName() + " cast a Mana Grove!";
                typeWriter.typeWriterFast(text);
                addMp(25);
-               System.out.println("Mana Restored by 25 points!");
                skillUsedTurnForSkill3 = 2;
 			   skillUsedTurnForSkill2();
                setLastActionSucceeded(true); 

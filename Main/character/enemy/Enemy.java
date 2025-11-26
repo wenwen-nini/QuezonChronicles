@@ -77,6 +77,13 @@ public abstract class Enemy extends Character {
         newDefense = (int)Math.max(0, Math.round(newDefense * classBiases[2]));
         newSpeed = (int)Math.max(1, Math.round(newSpeed * classBiases[3]));
 
+        if (isWestLateTown(player, townIndex)) {
+            double[] westNerf = getWestLateTownAdjustments();
+            newMaxHp = (int)Math.max(1, Math.round(newMaxHp * westNerf[0]));
+            newAttack = (int)Math.max(1, Math.round(newAttack * westNerf[1]));
+            newDefense = (int)Math.max(0, Math.round(newDefense * westNerf[2]));
+        }
+
         double damageMultiplier = getDamageMultiplierForTown(townIndex);
         newAttack = (int)Math.max(1, Math.round(newAttack * damageMultiplier));
 
@@ -167,6 +174,18 @@ public abstract class Enemy extends Character {
         int capped = Math.max(0, Math.min(townIndex, 4));
         double[] multipliers = {0.82, 0.88, 0.94, 0.96, 0.99};
         return multipliers[capped];
+    }
+
+    private boolean isWestLateTown(Player player, int townIndex) {
+        String path = player.getChosenPath();
+        if (path == null) {
+            return false;
+        }
+        return townIndex >= 2 && path.equalsIgnoreCase("west");
+    }
+
+    private double[] getWestLateTownAdjustments() {
+        return new double[]{0.94, 0.9, 0.93};
     }
 
     public Item dropLoot() {

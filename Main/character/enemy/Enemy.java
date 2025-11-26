@@ -235,6 +235,20 @@ public abstract class Enemy extends Character {
 
     //Debuff Methods
   public void applyDebuff(String type, int turns) {
+        if (type == null || turns <= 0) {
+            return;
+        }
+
+        if (type.equalsIgnoreCase("stun")) {
+            boolean wasStunned = getStunTurnsRemaining() > 0;
+            refreshStunDuration(turns);
+            String text = wasStunned
+                ? getName() + "'s stun duration refreshed to " + getStunTurnsRemaining() + " turns!"
+                : getName() + " is afflicted with stun for " + getStunTurnsRemaining() + " turns!";
+            typeWriter.typeWriterFast(text);
+            return;
+        }
+
     for (int i = 0; i < activeDebuffs.length; i++) {
         if (activeDebuffs[i] == null) {
             activeDebuffs[i] = type;
@@ -243,7 +257,7 @@ public abstract class Enemy extends Character {
             typeWriter.typeWriterFast(text);
             return;
         }
-        else if (activeDebuffs[i].equalsIgnoreCase(type)) {
+            else if (activeDebuffs[i].equalsIgnoreCase(type)) {
             debuffTurns[i] = Math.max(debuffTurns[i], turns);
             String text = getName() + "'s " + type + " duration refreshed to " + debuffTurns[i] + " turns!";
             typeWriter.typeWriterFast(text);

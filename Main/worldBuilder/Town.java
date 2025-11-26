@@ -89,22 +89,22 @@ public class Town {
                     if (chances <= 0.17 && enemiesDefeated < (enemies != null ? enemies.length : 0)) { //FOR SPECIAL ENEMY SPAWN
                         clearScreen.clear();
                         typeWriter.typeWriterFast("A special enemy have spawned during your exploration!");
-                        double bossChance = Math.random();
-                        if (bossChance <= 0.25) {
+                        double specialEnemyChance = Math.random();
+                        if (specialEnemyChance <= 0.25) {
                             Enemy enemy = new Alwynn(townIndex);
                             text = "A wild " + enemy.getName() + " appeared!";
                             typeWriter.typeWriterFast(textColor.GREEN + text + textColor.RESET);
                             typeWriter.typeWriterFast(textColor.GREEN + "Bro followed you all the way from the Atimonan!" + textColor.RESET);
                             new BattleSystem().BattleStart(player, enemy);
                         }
-                        else if (bossChance > 0.25 && bossChance <= 0.5) {
+                        else if (specialEnemyChance > 0.25 && specialEnemyChance <= 0.5) {
                             Enemy enemy = new Eduard(townIndex, player);
                             text = "A wild " + enemy.getName() + " appeared!";
                             typeWriter.typeWriterFast(textColor.ORANGE + text + textColor.RESET);
                             typeWriter.typeWriterFast(textColor.ORANGE + "Careful—he might try to bargain, charm, or steal your loot." + textColor.RESET);
                             new BattleSystem().BattleStart(player, enemy);
                         }
-                        else if (bossChance > 0.5 && bossChance <= 0.75) {
+                        else if (specialEnemyChance > 0.5 && specialEnemyChance <= 0.75) {
                             Enemy enemy = new Nell(townIndex);
                             text = "A wild " + enemy.getName() + " appeared!";
                             typeWriter.typeWriterFast(textColor.CYAN + text + textColor.RESET);
@@ -112,7 +112,7 @@ public class Town {
                             new BattleSystem().BattleStart(player, enemy);
                         }
 
-                        else if (bossChance > 0.75 && bossChance <= 1) {
+                        else if (specialEnemyChance > 0.75 && specialEnemyChance <= 1) {
                             Enemy enemy = new Red(townIndex);
                             text = "A wild " + enemy.getName() + " appeared!";
                             typeWriter.typeWriterFast(textColor.RED + text + textColor.RESET);

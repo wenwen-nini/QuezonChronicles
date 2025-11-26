@@ -10,6 +10,7 @@ public abstract class Character {
   //Debuff Attributes
   public String[] activeDebuffs = new String[3];
   public int[] debuffTurns = new int[3];
+  private int stunTurnsRemaining = 0;
 
   private TypeWriter typeWriter = new TypeWriter();
 
@@ -94,20 +95,67 @@ public abstract class Character {
   // When a character's turn arrives, consume one turn of stun if present.
   // Returns true if the character was stunned and their turn is consumed (i.e., they cannot act).
   public boolean consumeStunTurn() {
-    for (int i = 0; i < activeDebuffs.length; i++) {
-      String debuff = activeDebuffs[i];
-      if (debuff != null && debuff.equalsIgnoreCase("stun")) {
-        // apply effect message
-        applyDebuffEffect("stun");
-        debuffTurns[i]--;
-        if (debuffTurns[i] <= 0) {
-          activeDebuffs[i] = null;
-          typeWriter.typeWriterFast("Stun wore off!");
-        }
-        return true;
+    if (stunTurnsRemaining > 0) {
+      applyDebuffEffect("stun");
+      stunTurnsRemaining--;
+      syncStunSlot();
+      if (stunTurnsRemaining <= 0) {
+        typeWriter.typeWriterFast("Stun wore off!");
+        clearStunSlot();
       }
+      return true;
     }
     return false;
+  }
+
+  protected void refreshStunDuration(int turns) {
+    if (turns <= 0) {
+      return;
+    }
+    stunTurnsRemaining = Math.max(stunTurnsRemaining, turns);
+    boolean slotFound = false;
+    for (int i = 0; i < activeDebuffs.length; i++) {
+      if (activeDebuffs[i] != null && activeDebuffs[i].equalsIgnoreCase("stun")) {
+        debuffTurns[i] = stunTurnsRemaining;
+        slotFound = true;
+        break;
+      }
+    }
+    if (!slotFound) {
+      for (int i = 0; i < activeDebuffs.length; i++) {
+        if (activeDebuffs[i] == null) {
+          activeDebuffs[i] = "stun";
+          debuffTurns[i] = stunTurnsRemaining;
+          slotFound = true;
+          break;
+        }
+      }
+    }
+    // If no slot is available we still track the stun internally so the effect applies.
+    isStunned = true;
+  }
+
+  protected int getStunTurnsRemaining() {
+    return stunTurnsRemaining;
+  }
+
+  private void syncStunSlot() {
+    for (int i = 0; i < activeDebuffs.length; i++) {
+      if (activeDebuffs[i] != null && activeDebuffs[i].equalsIgnoreCase("stun")) {
+        debuffTurns[i] = stunTurnsRemaining;
+      }
+    }
+  }
+
+  private void clearStunSlot() {
+    for (int i = 0; i < activeDebuffs.length; i++) {
+      if (activeDebuffs[i] != null && activeDebuffs[i].equalsIgnoreCase("stun")) {
+        activeDebuffs[i] = null;
+        debuffTurns[i] = 0;
+      }
+    }
+    stunTurnsRemaining = 0;
+    checkStunned();
   }
 
 	//setters for Stats
@@ -158,9 +206,15 @@ public abstract class Character {
     for (int i = 0; i < debuffTurns.length; i++) {
       debuffTurns[i] = 0;
     }
+    stunTurnsRemaining = 0;
+    isStunned = false;
   }
 
   public void checkStunned() {
+    if (stunTurnsRemaining > 0) {
+      isStunned = true;
+      return;
+    }
     isStunned = false;
     for (String debuff : activeDebuffs) {
       if (debuff != null && debuff.equalsIgnoreCase("stun")) {

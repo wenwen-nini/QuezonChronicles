@@ -98,7 +98,7 @@ public class Town {
                             new BattleSystem().BattleStart(player, enemy);
                         }
                         else if (specialEnemyChance > 0.25 && specialEnemyChance <= 0.5) {
-                            Enemy enemy = new Eduard(townIndex, player);
+                            Enemy enemy = new Eduard(townIndex);
                             text = "A wild " + enemy.getName() + " appeared!";
                             typeWriter.typeWriterFast(textColor.ORANGE + text + textColor.RESET);
                             typeWriter.typeWriterFast(textColor.ORANGE + "Careful—he might try to bargain, charm, or steal your loot." + textColor.RESET);

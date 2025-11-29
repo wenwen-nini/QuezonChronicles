@@ -8,7 +8,7 @@ import Main.styles.textColor.TextColorHub;
 
 public class Eduard extends Enemy{
 
-    public Eduard(int townIndex, Player player) {
+    public Eduard(int townIndex) {
         double levelScaler = (townIndex + 1.0) / 2.0;
         setName("Aladdin of Mindoro, Eduard");
         setMaxHp((int)Math.floor(85.0 * levelScaler));
@@ -37,7 +37,7 @@ public class Eduard extends Enemy{
         player.takeDamage(baseDamage);
 
         // 50% chance to stun player for 2 turns (only if not already stunned and skill is not on cooldown)
-        double stunChance = 0.7;
+        double stunChance = 0.5;
         double stunRoll = Math.random();
         if (stunRoll < stunChance && getSkillUsedTurn() <= 0) {
             // Check if player already has stun debuff

@@ -20,7 +20,7 @@ public class Mage extends Player {
       setMp(110);
       setMaxMp(110);
       setDefense(8);
-      setAttackPower(20);
+      setAttackPower(18);
       setSpeed(7);
       description =
             "Masters of the mystical arts and occasional bakery enthusiasts, Mages command the elements with pure intellect — and sometimes pure chaos.\n" +
@@ -28,7 +28,7 @@ public class Mage extends Player {
             "Mages have discovered the secret arcane energy within pastries and pastries alone.";
 
       // Capture base stats for proper reset behavior
-      setBaseStats(100, 0, 0, 110, 110, 8, 20, 7);
+      setBaseStats(100, 0, 0, 110, 110, 8, 17, 7);
       setUsesMp(true);
    
   		setMoves(new String[] {"1. Fire Ball (Basic + no mana required)", 
@@ -92,7 +92,7 @@ public class Mage extends Player {
                setMp(getMp() - 15);
                text = "\n" + getName() + " cast a Pinagong Storm!";
                typeWriter.typeWriterFast(text);
-               int damage = getAttackPower() + (int)(getAttackPower() * 1.1);
+               int damage = (int)(getAttackPower() * 1.6);
 				   target.takeDamage(damage);
                skillUsedTurnForSkill2();
                skillUsedTurnForSkill3();

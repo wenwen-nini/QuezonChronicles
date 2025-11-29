@@ -103,7 +103,7 @@ public abstract class Enemy extends Character {
 
         if (player instanceof Mage) {
             hpBias = 0.94;
-            atkBias = 0.9;
+            atkBias = 0.80;
             defBias = 0.92;
             spdBias = 1.05;
         } else if (player instanceof Thief) {

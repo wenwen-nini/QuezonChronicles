@@ -9,7 +9,6 @@ public class DonMariano extends Enemy {
 
     public DonMariano(Player player) {
         setName("Don Mariano");
-        double levelScaler = player.getLevel();
         // Increased boss durability and loot value
         setMaxHp((int) (150 + Math.floor(player.getLevel() * 10 * 2.2)));
         setHp((int) (150 + Math.floor(player.getLevel() * 10 * 2.2)));

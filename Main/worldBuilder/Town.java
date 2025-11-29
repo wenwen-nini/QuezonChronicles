@@ -200,7 +200,7 @@ public class Town {
 
                             chances = Math.random();
                             if (chances <= 1) {
-                                Enemy secretEnemy = new Jm();
+                                Enemy secretEnemy = new Jm(townIndex);
                                 secretBossAppearedMessager();
                                 new BattleSystem().BattleStart(player, secretEnemy);
                                 secretBossDefeatedMessager(player);

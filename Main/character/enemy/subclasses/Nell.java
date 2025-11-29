@@ -36,10 +36,10 @@ public class Nell extends Enemy{
 
     @Override
     public void takeDamage(int amount) {
-        double dodgeChance = 0.45;
+        double dodgeChance = 0.5;
         double dodgeRoll = Math.random();
         
-        if (dodgeRoll < dodgeChance) {
+        if (dodgeRoll <= dodgeChance) {
             centerHub.printRightTextWithTypeWriter(textColor.CYAN + getName() + " dodged the attack!" + textColor.RESET);
             centerHub.printRightTextWithTypeWriter(textColor.CYAN + "You can't catch me!" + textColor.RESET);
             String text = getName() + " took 0 damage.";

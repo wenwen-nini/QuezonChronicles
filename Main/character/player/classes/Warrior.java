@@ -66,7 +66,7 @@ public class Warrior extends Player{
                 if (getStamina() >= 5){
                     text = "\n" + getName() + " used Shield Bash!";
                     typeWriter.typeWriterFast(text);
-                    target.takeDamage((int) (getAttackPower() * 0.5));
+                    target.takeDamage((int) (getAttackPower() * 1.5));
                     double stunChance = 0.25;
                     if(Math.random() <= stunChance){
                         target.applyDebuff("stun", 4);

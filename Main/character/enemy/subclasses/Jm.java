@@ -9,12 +9,13 @@ public class Jm extends Enemy {
 
     public int windUp = 2;
 
-    public Jm() {
+    public Jm(int townIndex) {
+        double levelScaler = (townIndex + 1.0) / 2.0;
         setName("Super Sariayan Jm");
-        setMaxHp(280);
-        setHp(280);
-        setAttackPower(15);
-        setDefense(15);
+        setMaxHp((int)Math.floor(280.0 * levelScaler));
+        setHp((int)Math.floor(280.0 * levelScaler));
+        setAttackPower((int)Math.floor(15.0 * levelScaler));
+        setDefense((int)Math.floor(15.0 * levelScaler));
         setSpeed(15);
 
         setExpReward(300);

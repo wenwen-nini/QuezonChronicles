@@ -11,11 +11,11 @@ public class CoconutBrigade extends Enemy {
         double levelScaler = (player.getLevel());
         setName("Coconut Brigade");
         // Mid game enemy - Town 3
-        setMaxHp((int) (85 + Math.floor(levelScaler * 6 *1.6)));
-        setHp((int) (85 + Math.floor(levelScaler * 6 * 1.6)));
-        setAttackPower((int) (16 + Math.floor(levelScaler * 0.8 * 1.6)));
-        setDefense((int) (6 + Math.floor(levelScaler * 0.2 * 1.6)));
-        setSpeed(8);
+        setMaxHp((int) (70 + Math.floor(levelScaler * 6 *1.6)));
+        setHp((int) (70 + Math.floor(levelScaler * 6 * 1.6)));
+        setAttackPower((int) (12 + Math.floor(levelScaler * 0.8 * 1.6)));
+        setDefense((int) (5 + Math.floor(levelScaler * 0.2 * 1.6)));
+        setSpeed(5);
 
         setExpReward(100);
 

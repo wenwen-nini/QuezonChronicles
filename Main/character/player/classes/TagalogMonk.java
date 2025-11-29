@@ -52,7 +52,7 @@ public class TagalogMonk extends Player {
                   text = "\n" + getName() + " used Bugso ng Loob!";
                   typeWriter.typeWriterFast(text);
                   setStamina(getStamina() - 10);
-                  int boostDamage = getAttackPower() + (int) Math.floor((getAttackPower() * 0.6));
+                  int boostDamage = getAttackPower() + (int) Math.floor((getAttackPower() * 1.2));
                   target.takeDamage(boostDamage);
                   setLastActionSucceeded(true);
                }
@@ -67,7 +67,7 @@ public class TagalogMonk extends Player {
                text = "\n" + getName() + " used a Karma Strike!";
                typeWriter.typeWriterFast(text);
                setStamina(getStamina() - 15);
-			      int boostDamage = getAttackPower() + (int)(getAttackPower() * 0.2);
+			      int boostDamage = getAttackPower() + (int)(getAttackPower() * 1.5);
                target.takeDamage(boostDamage);
                double stunChance = Math.random();
                   if (stunChance < 0.25) {
@@ -93,9 +93,9 @@ public class TagalogMonk extends Player {
                typeWriter.typeWriterFast(text);
                text = getName() + "'s has healed and gained stamina!";
                typeWriter.typeWriterFast(text);
-               heal((int)(getHp() * 0.3));
+               heal((int)(getHp() * 1.1));
                addStamina(25);
-               addTemporaryDefenseBoost((int)(getDefense() * 0.25), 2);
+               addTemporaryDefenseBoost((int)(getDefense() * 1.25), 2);
                skillUsedTurn = 2;
                skillUsedTurn();
                setLastActionSucceeded(true);

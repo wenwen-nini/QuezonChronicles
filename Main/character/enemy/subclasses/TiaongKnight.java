@@ -12,8 +12,8 @@ public class TiaongKnight extends Enemy {
         double levelScaler = Math.max(1, player.getLevel());
         // Late game enemy - Town 5
         int scaledHp = (int)(120 + Math.floor(levelScaler * 2.4));
-        int scaledAttack = (int)(25 + Math.floor(levelScaler * 1.1));
-        int scaledDefense = (int)(10 + Math.floor(levelScaler * 0.5));
+        int scaledAttack = (int)(17 + Math.floor(levelScaler * 1.1));
+        int scaledDefense = (int)(5 + Math.floor(levelScaler * 0.5));
         setMaxHp(scaledHp);
         setHp(scaledHp);
         setAttackPower(scaledAttack);

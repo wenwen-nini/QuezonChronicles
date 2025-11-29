@@ -24,7 +24,6 @@ public abstract class Enemy extends Character {
 
     // Scaling support
     private boolean baseStatsCaptured = false;
-    private boolean baseStatsAdjusted = false;
     private int baseMaxHp;
     private int baseAttackPower;
     private int baseDefense;
@@ -52,7 +51,6 @@ public abstract class Enemy extends Character {
         if (isSpecialEncounter()) {
             return;
         }
-        applySubclassBaseReduction(townIndex);
 
         double levelFactor = 1.0 + 0.028 * (playerLevel - 1);
         double[] townMultipliers = getTownMultipliers(townIndex);
@@ -133,20 +131,6 @@ public abstract class Enemy extends Character {
         return new double[]{hpBias, atkBias, defBias, spdBias};
     }
 
-    private void applySubclassBaseReduction(int townIndex) {
-        if (baseStatsAdjusted) {
-            return;
-        }
-        int capped = Math.max(0, Math.min(townIndex, 4));
-        double[] hpFactors = {0.9, 0.94, 0.98, 1.01, 1.03};
-        double[] atkFactors = {0.86, 0.9, 0.95, 0.99, 1.02};
-        double[] defFactors = {0.86, 0.9, 0.95, 0.99, 1.01};
-        baseMaxHp = (int)Math.max(1, Math.round(baseMaxHp * hpFactors[capped]));
-        baseAttackPower = (int)Math.max(1, Math.round(baseAttackPower * atkFactors[capped]));
-        baseDefense = (int)Math.max(0, Math.round(baseDefense * defFactors[capped]));
-        baseStatsAdjusted = true;
-    }
-
     private double[] getTownMultipliers(int townIndex) {
         int capped = Math.max(0, Math.min(townIndex, 4));
         double[] hpMultipliers = {0.65, 0.85, 1.0, 1.08, 1.18};
@@ -165,10 +149,9 @@ public abstract class Enemy extends Character {
 
     private double getDamageMultiplierForTown(int townIndex) {
         int capped = Math.max(0, Math.min(townIndex, 4));
-        double[] multipliers = {0.82, 0.88, 0.94, 0.96, 0.99};
+        double[] multipliers = {0.82, 0.88, 0.94, 0.70, 0.60};
         return multipliers[capped];
     }
-
     public Item dropLoot() {
         if (possibleLoot == null || possibleLoot.length == 0) {
             return null;

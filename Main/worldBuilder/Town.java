@@ -199,7 +199,7 @@ public class Town {
                             } 
 
                             chances = Math.random();
-                            if (chances <= 0.5) {
+                            if (chances <= 1) {
                                 Enemy secretEnemy = new Jm();
                                 secretBossAppearedMessager();
                                 new BattleSystem().BattleStart(player, secretEnemy);

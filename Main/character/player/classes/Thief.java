@@ -99,8 +99,8 @@ public class Thief extends Player{
                 else{
                     text = "\n" + getName() + " used Looter's Instinct!";
                     typeWriter.typeWriterFast(text);
-                    heal(8);
-                    addStamina(15);
+                    heal(10 + (getLevel() * 2));
+                    addStamina(15 + (getLevel() * 2));
                     skillUsedTurnForSkill4 = 2;
                     skillUsedTurnForSkill3();
                     setLastActionSucceeded(true);

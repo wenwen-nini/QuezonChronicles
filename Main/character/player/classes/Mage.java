@@ -60,7 +60,7 @@ public class Mage extends Player {
                text = "\n" + getName() + " cast a LambaShield!";
                typeWriter.typeWriterFast(text);
                setMp(getMp() - 10);
-               addTemporaryDefenseBoost((int)(getDefense() * 0.30), 2);
+               addTemporaryDefenseBoost((int)(getDefense() * 1.2), 2);
                skillUsedTurnForSkill2 = 2;
                skillUsedTurnForSkill3();
                setLastActionSucceeded(true);
@@ -92,7 +92,7 @@ public class Mage extends Player {
                setMp(getMp() - 15);
                text = "\n" + getName() + " cast a Pinagong Storm!";
                typeWriter.typeWriterFast(text);
-               int damage = getAttackPower() + (int)(getAttackPower() * 0.5);
+               int damage = getAttackPower() + (int)(getAttackPower() * 1.1);
 				   target.takeDamage(damage);
                skillUsedTurnForSkill2();
                skillUsedTurnForSkill3();

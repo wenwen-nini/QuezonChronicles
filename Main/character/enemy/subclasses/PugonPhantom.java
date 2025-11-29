@@ -11,10 +11,10 @@ public class PugonPhantom extends Enemy {
         setName("Pugon Phantom");
         double levelScaler = (player.getLevel());
         // Late game enemy - Town 5
-        setMaxHp((int) (120 + Math.floor(levelScaler * 6 * 2.2)));
-        setHp((int) (120 + Math.floor(levelScaler * 6 * 2.2)));
-        setAttackPower((int) (25 + Math.floor(levelScaler * 0.8 * 2.2)));
-        setDefense((int) (10 + Math.floor(levelScaler * 0.2 * 2.2)));
+        setMaxHp((int) (100 + Math.floor(levelScaler * 6 * 2.2)));
+        setHp((int) (100 + Math.floor(levelScaler * 6 * 2.2)));
+        setAttackPower((int) (19 + Math.floor(levelScaler * 0.8 * 2.2)));
+        setDefense((int) (7 + Math.floor(levelScaler * 0.2 * 2.2)));
         setSpeed(10);
         
         setExpReward(150);

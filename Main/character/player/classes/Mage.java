@@ -135,8 +135,8 @@ public class Mage extends Player {
    public void levelStats() {
       // Mage grows in MP faster than HP and becomes more potent with spells
       setMaxHp(getMaxHp() + 12);
-      setHp(getHp() + 12);
-      setMp(getMp() + 12);
+      setHp(getHp() + 15);
+      setMp(getMp() + 15);
       setMaxMp(getMaxMp() + 12); 
       setDefense(getDefense() + 3);
       setAttackPower(getAttackPower() + 4);

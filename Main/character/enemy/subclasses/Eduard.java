@@ -8,7 +8,7 @@ import Main.styles.textColor.TextColorHub;
 
 public class Eduard extends Enemy{
 
-    public Eduard(int townIndex, Player player) {
+    public Eduard(int townIndex) {
         double levelScaler = (townIndex + 1.0) / 2.0;
         setName("Aladdin of Mindoro, Eduard");
         setMaxHp((int)Math.floor(85.0 * levelScaler));

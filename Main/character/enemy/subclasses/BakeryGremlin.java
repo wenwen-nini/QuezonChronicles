@@ -12,10 +12,10 @@ public class BakeryGremlin extends Enemy{
         double levelScaler = (player.getLevel());
         setName("Bakery Gremlin");
         // Mid game enemy - Town 3
-        setMaxHp((int) (75 + Math.floor(levelScaler * 12 *1.3)));
-        setHp((int) (75 + Math.floor(levelScaler * 12 * 1.3)));
-        setAttackPower((int) (14 + Math.floor(levelScaler * 1.2 * 1.3)));
-        setDefense((int) (4 + Math.floor(levelScaler * 0.3 * 1.3)));
+        setMaxHp((int) (75 + Math.floor(levelScaler * 12 *1.1)));
+        setHp((int) (75 + Math.floor(levelScaler * 12 * 1.1)));
+        setAttackPower((int) (10 + Math.floor(levelScaler * 1.2 * 1.1)));
+        setDefense((int) (4 + Math.floor(levelScaler * 0.3 * 1.1)));
         setSpeed(8);
 
         setExpReward(70);

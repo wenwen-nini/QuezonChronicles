@@ -11,10 +11,17 @@ public class CalauagBandit extends Enemy {
         setName("Calauag Bandit");
         double levelScaler = (player.getLevel());
         // Mid game enemy - Town 3 (East)
+<<<<<<< HEAD
         setMaxHp((int) (70 + Math.floor(levelScaler * 6 * 1.6)));
         setHp((int) (70 + Math.floor(levelScaler * 6 * 1.6)));
         setAttackPower((int) (15 + Math.floor(levelScaler * 0.8 * 1.6)));
         setDefense((int) (3 + Math.floor(levelScaler * 0.2 * 1.6)));
+=======
+        setMaxHp((int) (85 + Math.floor(levelScaler * 6 * 1.3)));
+        setHp((int) (85 + Math.floor(levelScaler * 6 * 1.3)));
+        setAttackPower((int) (12 + Math.floor(levelScaler * 0.8 * 1.3)));
+        setDefense((int) (6 + Math.floor(levelScaler * 0.2 * 1.3)));
+>>>>>>> 2388a47946fb0ebdc282c68dddf68351cafdfd99
         setSpeed(8);
 
         setExpReward(75);

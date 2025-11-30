@@ -112,19 +112,19 @@ public abstract class Enemy extends Character {
             defBias = 0.93;
             spdBias = 1.08;
         } else if (player instanceof Bruid) {
-            hpBias = 0.98;
-            atkBias = 0.95;
-            defBias = 0.98;
+            hpBias = 0.92;
+            atkBias = 0.85;
+            defBias = 0.96;
             spdBias = 1.0;
         } else if (player instanceof TagalogMonk) {
-            hpBias = 1.0;
-            atkBias = 1.0;
-            defBias = 1.02;
+            hpBias = 0.94;
+            atkBias = 0.88;
+            defBias = 0.96;
             spdBias = 1.02;
         } else if (player instanceof Warrior) {
-            hpBias = 1.03;
-            atkBias = 1.1;
-            defBias = 1.05;
+            hpBias = 0.96;
+            atkBias = 0.90;
+            defBias = 0.98;
             spdBias = 0.98;
         }
 
@@ -149,7 +149,7 @@ public abstract class Enemy extends Character {
 
     private double getDamageMultiplierForTown(int townIndex) {
         int capped = Math.max(0, Math.min(townIndex, 4));
-        double[] multipliers = {0.82, 0.88, 0.94, 0.70, 0.60};
+        double[] multipliers = {0.82, 0.88, 0.94, 0.60, 0.50};
         return multipliers[capped];
     }
     public Item dropLoot() {

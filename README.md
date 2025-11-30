@@ -56,11 +56,11 @@ Mapalad, Nell John Cedrick J.<br>
 ### Character Classes
 | Class | HP | Resource | Attack | Defense | Speed | Playstyle |
 |-------|----|----|--------|---------|-------|----------|
-| **Warrior** | x | x Stamina | x | x | x | x, x |
-| **Bruid** | x | x Stamina | x | x | x | x |
-| **Mage** | x | x MP | x | x | x | x, x |
-| **Tagalog Monk** | x | MP | x | x | x | x |
-| **Thief** | x | x Stamina | x | x | x | x, x |
+| **Warrior** | 140 | 50 Stamina | 18 | 12 | 5 | Tank, High sustain |
+| **Bruid** | 100 | 80 MP | 12 | 8 | 6 | Hybrid support, Nature magic |
+| **Mage** | 70 | 120 MP | 12 | 6 | 18 | Glass cannon, High speed |
+| **Tagalog Monk** | 110 | 50 Stamina | 16 | 8 | 8 | Balanced melee hybrid |
+| **Thief** | 85 | 60 Stamina | 22 | 5 | 14 | High damage, High speed |
 
 ### Combat Mechanics
 - **Initiative System**: Turn order based on Speed stat

@@ -356,4 +356,24 @@ For bug reports, feature requests, or contributions, refer to the project reposi
 
 ---
 
+## 🙏 Acknowledgements
+
+### Special Thanks to Our Instructors
+- **Ma'am Fatima** - For providing comprehensive lessons, templates, and resources shared through her Discord.
+- **Sir Emmanuel** - For his dedicated lessons and continuous effort in teaching us whenever possible. His support and expertise greatly contributed to our understanding and development
+
+### Learning Resources & Inspiration
+- **YouTube Channels**: 
+  - Bro Code - For comprehensive Java tutorials and best practices
+  - Coding with Mosh - For clear programming concepts and design patterns
+  - Other Indian Coding Tutorials - For diverse perspectives and innovative solutions
+- **Stack Overflow** - For community support and solving countless technical challenges
+- **Open-Source Community** - For shared knowledge and programming resources
+
+### Personal Support
+- **Our Parents** - For their unwavering support, encouragement, and belief in this project. This wouldn't have been possible without their sacrifices and dedication
+- **Our Peers & Friends** - For playtesting, constructive feedback, and motivation throughout development
+
+---
+
 **Enjoy your adventure through Quezon Chronicles!** 🏛️⚔️✨

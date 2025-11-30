@@ -13,7 +13,7 @@ public class ForestNymph extends Enemy {
         // Mid-late game enemy - Town 4 (East)
         setMaxHp((int) (80 + Math.floor(levelScaler * 6 *1.9)));
         setHp((int) (80 + Math.floor(levelScaler * 6 *1.9)));
-        setAttackPower((int) (18 + Math.floor(levelScaler * 0.8 * 1.9)));
+        setAttackPower((int) (15 + Math.floor(levelScaler * 0.8 * 1.9)));
         setDefense((int) (4 + Math.floor(levelScaler * 0.2 * 1.9)));
         setSpeed(9);
 

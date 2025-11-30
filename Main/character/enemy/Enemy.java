@@ -149,7 +149,7 @@ public abstract class Enemy extends Character {
 
     private double getDamageMultiplierForTown(int townIndex) {
         int capped = Math.max(0, Math.min(townIndex, 4));
-        double[] multipliers = {0.82, 0.88, 0.94, 0.60, 0.50};
+        double[] multipliers = {0.82, 0.88, 0.85, 0.60, 0.50};
         return multipliers[capped];
     }
     public Item dropLoot() {

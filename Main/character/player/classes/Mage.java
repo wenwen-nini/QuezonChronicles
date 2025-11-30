@@ -138,7 +138,7 @@ public class Mage extends Player {
       setHp(getHp() + 15);
       setMp(getMp() + 15);
       setMaxMp(getMaxMp() + 15); 
-      setDefense(getDefense() + 3);
+      setDefense(getDefense() + 2);
       setAttackPower(getAttackPower() + 4);
       setSpeed(getSpeed() + 2);
 	}

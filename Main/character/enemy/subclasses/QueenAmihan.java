@@ -11,8 +11,8 @@ public class QueenAmihan extends Enemy {
         setName("Queen Amihan");
         double levelScaler = (player.getLevel());
         // Final boss - increased health and attack, unique wave heal ability remains
-        setMaxHp((int) (240 + Math.floor(levelScaler * 10 * 1.8)));
-        setHp((int) (240 + Math.floor(levelScaler * 10 * 2.2)));
+        setMaxHp((int) (140 + Math.floor(levelScaler * 10 * 1.8)));
+        setHp((int) (140 + Math.floor(levelScaler * 10 * 2.2)));
         setAttackPower((int) (30 + Math.floor(levelScaler * 0.8 * 2.2)));
         setDefense((int) (12 + Math.floor(levelScaler * 0.2 * 2.2)));
         setSpeed(20);

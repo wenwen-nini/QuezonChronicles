@@ -9,29 +9,29 @@ public class TagalogMonk extends Player {
 
    private CenterHub centerHub = new CenterHub();
 
-   public static int skillUsedTurn;
+   public int skillUsedTurn;
    
    public TagalogMonk(String name) {
       setName(name);
       // Balanced base stats for Tagalog Monk (balanced melee hybrid)
-      setMaxHp(110);
-      setHp(110);
-      setStamina(50);
-      setMaxStamina(50);
-      setDefense(8);
-      setAttackPower(16);
-      setSpeed(8);
+      setMaxHp(120);
+      setHp(120);
+      setStamina(75);
+      setMaxStamina(75);
+      setDefense(10);
+      setAttackPower(13);
+      setSpeed(10);
       description =
                "Steeped in the ancient traditions of the Tagalog highlands and lowlands, the Tagalog Monk embodies harmony between body, spirit, and the land.\n" +
                "Guided by pananampalataya (faith) and disiplina (discipline), these warriors channel the strength of their ancestors\n" +
                "from the mountains of the North to the plains of the heart of Luzon.";
 
       // Capture base stats for proper reset behavior
-      setBaseStats(110, 50, 50, 0, 0, 8, 16, 8);
+      setBaseStats(120, 75, 75, 0, 0, 10, 13, 10);
       setUsesMp(false);
    
   		setMoves(new String[] {"1. Suntok ni Apo (basic + no stamina required)", 
-   			"2. Bugso ng Loob (The monk releases a surge of inner energy, increasing attack power by 40% and dealing strong damage to a single enemy. (Cost: 10 Stamina))", 
+   			"2. Bugso ng Loob (The monk releases a surge of inner energy, increasing attack power by 60% and dealing strong damage to a single enemy. (Cost: 10 Stamina))", 
             "3. Karma Strike (A powerful counterattack imbued with spiritual justice. Deals heavy damage and has a small chance to stun the target. (Cost: 15 Stamina))",
             "4. Dasal ng Katahimikan (The monk prays calmly amid battle, restoring a portion of HP and stamina while reducing incoming damage by 25% for 1 turn)"});
    }
@@ -52,7 +52,7 @@ public class TagalogMonk extends Player {
                   text = "\n" + getName() + " used Bugso ng Loob!";
                   typeWriter.typeWriterFast(text);
                   setStamina(getStamina() - 10);
-                  int boostDamage = getAttackPower() + (int)(getAttackPower() * 0.4);
+                  int boostDamage = getAttackPower() + (int) Math.floor((getAttackPower() * 1.2));
                   target.takeDamage(boostDamage);
                   setLastActionSucceeded(true);
                }
@@ -67,12 +67,12 @@ public class TagalogMonk extends Player {
                text = "\n" + getName() + " used a Karma Strike!";
                typeWriter.typeWriterFast(text);
                setStamina(getStamina() - 15);
-			      int boostDamage = getAttackPower() + (int)(getAttackPower() * 0.2);
+			      int boostDamage = getAttackPower() + (int)(getAttackPower() * 1.5);
                target.takeDamage(boostDamage);
                double stunChance = Math.random();
-                  if (stunChance < 0.15) {
+                  if (stunChance < 0.25) {
                      System.out.println(target.getName() + " is stunned!");
-                     target.applyDebuff("stun", 1);
+                     target.applyDebuff("stun", 3);
                   }
                setLastActionSucceeded(true);
             }
@@ -93,10 +93,11 @@ public class TagalogMonk extends Player {
                typeWriter.typeWriterFast(text);
                text = getName() + "'s has healed and gained stamina!";
                typeWriter.typeWriterFast(text);
-               heal((int)(getHp() * 0.3));
-               addStamina(1);
-               addTemporaryDefenseBoost((int)(getDefense() * 0.25), 2);
+               heal((int)(getHp() * 0.5));
+               addStamina(25);
+               addTemporaryDefenseBoost((int)(getDefense() * 1.25), 2);
                skillUsedTurn = 2;
+               skillUsedTurn();
                setLastActionSucceeded(true);
                break;
             }
@@ -131,23 +132,23 @@ public class TagalogMonk extends Player {
 	@Override
    public void levelStats() {
       // Monk grows in HP and stamina and gains attack steadily
-      setMaxHp(getMaxHp() + 8);
-      setHp(getHp() + 8);
-      setStamina(getStamina() + 3);
-         setMaxStamina(getMaxStamina() + 3);
-      setDefense(getDefense() + 1);
+      setMaxHp(getMaxHp() + 12);
+      setHp(getHp() + 12);
+      setStamina(getStamina() + 7);
+      setMaxStamina(getMaxStamina() + 7);
+      setDefense(getDefense() + 2);
       setAttackPower(getAttackPower() + 2);
-      setSpeed(getSpeed() + 0);
+      setSpeed(getSpeed() + 2);
 	}
 
-   public static void skillUsedTurn() {
+   public void skillUsedTurn() {
       if (skillUsedTurn <= 0) {
          skillUsedTurn = 0;
       }
       else {
          skillUsedTurn--;
          if (skillUsedTurn == 0) {
-            System.out.println("Dasal ng Katahimikan is ready!");
+            typeWriter.typeWriterFast("Dasal ng Katahimikan is ready!");
          }
       }
    }

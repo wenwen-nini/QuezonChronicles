@@ -7,33 +7,34 @@ import Main.styles.textColor.TextColorHub;
 
 public class Mage extends Player {
    
-   private static CenterHub centerHub = new CenterHub();
+   private CenterHub centerHub = new CenterHub();
 
-   public static int skillUsedTurn;
+   public int skillUsedTurnForSkill2 = 0;
+   public int skillUsedTurnForSkill3 = 0;
 
    public Mage(String name) {
       setName(name);
       // Balanced base stats for Mage (glass cannon / caster)
-      setMaxHp(70);
-      setHp(70);
-      setMp(120);
-      setMaxMp(120);
-      setDefense(6);
-      setAttackPower(12);
-      setSpeed(18);
+      setMaxHp(100);
+      setHp(100);
+      setMp(110);
+      setMaxMp(110);
+      setDefense(8);
+      setAttackPower(18);
+      setSpeed(7);
       description =
             "Masters of the mystical arts and occasional bakery enthusiasts, Mages command the elements with pure intellect — and sometimes pure chaos.\n" +
             "These spellcasters channel the raw forces of fire, mana, and… baked goods? Yes, through years of study (and late-night merienda),\n" +
             "Mages have discovered the secret arcane energy within pastries and pastries alone.";
 
       // Capture base stats for proper reset behavior
-      setBaseStats(70, 0, 0, 120, 120, 6, 12, 18);
+      setBaseStats(100, 0, 0, 110, 110, 8, 17, 7);
       setUsesMp(true);
    
   		setMoves(new String[] {"1. Fire Ball (Basic + no mana required)", 
    			"2. LambaShield (Creates a barrier that reduces incoming damage by 30% for 2 turns. 10 MP)", 
-            "3. Mana Surge (Regenerates 20 MP instantly.)",
-            "4. Pinagong Storm (Calls down hard pinagong breads on all enemies, deals heavy damage. 18 MP)"});
+            "3. Mana Surge (Regenerates 25 MP instantly.)",
+            "4. Pinagong Storm (Calls down hard pinagong breads on all enemies, deals heavy damage. 15 MP)"});
    }
 
 	@Override
@@ -43,17 +44,25 @@ public class Mage extends Player {
             String text = "\n" + getName() + " cast a Fire Ball!";
             typeWriter.typeWriterFast(text);
             target.takeDamage(getAttackPower());
-            skillUsedTurn();
+            skillUsedTurnForSkill2();
+            skillUsedTurnForSkill3();
             setLastActionSucceeded(true);
             break;
 
          case 2:
             if (getMp() >= 10) {
+               if (skillUsedTurnForSkill2 > 0){
+                  text = "You just used LambaShield. Cannot use for " + skillUsedTurnForSkill2 + " more turn(s).";
+                  typeWriter.typeWriterFast(text);
+                  setLastActionSucceeded(false);
+                  break;
+               }
                text = "\n" + getName() + " cast a LambaShield!";
                typeWriter.typeWriterFast(text);
                setMp(getMp() - 10);
-               addTemporaryDefenseBoost((int)(getDefense() * 0.30), 2);
-               skillUsedTurn();
+               addTemporaryDefenseBoost((int)(getDefense() * 1.2), 2);
+               skillUsedTurnForSkill2 = 2;
+               skillUsedTurnForSkill3();
                setLastActionSucceeded(true);
             }
             else {
@@ -62,8 +71,8 @@ public class Mage extends Player {
             break;
 
          case 3:
-            if(skillUsedTurn > 0){
-               text = "You just used Mana Surge. Cannot use for " + skillUsedTurn + " more turn(s).";
+            if(skillUsedTurnForSkill3 > 0){
+               text = "You just used Mana Surge. Cannot use for " + skillUsedTurnForSkill3 + " more turn(s).";
                typeWriter.typeWriterFast(text);
                setLastActionSucceeded(false);
                break;
@@ -72,20 +81,21 @@ public class Mage extends Player {
                text = "\n" + getName() + " cast a Mana Surge!";
                typeWriter.typeWriterFast(text);
                addMp(25);
-               System.out.println("Mana Restored by 25 points!");
-               skillUsedTurn = 2;
+               skillUsedTurnForSkill3 = 2;
+               skillUsedTurnForSkill2();
                setLastActionSucceeded(true); 
                break;
             }
 
          case 4:
-            if (getMp() >= 18) {
-               setMp(getMp() - 18);
+            if (getMp() >= 15) {
+               setMp(getMp() - 15);
                text = "\n" + getName() + " cast a Pinagong Storm!";
                typeWriter.typeWriterFast(text);
-               int damage = getAttackPower() + (int)(getAttackPower() * 0.5);
+               int damage = (int)(getAttackPower() * 1.6);
 				   target.takeDamage(damage);
-               skillUsedTurn();
+               skillUsedTurnForSkill2();
+               skillUsedTurnForSkill3();
                setLastActionSucceeded(true);
             }
             else {
@@ -124,24 +134,36 @@ public class Mage extends Player {
 	@Override
    public void levelStats() {
       // Mage grows in MP faster than HP and becomes more potent with spells
-      setMaxHp(getMaxHp() + 5);
-      setHp(getHp() + 5);
-      setMp(getMp() + 8);
-       setMaxMp(getMaxMp() + 8); 
-      setDefense(getDefense() + 1);
-      setAttackPower(getAttackPower() + 2);
-      setSpeed(getSpeed() + 0);
+      setMaxHp(getMaxHp() + 12);
+      setHp(getHp() + 15);
+      setMp(getMp() + 15);
+      setMaxMp(getMaxMp() + 12); 
+      setDefense(getDefense() + 3);
+      setAttackPower(getAttackPower() + 4);
+      setSpeed(getSpeed() + 2);
 	}
 
-   public static void skillUsedTurn() {
-      if (skillUsedTurn <= 0) {
-         skillUsedTurn = 0;
+   public void skillUsedTurnForSkill2() {
+      if (skillUsedTurnForSkill2 <= 0) {
+         skillUsedTurnForSkill2 = 0;
       }
       else {
-         skillUsedTurn--;
-         if (skillUsedTurn == 0) {
-            System.out.println("Mana Surge is ready!");
+         skillUsedTurnForSkill2--;
+         if (skillUsedTurnForSkill2 == 0) {
+            typeWriter.typeWriterFast("LambaShield is ready!");
          }
       }
+   }
+
+   public void skillUsedTurnForSkill3() {
+	  if (skillUsedTurnForSkill3 <= 0) {
+		 skillUsedTurnForSkill3 = 0;
+	  }
+	  else {
+		 skillUsedTurnForSkill3--;
+		 if (skillUsedTurnForSkill3 == 0) {
+			typeWriter.typeWriterFast("Mana Surge is ready!");
+		 }
+	  }
    }
 }

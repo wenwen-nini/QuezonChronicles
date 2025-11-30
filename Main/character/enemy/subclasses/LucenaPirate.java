@@ -7,14 +7,15 @@ import Main.styles.printAlignmentHub.CenterHub;
 
 public class LucenaPirate extends Enemy{
 
-    public LucenaPirate() {
+    public LucenaPirate(Player player) {
         setName("Lucena Pirate");
         // Early-mid game enemy - Town 2
-        setMaxHp(70);
-        setHp(70);
-        setAttackPower(14);
-        setDefense(5);
-        setSpeed(7);
+        double levelScaler = (player.getLevel());
+        setMaxHp((int) (70 + Math.floor(levelScaler * 6 * 1.3)));
+        setHp((int) (70 + Math.floor(levelScaler * 6 * 1.3)));
+        setAttackPower((int) (10 + Math.floor(levelScaler * 0.8 * 1.3)));
+        setDefense((int) (5 + Math.floor(levelScaler * 0.2 * 1.3)));
+        setSpeed(8);
 
         setExpReward(50);
 
@@ -31,9 +32,9 @@ public class LucenaPirate extends Enemy{
     if (baseDamage < 0) baseDamage = 0;
 
     // Critical hit mechanic
-    double critChance = 0.1;
+    double critChance = 0.06;
     if (Math.random() < critChance) {
-        baseDamage *= 2;
+        baseDamage = (int)Math.floor (baseDamage * 1.1);
         centerHub.printRightTextWithTypeWriter(textColor.RED + "Critical hit!" + textColor.RESET);
     }
 

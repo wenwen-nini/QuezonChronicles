@@ -9,8 +9,9 @@ import Main.styles.textColor.TextColorHub;
 public class Game {
     private GameMenu menu;
     public Scanner input = new Scanner(System.in);
-    private static CenterHub centerHub = new CenterHub();
-    private static TextColorHub textColor = new TextColorHub();
+    private CenterHub centerHub = new CenterHub();
+    private TextColorHub textColor = new TextColorHub();
+    private ClearScreen clearScreen = new ClearScreen();
 
     public Game() {
         menu = new GameMenu();
@@ -36,18 +37,18 @@ public class Game {
                 input.nextLine();
             } catch (Exception e) {
                 input.nextLine();
-                ClearScreen.clear();
+                clearScreen.clear();
                 System.out.println("Invalid input. Please enter a number.");
                 continue;
             }
             
             switch (choice) {
                 case 1:
-                    ClearScreen.clear();
+                    clearScreen.clear();
                     menu.showMainMenu();
                     break;
                 case 2:
-                    ClearScreen.clear();
+                    clearScreen.clear();
                     System.out.println("==================================================================== ABOUT THE GAME =================================================================");
                     text = 
                         "Quezon Chronicles is an epic RPG adventure set in the Philippines.\n " +
@@ -60,22 +61,22 @@ public class Game {
                     System.out.println("=====================================================================================================================================================");
                     System.out.println("Press Enter to return to the main menu...");
                     input.nextLine();
-                    ClearScreen.clear();
+                    clearScreen.clear();
                     break;
                 case 3:
-                    ClearScreen.clear();
+                    clearScreen.clear();
                     System.out.println("Exiting the game. Goodbye!");
                     System.exit(0);
                     break;
                 default:
-                    ClearScreen.clear();
+                    clearScreen.clear();
                     System.out.println("Invalid choice. Please try again.");
                     break;
             }
         } while (choice != 3);
     }
 
-    public static void QuezonChronicles() {
+    public void QuezonChronicles() {
         centerHub.printCenteredText(textColor.GREEN + "                                                                                                ");
         centerHub.printCenteredText("                @@@@@@    @@@  @@@  @@@@@@@@  @@@@@@@@   @@@@@@   @@@  @@@                     ");
         centerHub.printCenteredText("               @@@@@@@@   @@@  @@@  @@@@@@@@  @@@@@@@@  @@@@@@@@  @@@@ @@@                     ");

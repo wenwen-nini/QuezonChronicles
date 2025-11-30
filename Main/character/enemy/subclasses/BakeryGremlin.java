@@ -8,16 +8,17 @@ import Main.styles.textColor.TextColorHub;
 
 public class BakeryGremlin extends Enemy{
 
-    public BakeryGremlin() {
+    public BakeryGremlin(Player player) {
+        double levelScaler = (player.getLevel());
         setName("Bakery Gremlin");
         // Mid game enemy - Town 3
-        setMaxHp(80);
-        setHp(80);
-        setAttackPower(16);
-        setDefense(6);
+        setMaxHp((int) (75 + Math.floor(levelScaler * 12 *1.1)));
+        setHp((int) (75 + Math.floor(levelScaler * 12 * 1.1)));
+        setAttackPower((int) (10 + Math.floor(levelScaler * 1.2 * 1.1)));
+        setDefense((int) (4 + Math.floor(levelScaler * 0.3 * 1.1)));
         setSpeed(8);
 
-        setExpReward(60);
+        setExpReward(70);
 
         // Possible loot
         setPossibleLoot(new Item[]{new Pinagong(), new Budin()});
@@ -32,10 +33,10 @@ public class BakeryGremlin extends Enemy{
     if (baseDamage < 0) baseDamage = 0;
 
     // Critical hit mechanic
-    double critChance = 0.2;
+    double critChance = 0.14;
     double critRoll = Math.random();
     if (critRoll < critChance) {
-        baseDamage *= 2; // Critical hit doubles damage
+        baseDamage =(int)Math.floor(baseDamage * 1.2); // Critical hit doubles damage
         centerHub.printRightTextWithTypeWriter(textColor.RED + "Critical hit!" + textColor.RESET);
     }
 

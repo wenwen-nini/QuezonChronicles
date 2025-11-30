@@ -7,20 +7,21 @@ import Main.styles.printAlignmentHub.CenterHub;
 
 public class FestivalMask extends Enemy {
 
-    public FestivalMask() {
+    public FestivalMask(Player player) {
         setName("Festival Mask");
+        double levelScaler = (player.getLevel());
         // Early game enemy - Town 1 (East)
-        setMaxHp(40);
-        setHp(40);
+        setMaxHp(50);
+        setHp(50);
         setAttackPower(8);
         setDefense(2);
         setSpeed(5);
         setSkillUsedTurn(2);
 
-        setExpReward(25);
+        setExpReward(50);
 
         // Possible loot
-        setPossibleLoot(new Item[]{new Tinuto(), new PugonCoffee()});
+        setPossibleLoot(new Item[]{new KipingDelight(), new BananaChips()});
     }
     @Override
     public void enemyMove(Player player) {
@@ -30,25 +31,28 @@ public class FestivalMask extends Enemy {
 
         // Base damage
         int damage = getAttackPower();
+        double confuseChance = 0.4;
         if (getSkillUsedTurn() <= 0) {
-            double confuseChance = 0.4;
-            if (Math.random() <= confuseChance){
+            // skill ready
+            if (Math.random() <= confuseChance) {
                 player.applyDebuff("confusion", 2);
                 player.takeDamage(damage);
-                setSkillUsedTurn(2);
-            }else {
+            } else {
                 player.takeDamage(damage);
             }
+            // set cooldown (2 turns)
+            setSkillUsedTurn(2);
         } else {
-            updateSkillUsedTurn(); // count down until the skill can be used
+            // perform normal attack while skill is on cooldown
+            player.takeDamage(damage);
         }
 
         // Optional chance flavor (adds variety)
         double chance = Math.random();
-        if (chance < 0.15) { // 15% chance for extra confusion feedback
+        if (chance <= 0.35) { // 35% chance for extra confusion feedback
             text = player.getName() + " hits themselves in confusion!";
             centerHub.printRightTextWithTypeWriter(text);
-            player.takeDamage(3);
+            player.takeDamage(3 + player.getDefense());
         }
     }
 }

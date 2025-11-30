@@ -8,15 +8,16 @@ import Main.styles.textColor.TextColorHub;
 
 public class Eduard extends Enemy{
 
-    public Eduard() {
+    public Eduard(int townIndex) {
+        double levelScaler = (townIndex + 1.0) / 2.0;
         setName("Aladdin of Mindoro, Eduard");
-        setMaxHp(80);
-        setHp(80);
-        setAttackPower(4);
+        setMaxHp((int)Math.floor(85.0 * levelScaler));
+        setHp((int)Math.floor(85.0 * levelScaler));
+        setAttackPower((int)Math.floor(10.0 * levelScaler));
         setDefense(6);
         setSpeed(8);
 
-        setExpReward(60);
+        setExpReward(300);
 
         // Possible loot
         setPossibleLoot(new Item[]{new MountainHoney(), new Turon()});
@@ -25,20 +26,20 @@ public class Eduard extends Enemy{
     @Override
     public void enemyMove(Player player) {
         String text = getName() + " uses Aladdin's Carpet Specter!";
-        centerHub.printRightTextWithTypeWriter(text);
+        centerHub.printRightTextWithTypeWriter(textColor.ORANGE + text + textColor.RESET);
         
         String attackText = getName() + " dives on its flying carpet and crashes into " + player.getName() + " with force!";
-        centerHub.printRightTextWithTypeWriter(attackText);
+        centerHub.printRightTextWithTypeWriter(textColor.ORANGE + attackText + textColor.RESET);
 
         int baseDamage = getAttackPower();// High attack power
         if (baseDamage < 0) baseDamage = 0;
 
         player.takeDamage(baseDamage);
 
-        // 50% chance to stun player for 1 turn (only if not already stunned)
-        double stunChance = 0.5;
+        // 50% chance to stun player for 2 turns (only if not already stunned and skill is not on cooldown)
+        double stunChance = 0.3;
         double stunRoll = Math.random();
-        if (stunRoll < stunChance) {
+        if (stunRoll < stunChance && getSkillUsedTurn() <= 0) {
             // Check if player already has stun debuff
             boolean alreadyStunned = false;
             String[] debuffs = player.getActiveDebuffs();
@@ -52,7 +53,13 @@ public class Eduard extends Enemy{
             if (!alreadyStunned) {
                 player.applyDebuff("stun", 2);
                 centerHub.printRightTextWithTypeWriter(textColor.YELLOW + player.getName() + " is stunned by the impact!" + textColor.RESET);
+                setSkillUsedTurn(2);
             }
+        }
+
+        // 20% chance to steal a random item from player's inventory
+        if (Math.random() < 0.2) {
+            stealRandomItem(player);
         }
     }
 }

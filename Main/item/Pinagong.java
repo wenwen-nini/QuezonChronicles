@@ -14,7 +14,8 @@ public class Pinagong extends Item {
     public void useItem(Player player) {
         int healBoost = 30;
         
-        System.out.println(player.getName() + " eats a Pinagong and restores +30 HP!");
+        text = player.getName() + " ate the Pinagong!";
+        typeWriter.typeWriterFast(text);
         player.heal(healBoost);
     }
 }

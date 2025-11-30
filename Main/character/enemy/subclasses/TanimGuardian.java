@@ -9,16 +9,17 @@ public class TanimGuardian extends Enemy {
 
     private CenterHub centerHub = new CenterHub();
 
-    public TanimGuardian() {
+    public TanimGuardian(Player player) {
         setName("Tanim Guardian");
+        double levelScaler = player.getLevel();
         // Early game enemy - Town 1
-        setMaxHp(40);
-        setHp(40);
-        setAttackPower(8);
-        setDefense(2);
-        setSpeed(4);
+        setMaxHp((int) (45 + Math.floor(0 * 6 * 1.0)));
+        setHp((int) (45 + Math.floor(0 * 6 * 1.0)));
+        setAttackPower((int) (8 + Math.floor(0 * 0.2 * 1.0)));
+        setDefense((int)(2 + Math.floor(0 * 0.2 * 1.0)));
+        setSpeed(5);
 
-        setExpReward(25);
+        setExpReward(40);
 
         // Possible loot
         setPossibleLoot(new Item[]{new Habhab(), new LongganisangLucban()});
@@ -33,10 +34,10 @@ public class TanimGuardian extends Enemy {
     if (baseDamage < 0) baseDamage = 0;
     
     // Critical hit mechanic
-    double critChance = 0.2;
+    double critChance = 0.14;
     double critRoll = Math.random();
     if (critRoll < critChance) {
-        baseDamage *= 2; // Critical hit doubles damage
+        baseDamage = (int)Math.floor (baseDamage * 1.1); // Critical hit doubles damage
         centerHub.printRightTextWithTypeWriter(textColor.RED + "Critical hit!" + textColor.RESET);
     }
 

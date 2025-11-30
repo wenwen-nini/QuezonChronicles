@@ -96,6 +96,10 @@ public abstract class Player extends Character {
     return attackMoves;
   }
 
+  public String[] getActiveDebuffs() {
+    return activeDebuffs;
+  }
+
 	//setter
   public void setUsesMp(boolean usesMp) {
     this.usesMp = usesMp;
@@ -122,12 +126,30 @@ public abstract class Player extends Character {
     level++;
     String text = "You have leveled up to: " + level;
     typeWriter.typeWriterFast(textColor.YELLOW + text + textColor.RESET);
-    nextExpLevel += 50;
+    int expIncrement;
+    if (level < 5) {
+      expIncrement = 60;
+    } else if (level < 10) {
+      expIncrement = 80;
+    } else {
+      expIncrement = 110;
+    }
+    nextExpLevel += expIncrement;
     levelStats();
   }
 
   public void takeDamage(int amount) {
-    int reducedDamage = Math.max(0, amount - getDefense());
+    if (getDodgeTurns() > 0) {
+      if (Math.random() < 0.8) {
+        String text = getName() + " dodged the attack!";
+        centerHub.printRightTextWithTypeWriter(text);
+        reduceDodgeTurns();
+        return;
+      }
+      reduceDodgeTurns();
+    }
+
+    int reducedDamage = amount <= 0 ? 0 : Math.max(1, amount - getDefense());
     setHp(getHp() - reducedDamage);
     String text = getName() + " took " + String.valueOf(reducedDamage) + " damage.";
     centerHub.printRightTextWithTypeWriter(text);
@@ -271,11 +293,31 @@ public abstract class Player extends Character {
 
   //Debuff Methods
   public void applyDebuff(String type, int turns) {
+    if (type == null || turns <= 0) {
+      return;
+    }
+
+    if (type.equalsIgnoreCase("stun")) {
+      boolean wasStunned = getStunTurnsRemaining() > 0;
+      refreshStunDuration(turns);
+      String text = wasStunned
+        ? getName() + "'s stun duration refreshed to " + getStunTurnsRemaining() + " turns!"
+        : getName() + " is afflicted with stun for " + getStunTurnsRemaining() + " turns!";
+      centerHub.printRightTextWithTypeWriter(text);
+      return;
+    }
+
     for (int i = 0; i < activeDebuffs.length; i++) {
-        if (activeDebuffs[i] == null) {
+      if (activeDebuffs[i] == null) {
             activeDebuffs[i] = type;
             debuffTurns[i] = turns;
             String text = getName() + " is afflicted with " + type + " for " + turns + " turns!";
+            centerHub.printRightTextWithTypeWriter(text);
+            return;
+        }
+      else if (activeDebuffs[i].equalsIgnoreCase(type)) {
+            debuffTurns[i] = Math.max(debuffTurns[i], turns);
+            String text = getName() + "'s " + type + " duration refreshed to " + debuffTurns[i] + " turns!";
             centerHub.printRightTextWithTypeWriter(text);
             return;
         }
@@ -285,16 +327,21 @@ public abstract class Player extends Character {
 
   public void updateDebuffs() {
     for (int i = 0; i < activeDebuffs.length; i++) {
-        if (activeDebuffs[i] != null) {
-            debuffTurns[i]--;
-            applyDebuffEffect(activeDebuffs[i]);
-
-            if (debuffTurns[i] <= 0) {
-                String text = activeDebuffs[i] + " wore off!";
-                centerHub.printRightTextWithTypeWriter(text);
-                activeDebuffs[i] = null;
-            }
+      if (activeDebuffs[i] != null) {
+        // Stun is handled when the character attempts to act (consumeStunTurn),
+        // so skip decrementing or applying its effect here to avoid double-counting.
+        if (activeDebuffs[i].equalsIgnoreCase("stun")) {
+          continue;
         }
+        debuffTurns[i]--;
+        applyDebuffEffect(activeDebuffs[i]);
+
+        if (debuffTurns[i] <= 0) {
+          String text = activeDebuffs[i] + " wore off!";
+          centerHub.printRightTextWithTypeWriter(text);
+          activeDebuffs[i] = null;
+        }
+      }
     }
   }
 
@@ -308,7 +355,7 @@ public abstract class Player extends Character {
             case "burn":
                 text = getName() + " takes 2 burn damage!";
                 centerHub.printRightTextWithTypeWriter(text);
-                takeDamage(2);
+                takeDamage(getDefense() + 2);
                 break;
             case "absorb":
                 text = getName() + " feels weaker! Health had been absored by 2";
@@ -318,7 +365,7 @@ public abstract class Player extends Character {
             case "defense down":
                 text = getName() + " feels weaker! Defense temporarily reduced.";
                 centerHub.printRightTextWithTypeWriter(text);
-                setDefense(getDefense() - 1);
+                setDefense(getDefense() - 2);
                 break;
             case "attack down":
                 text = getName() + " feels their strength fade!";

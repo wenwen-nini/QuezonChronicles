@@ -7,19 +7,23 @@ import Main.styles.printAlignmentHub.CenterHub;
 
 public class TiaongKnight extends Enemy {
 
-    public TiaongKnight() {
+    public TiaongKnight(Player player) {
         setName("Tiaong Knight");
+        double levelScaler = Math.max(1, player.getLevel());
         // Late game enemy - Town 5
-        setMaxHp(125);
-        setHp(125);
-        setAttackPower(26); 
-        setDefense(11);
-        setSpeed(9);
+        int scaledHp = (int)(120 + Math.floor(levelScaler * 2.4));
+        int scaledAttack = (int)(17 + Math.floor(levelScaler * 1.1));
+        int scaledDefense = (int)(5 + Math.floor(levelScaler * 0.5));
+        setMaxHp(scaledHp);
+        setHp(scaledHp);
+        setAttackPower(scaledAttack);
+        setDefense(scaledDefense);
+        setSpeed(10);
 
         setExpReward(120);
 
         // Possible loot
-        setPossibleLoot(new Item[]{new Tinuto(), new PugonCoffee()});
+        setPossibleLoot(new Item[]{new Tinuto(), new Turon()});
     }
 
     @Override
@@ -30,9 +34,9 @@ public class TiaongKnight extends Enemy {
         int attackPower = getAttackPower();
 
         //Critical Damage
-        double critChance = 0.5; //50% chance
+        double critChance = 0.35; //35% chance
         if (Math.random() < critChance) {
-            attackPower *= 2;
+            attackPower = (int)Math.floor (attackPower * 1.1);
             centerHub.printRightTextWithTypeWriter(textColor.RED + "Critical hit!" + textColor.RESET);
         }
         // Deal damage

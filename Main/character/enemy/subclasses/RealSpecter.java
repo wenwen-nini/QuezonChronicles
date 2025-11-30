@@ -7,19 +7,20 @@ import Main.styles.printAlignmentHub.CenterHub;
 
 public class RealSpecter extends Enemy {
 
-    public RealSpecter() {
+    public RealSpecter(Player player) {
         setName("Real Specter");
+        double levelScaler = (player.getLevel());
         // Late game enemy - Town 5 (East)
-        setMaxHp(125);
-        setHp(125);
-        setAttackPower(26); 
-        setDefense(11);
-        setSpeed(12);
+        setMaxHp((int) (120 + Math.floor(levelScaler * 6 * 2.2)));
+        setHp((int) (120 + Math.floor(levelScaler * 6 * 2.2)));
+        setAttackPower((int) (26 + Math.floor(levelScaler * 0.8 * 2.2)));
+        setDefense((int) (10 + Math.floor(levelScaler * 0.2 * 2.2)));
+        setSpeed(10);
 
         setExpReward(120);
 
         // Possible loot
-        setPossibleLoot(new Item[]{new Tinuto(), new PugonCoffee()});
+        setPossibleLoot(new Item[]{new SinigangHipon(), new Lambanog()});
     }
 
     @Override
@@ -30,9 +31,9 @@ public class RealSpecter extends Enemy {
         int attackPower = getAttackPower();
 
         //Critical Damage
-        double critChance = 0.5; //50% chance
+        double critChance = 0.35; //35% chance
         if (Math.random() < critChance) {
-        attackPower *= 2;
+        attackPower = (int)Math.floor (attackPower * 1.5);
         centerHub.printRightTextWithTypeWriter(textColor.RED + "Critical hit!" + textColor.RESET);
 }
         // Deal damage

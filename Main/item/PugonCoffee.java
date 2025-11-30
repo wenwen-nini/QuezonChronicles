@@ -7,15 +7,17 @@ public class PugonCoffee extends Item {
 
     public PugonCoffee() {
         setName(textColor.YELLOW + "Pugon Coffee" + textColor.RESET);
-        setDescription("(A strong brew that energizes the drinker, granting +1 Speed for the next turn.)");
+        setDescription("(A strong brew that energizes the drinker, granting +2 Speed)");
     }
 
     @Override
     public void useItem(Player player) {
-        int speedBoost = 1;
+        int speedBoost = 2;
 
-        System.out.println(player.getName() + " drinks the Pugon Coffee!");
-        System.out.println(player.getName() + " has permanently increased their speed by 1!");
+        text = player.getName() + " drinks the Pugon Coffee!";
+        typeWriter.typeWriterFast(text);
+        text = player.getName() + " has permanently increased their speed by 2!";
+        typeWriter.typeWriterFast(text);
         player.addSpeed(speedBoost);
     }
 }

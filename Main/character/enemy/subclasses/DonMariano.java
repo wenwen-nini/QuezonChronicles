@@ -7,13 +7,13 @@ import Main.styles.printAlignmentHub.CenterHub;
 
 public class DonMariano extends Enemy {
 
-    public DonMariano() {
+    public DonMariano(Player player) {
         setName("Don Mariano");
         // Increased boss durability and loot value
-        setMaxHp(220);
-        setHp(220);
-        setAttackPower(30);
-        setDefense(14);
+        setMaxHp((int) (150 + Math.floor(player.getLevel() * 10 * 2.2)));
+        setHp((int) (150 + Math.floor(player.getLevel() * 10 * 2.2)));
+        setAttackPower((int) (20 + Math.floor(player.getLevel() * 0.8 * 2.2)));
+        setDefense((int) (9 + Math.floor(player.getLevel() * 0.2 * 2.2)));
         setSpeed(6);
         setSkillUsedTurn(2);
 
@@ -41,19 +41,13 @@ public class DonMariano extends Enemy {
                 player.applyDebuff("burn", 2);
                 setSkillUsedTurn(2);
             }
-            else {
-                updateSkillUsedTurn();
-            }
         }
-
         if (Math.random() <= healChance) {
             int healAmount = (int) (player.getAttackPower() * 0.5);
             heal(healAmount);
             centerHub.printRightTextWithTypeWriter("Don Mariano absorbs " + String.valueOf(healAmount) + " damage from " + player.getName() + "!");
         }
 
-        if (getSkillUsedTurn() > 0) {
-            updateSkillUsedTurn();
-        }
+        // cooldown is decremented centrally by the BattleSystem after enemyTurn
     }
 }

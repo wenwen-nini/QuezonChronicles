@@ -6,7 +6,7 @@ public class LoadingDots {
     
     public LoadingDots() { }
 
-    public static void loadingDotsAnimation(String message) {
+    public void loadingDotsAnimation(String message) {
         int dotCount = 3;
         int delay = 500;
 
@@ -25,7 +25,7 @@ public class LoadingDots {
         }
     }
 
-    public static void customLoadingDotsAnimation(String message, int dotCount, int delay, long duration) {
+    public void customLoadingDotsAnimation(String message, int dotCount, int delay, long duration) {
         long startTime = System.currentTimeMillis();
 
         while (System.currentTimeMillis() - startTime < duration) {

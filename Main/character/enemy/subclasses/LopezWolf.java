@@ -7,19 +7,20 @@ import Main.styles.printAlignmentHub.CenterHub;
 
 public class LopezWolf extends Enemy{
 
-    public LopezWolf() {
+    public LopezWolf(Player player) {
         setName("Lopez Wolf");
+        double levelScaler = (player.getLevel());
         // Early-mid game enemy - Town 2 (East)
-        setMaxHp(70);
-        setHp(70);
-        setAttackPower(14);
-        setDefense(5);
-        setSpeed(10);
+        setMaxHp((int) (70 + Math.floor(levelScaler * 6 * 1.3)));
+        setHp((int) (70 + Math.floor(levelScaler * 6 * 1.3)));
+        setAttackPower((int) (14 + Math.floor(levelScaler * 0.8 * 1.3)));
+        setDefense((int) (5 + Math.floor(levelScaler * 0.2 * 1.3)));
+        setSpeed(8);
 
         setExpReward(50);
 
         // Possible loot
-        setPossibleLoot(new Item[]{new Tinuto(), new PugonCoffee()});
+        setPossibleLoot(new Item[]{new LopezCocoaDrink(), new SumanIbos()});
     }
 
     @Override
@@ -31,10 +32,10 @@ public class LopezWolf extends Enemy{
     if (baseDamage < 0) baseDamage = 0;
 
     // Critical hit mechanic
-    double critChance = 0.2;
+    double critChance = 0.14;
     double critRoll = Math.random();
     if (critRoll < critChance) {
-        baseDamage *= 2;
+        baseDamage = (int)Math.floor (baseDamage * 1.2);
         centerHub.printRightTextWithTypeWriter(textColor.RED + "Critical hit!" + textColor.RESET);
     }
 

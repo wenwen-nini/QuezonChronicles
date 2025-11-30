@@ -12,12 +12,12 @@ public class LongganisangLucban extends Item {
 
     @Override
     public void useItem(Player player) {
-    int attackBoost = 5;
-    int duration = 2;
+        int attackBoost = 5;
+        int duration = 3;
 
-    System.out.println(player.getName() + " eats a Longganisang Lucban!");
-    System.out.println(player.getName() + " gain a 5 Attack Power for 2 turns!");
+        text = player.getName() + " eats a Longganisang Lucban!";
+        typeWriter.typeWriterFast(text);
 
-    player.addTemporaryAttackBoost(attackBoost, duration);
+        player.addTemporaryAttackBoost(attackBoost, duration);
     }
 }

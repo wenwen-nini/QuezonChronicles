@@ -7,14 +7,15 @@ import Main.styles.printAlignmentHub.CenterHub;
 
 public class HoneyGuardian extends Enemy {
 
-    public HoneyGuardian() {
+    public HoneyGuardian(Player player) {
         setName("Honey Guardian");
+        double levelScaler = (player.getLevel());
         // Mid-late game enemy - Town 4 (East)
-        setMaxHp(100);
-        setHp(100);
-        setAttackPower(21);
-        setDefense(8);
-        setSpeed(8);
+        setMaxHp((int) (100 + Math.floor(levelScaler * 6 *1.9)));
+        setHp((int) (100 + Math.floor(levelScaler * 6 *1.9)));
+        setAttackPower((int) (21 + Math.floor(levelScaler * 0.8 * 1.9)));
+        setDefense((int) (8 + Math.floor(levelScaler * 0.2 * 1.9)));
+        setSpeed(9);
 
         setExpReward(90);
 
@@ -30,9 +31,9 @@ public class HoneyGuardian extends Enemy {
         int attackPower = getAttackPower();
 
         // Critical hit mechanic
-        double critChance = 0.2; // 20% chance
+        double critChance = 0.05; // 14% chance
         if (Math.random() < critChance) {
-            attackPower *= 2;
+            attackPower = (int)Math.floor(attackPower * 1.1);
             centerHub.printRightTextWithTypeWriter(textColor.RED + "Critical hit!" + textColor.RESET);
         }
 
@@ -40,7 +41,7 @@ public class HoneyGuardian extends Enemy {
         player.takeDamage(attackPower);
 
         //poison
-        double poisonChance = 0.3;
+        double poisonChance = 0.25;
         if (Math.random() < poisonChance) {
             centerHub.printRightTextWithTypeWriter(text);
             player.applyDebuff("Poison", 2);

@@ -7,16 +7,17 @@ import Main.styles.printAlignmentHub.CenterHub;
 
 public class BibingkaElemental extends Enemy {
 
-    public BibingkaElemental() {
+    public BibingkaElemental(Player player) {
         setName("Bibingka Elemental");
+        double levelScaler = (player.getLevel());
         // Mid-late game enemy - Town 4
-        setMaxHp(95);
-        setHp(95);
-        setAttackPower(20); 
-        setDefense(8);
-        setSpeed(8);
+        setMaxHp((int) (80 + Math.floor(levelScaler * 6 *1.9)));
+        setHp((int) (80 + Math.floor(levelScaler * 6 *1.9)));
+        setAttackPower((int) (15 + Math.floor(levelScaler * 0.8 * 1.9)));
+        setDefense((int) (6 + Math.floor(levelScaler * 0.2 * 1.9)));
+        setSpeed(7);
 
-        setExpReward(85);
+        setExpReward(100);
 
         // Possible loot
         setPossibleLoot(new Item[]{new Bibingka(), new Panutsa()});
@@ -30,9 +31,9 @@ public class BibingkaElemental extends Enemy {
         int attackPower = getAttackPower();
 
         // Critical hit mechanic
-        double critChance = 0.2; // 20% chance
+        double critChance = 0.14; // 14% chance
         if (Math.random() < critChance) {
-            attackPower *= 2;
+            attackPower = (int)Math.floor(attackPower * 1.3);
             centerHub.printRightTextWithTypeWriter(textColor.RED + "Critical hit!" + textColor.RESET);
         }
 

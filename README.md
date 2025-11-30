@@ -5,9 +5,9 @@
 **A Quezon Province-Inspired Console RPG Adventure**  
 
 <b>IT-2108:</b><br>
-Aguho, Alwynn<br>
+Aguho, Alwynn L.<br>
 Jamilano, John Red S.<br>
-Cortuna, Nhel Edward<br>
+Cortuna, Nhel Eduard B.<br>
 Mapalad, Nell John Cedrick J.<br>
 </div>
 
@@ -44,7 +44,7 @@ Mapalad, Nell John Cedrick J.<br>
 - **5 playable character classes** with unique combat mechanics (Warrior, Bruid, Mage, Tagalog Monk, Thief)
 - **Turn-based combat system** with resource management (Stamina/MP) and status effects
 - **Two branching story paths** through Quezon Province (West: Lucban→Lucena→Tiaong | East: Gumaca→Lopez→Real)
-- **31+ unique enemy types** inspired by Quezon's folklore and local culture
+- **35 unique enemy types** inspired by Quezon's folklore and local culture
 - **23 Quezon-themed consumable items** for healing, buffs, and debuff removal
 - **Progressive difficulty** with minibosses and final boss encounters per path
 - **Character leveling system** with stat growth and experience rewards

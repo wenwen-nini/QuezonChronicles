@@ -4,11 +4,11 @@ public class TypeWriter {
 
     public TypeWriter() { }
 
-    public static void typeWriterFast(String text) {
+    public void typeWriterFast(String text) {
         for (char c : text.toCharArray()) {
             System.out.print(c);
             try {
-                Thread.sleep(25);
+                Thread.sleep(1);
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
             }
@@ -16,7 +16,7 @@ public class TypeWriter {
         System.out.println();
     }
 
-    public static void typeWriterMedium(String text) {
+    public void typeWriterMedium(String text) {
         for (char c : text.toCharArray()) {
             System.out.print(c);
             try {
@@ -28,7 +28,7 @@ public class TypeWriter {
         System.out.println();
     }
 
-    public static void typeWriterSlow(String text) {
+    public void typeWriterSlow(String text) {
         for (char c : text.toCharArray()) {
             System.out.print(c);
             try {

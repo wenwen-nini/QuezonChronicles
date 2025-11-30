@@ -7,20 +7,21 @@ import Main.styles.printAlignmentHub.CenterHub;
 
 public class Sirena extends Enemy {
 
-    public Sirena() {
+    public Sirena(Player player) {
         setName("Gumacan Sirena");
+        double levelScaler = (player.getLevel());
         // Early game enemy - Town 1 (East)
-        setMaxHp(55);
-        setHp(55);
-        setAttackPower(11);
-        setDefense(4);
-        setSpeed(8);
+        setMaxHp((int) (55 + Math.floor(levelScaler * 6 * 1.0)));
+        setHp((int) (55 + Math.floor(levelScaler * 6 * 1.0)));
+        setAttackPower((int) (8 + Math.floor(levelScaler * 0.8 * 1.0)));
+        setDefense((int)(2 + Math.floor(levelScaler * 0.2 * 1.0)));
+        setSpeed(5);
         setSkillUsedTurn(3);
 
-        setExpReward(35);
+        setExpReward(50);
 
         // Possible loot
-        setPossibleLoot(new Item[]{new Tinuto(), new PugonCoffee()});
+        setPossibleLoot(new Item[]{new KipingDelight(), new BananaChips()});
     }
 
     @Override
@@ -31,9 +32,9 @@ public class Sirena extends Enemy {
         int baseDamage = getAttackPower();
         if (baseDamage < 0) baseDamage = 0;
 
-        double critChance = 0.15;
+        double critChance = 0.1;
         if (Math.random() < critChance) {
-            baseDamage *= 2;
+            baseDamage = (int)Math.floor (baseDamage * 1.1);
             centerHub.printRightTextWithTypeWriter(textColor.RED + "Critical hit!" + textColor.RESET);
         }
         player.takeDamage(baseDamage);

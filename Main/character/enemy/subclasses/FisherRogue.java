@@ -7,13 +7,21 @@ import Main.styles.printAlignmentHub.CenterHub;
 
 public class FisherRogue extends Enemy {
 
-    public FisherRogue() {
+    public FisherRogue(Player player) {
         setName("Fisher Rogue");
+        double levelScaler = (player.getLevel());
         // Mid game enemy - Town 3 (East)
-        setMaxHp(80);
-        setHp(80);
-        setAttackPower(16); 
-        setDefense(6);
+<<<<<<< HEAD
+        setMaxHp((int) (70 + Math.floor(levelScaler * 6 * 1.6)));
+        setHp((int) (70 + Math.floor(levelScaler * 6 * 1.6)));
+        setAttackPower((int) (15 + Math.floor(levelScaler * 0.8 * 1.6)));
+        setDefense((int) (6 + Math.floor(levelScaler * 0.2 * 1.6)));
+=======
+        setMaxHp((int) (85 + Math.floor(levelScaler * 6 * 1.3)));
+        setHp((int) (85 + Math.floor(levelScaler * 6 * 1.3)));
+        setAttackPower((int) (14 + Math.floor(levelScaler * 0.8 * 1.3)));
+        setDefense((int) (6 + Math.floor(levelScaler * 0.2 * 1.3)));
+>>>>>>> 2388a47946fb0ebdc282c68dddf68351cafdfd99
         setSpeed(8);
 
         setExpReward(60);
@@ -30,9 +38,9 @@ public class FisherRogue extends Enemy {
         int attackPower = getAttackPower();
 
         // Critical hit mechanic
-        double critChance = 0.2; // 20% chance
+        double critChance = 0.14; // 14% chance
         if (Math.random() < critChance) {
-            attackPower *= 2;
+            attackPower = (int)Math.floor(attackPower * 1.3);
             centerHub.printRightTextWithTypeWriter(textColor.RED + "Critical hit!" + textColor.RESET);
         }
 

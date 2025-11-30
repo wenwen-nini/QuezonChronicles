@@ -2,6 +2,7 @@ package Main.game;
 
 import java.util.Scanner;
 import Main.character.enemy.Enemy;
+import Main.character.enemy.subclasses.Red;
 import Main.character.player.Player;
 import Main.item.*;
 import Main.styles.printAlignmentHub.CenterHub;
@@ -14,12 +15,27 @@ public class BattleSystem {
     public Scanner input = new Scanner(System.in);
 
     private CenterHub centerHub = new CenterHub();
-    private static TypeWriter typeWriter = new TypeWriter();
-    private static TextColorHub textColor = new TextColorHub();
+    private TypeWriter typeWriter = new TypeWriter();
+    private TextColorHub textColor = new TextColorHub();
+    private ClearScreen clearScreen = new ClearScreen();
 
     // Safe integer reader: reads a line and parses an int, re-prompts on invalid input
 
     public BattleSystem() { }
+
+    // Calculate exp with RNG multiplier (1.5 to 2.0) and town multiplier
+    private int calculateExpReward(Player player, Enemy enemy) {
+        int baseExp = enemy.getExpReward();
+        double rngMultiplier = 1.2 + (Math.random() * 0.3); // Random between 1.2 and 1.5
+        
+        // Town multiplier: Town 0 = 1.0x, Town 1 = 1.15x, Town 2 = 1.3x, Town 3 = 1.5x, Town 4 = 1.7x
+        float[] townMultipliers = {1.0f, 1.15f, 1.3f, 1.5f, 1.7f};
+        int townIndex = Math.min(player.getCurrentTownIndex(), 4); // Cap at index 4
+        float townMultiplier = townMultipliers[townIndex];
+        
+        int finalExp = (int)(baseExp * rngMultiplier * townMultiplier);
+        return finalExp;
+    }
 
     public void BattleStart(Player player, Enemy enemy) {
 
@@ -28,8 +44,7 @@ public class BattleSystem {
         if (player.getSpeed() > enemy.getSpeed()) {
             printCombatStatus(player, enemy);
             typeWriter.typeWriterFast(textColor.ORANGE + "\nPlayer goes first!" + textColor.RESET);
-            player.checkStunned();
-            if (!player.getIsStunned()) {
+            if (!player.consumeStunTurn()) {
                 playerTurn(player, enemy);
                 playerInitiative = true;
             }
@@ -38,10 +53,8 @@ public class BattleSystem {
         else if (enemy.getSpeed() > player.getSpeed()) {
             String text = "\nEnemy goes first!";
             centerHub.printRightTextWithTypeWriter(textColor.RED + text + textColor.RESET);
-            enemy.checkStunned();
-            if (!enemy.getIsStunned()) {
+            if (!enemy.consumeStunTurn()) {
                 enemyTurn(player, enemy);
-                enemy.updateSkillUsedTurn();
             }
         }
         else {
@@ -49,74 +62,92 @@ public class BattleSystem {
             if (chances < 0.5) {
                 printCombatStatus(player, enemy);
                 typeWriter.typeWriterFast(textColor.ORANGE + "\nPlayer goes first!" + textColor.RESET);
-                player.checkStunned();
-                if (!player.getIsStunned()) {
+                if (!player.consumeStunTurn()) {
                     playerTurn(player, enemy);
                 }
                 playerInitiative = true;
             }
             else {
                 String text = "\nEnemy goes first!";
-                centerHub.printRightText(textColor.RED + text + textColor.RESET);
-                enemy.checkStunned();
-                if (!enemy.getIsStunned()) {
+                centerHub.printRightTextWithTypeWriter(textColor.RED + text + textColor.RESET);
+                if (!enemy.consumeStunTurn()) {
                     enemyTurn(player, enemy);
-                    enemy.updateSkillUsedTurn();
                 }
             }
         }
 
         while (player.isAlive() && enemy.isAlive()) {
+
+            // Update debuff effects and durations for both combatants first,
+            // then recalculate stunned state so debuffs take effect immediately.
+            player.updateDebuffs();
+            enemy.updateDebuffs();
+            player.checkStunned();
+            enemy.checkStunned();
+
             if (playerInitiative) {
-                enemy.checkStunned();
-                if (!enemy.getIsStunned()) {
+                if (!enemy.consumeStunTurn()) {
                     // Enemy goes first this round. If their action kills the player,
                     // we should not run the player's turn. Likewise, if enemy is
                     // dead before the player's turn, skip the player's turn.
                     enemyTurn(player, enemy);
-                    enemy.updateDebuffs();
-                    player.updateDebuffs();
+
                     player.updateTurnEffects();
                     if (player.isAlive() && enemy.isAlive()) {
                         printCombatStatus(player, enemy);
-                        playerTurn(player, enemy);
+                        if (!player.consumeStunTurn()) {
+                            playerTurn(player, enemy);
+                        }
                     }
                 }
                 else {
-                    playerTurn(player, enemy);
-                    player.updateDebuffs();
-                    enemy.updateDebuffs();
+                    printCombatStatus(player, enemy);
+                    if (!player.consumeStunTurn()) {
+                        playerTurn(player, enemy);
+                    }
                     player.updateTurnEffects();
                 }
             }
             else {
                 printCombatStatus(player, enemy);
-                player.checkStunned();
-                if (!player.getIsStunned()) {
+                if (!player.consumeStunTurn()) {
                     // Player acts first. If the player kills the enemy, don't let
                     // the (now dead) enemy take a turn.
                     playerTurn(player, enemy);
                     if (player.isAlive() && enemy.isAlive()) {
-                        enemy.checkStunned();
-                        if (!enemy.getIsStunned()) {
+                        if (!enemy.consumeStunTurn()) {
                             enemyTurn(player, enemy);
                         }
-                        enemy.updateDebuffs();
-                        player.updateDebuffs();
                         player.updateTurnEffects();
-                        
+
                     }
                 }
                 else {
-                    ClearScreen.clear();
+                    clearScreen.clear();
                     printCombatStatus(player, enemy);
-                    enemyTurn(player, enemy);
-                    enemy.updateSkillUsedTurn();
-                    enemy.updateDebuffs();
-                    player.updateDebuffs();
+                    if (!enemy.consumeStunTurn()) {
+                        enemyTurn(player, enemy);
+                    }
                     player.updateTurnEffects();
                 }
             }
+        }
+
+        if (!enemy.isAlive() && !player.isAlive()) {
+            // Check if Red exploded (special case - no rewards)
+            if (enemy instanceof Red && ((Red) enemy).hasExploded()) {
+                System.out.println(textColor.RED + "Both you and " + enemy.getName() + " perished in the explosion!" + textColor.RESET);
+                System.out.println(textColor.RED + "You gain no experience or loot from this battle!" + textColor.RESET);
+                return;
+            }
+            
+            System.out.println("Both you and " + enemy.getName() + " have fallen!");
+            Item loot = enemy.dropLoot();
+            if (loot != null) {
+                System.out.println("The " + enemy.getName() + " dropped " + loot.getName() + ", but you couldn't pick it up.");
+            }
+            System.out.println(textColor.RED + "You gain no experience or loot from this battle!" + textColor.RESET);
+            return;
         }
 
         handleVictory(player, enemy);
@@ -138,7 +169,7 @@ public class BattleSystem {
             System.out.println("=====================================================================================================================================================");
             System.out.print("Enter your choice: ");
             int choice = readInt();
-            ClearScreen.clear();
+            clearScreen.clear();
             if (choice >= 1 && choice <= 4) {
                 // Reset the last-action flag, attempt the move, and only end input loop
                 // if the move actually succeeded (had enough stamina/mp and wasn't on cooldown).
@@ -187,15 +218,16 @@ public class BattleSystem {
                     int itemIndex = readInt() - 1;
                     // Validate index and presence of item
                     if (itemIndex == -1) {
-                        ClearScreen.clear();
+                        clearScreen.clear();
                         System.out.println("Item use cancelled.");
+                        printCombatStatus(player, enemy);
                     }
                     else if (itemIndex < -1 || itemIndex >= inventory.length || inventory[itemIndex] == null) {
-                        ClearScreen.clear();
+                        clearScreen.clear();
                         System.out.println("Invalid item choice.");
                     }
                     else {
-                        ClearScreen.clear();
+                        clearScreen.clear();
                         inventory[itemIndex].useItem(player);
                         player.removeItem(itemIndex);
                         validInput = true;
@@ -217,18 +249,44 @@ public class BattleSystem {
         enemy.enemyMove(player);
 
         if (!(enemy.isAlive())) {
-            player.addExp(enemy.getExpReward());
+            // Don't award exp if Red exploded (special case)
+            if (!(enemy instanceof Red && ((Red) enemy).hasExploded())) {
+                int expAwarded = calculateExpReward(player, enemy);
+                player.addExp(expAwarded);
+            }
         }
+        // decrement enemy skill cooldown each time it takes a turn
+        enemy.updateSkillUsedTurn();
     }
 
-    public static void handleVictory(Player player, Enemy enemy) {
+    public void handleVictory(Player player, Enemy enemy) {
+        // If both enemy and player died
+        if (!enemy.isAlive() && !player.isAlive()) {
+            // Check if Red exploded (special case)
+            if (enemy instanceof Red && ((Red) enemy).hasExploded()) {
+                System.out.println(textColor.RED + "Both you and " + enemy.getName() + " perished in the explosion!" + textColor.RESET);
+                System.out.println(textColor.RED + "You gain no experience or loot from this battle!" + textColor.RESET);
+                player.resetProgress();
+                return;
+            }
+            
+            System.out.println("Both you and " + enemy.getName() + " have fallen!");
+            Item loot = enemy.dropLoot();
+            if (loot != null) {
+                System.out.println("The " + enemy.getName() + " dropped " + loot.getName() + ", but you couldn't pick it up.");
+            }
+            System.out.println(textColor.RED + "You gain no experience or loot from this battle!" + textColor.RESET);
+            player.resetProgress();
+            return;
+        }
         // If enemy is dead and player is alive -> normal victory
         if (!enemy.isAlive() && player.isAlive()) {
-            ClearScreen.clear();
+            clearScreen.clear();
             String text = "You defeated " + enemy.getName() + "!";
             typeWriter.typeWriterFast(textColor.GREEN + text + textColor.RESET); 
-            player.addExp(enemy.getExpReward());
-            text = "You gained " + enemy.getExpReward() + " Exp from the battle!";
+            int expAwarded = calculateExpReward(player, enemy);
+            player.addExp(expAwarded);
+            text = "You gained " + expAwarded + " Exp from the battle!";
             typeWriter.typeWriterFast(textColor.PURPLE + text + textColor.RESET);
             Item loot = enemy.dropLoot();
             if (loot != null) {
@@ -239,17 +297,6 @@ public class BattleSystem {
             } else {
                 text = "No loot dropped from " + enemy.getName() + ".";
                 typeWriter.typeWriterFast(textColor.YELLOW + text + textColor.RESET);
-            }
-            return;
-        }
-
-
-        // If both have fallen in the same round
-        if (!enemy.isAlive() && !player.isAlive()) {
-            System.out.println("Both you and " + enemy.getName() + " have fallen!");
-            Item loot = enemy.dropLoot();
-            if (loot != null) {
-                System.out.println("The " + enemy.getName() + " dropped " + loot.getName() + ", but you couldn't pick it up.");
             }
             return;
         }

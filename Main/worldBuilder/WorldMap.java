@@ -3,13 +3,12 @@ package Main.worldBuilder;
 import Main.character.enemy.Enemy;
 import Main.character.enemy.subclasses.*;
 import Main.styles.textColor.TextColorHub;
+import Main.character.player.Player;
 
 public class WorldMap {
        
         public WorldMap() { }
-
-        private static TextColorHub textColor = new TextColorHub();
-
+        
         static String lucbanDescription = "Lucban is renowned across the land for its Pahiyas Festival, a vibrant celebration where homes are covered in\n" + 
                                           "woven leaves, fruits, and radiant harvest ornaments. The locals believe the festival honors the Spirit of Abundance,\n" + 
                                           "a guardian who blesses their crops every year. But recently, elders whisper of subtle changes during the festival—decorations\n" + 
@@ -62,22 +61,22 @@ public class WorldMap {
                                         "entities roam. Few who venture eastward ever return, and those who do speak of colossal shapes beneath the waves and voices that echo from the deep.\n" + 
                                         "Real is a place for the brave… or the desperate.";
 
-    public static Town buildWestPath() {
+    public static Town buildWestPath(Player player) {
 
         Town lucban = new Town("Lucban", lucbanDescription,
-                new Enemy[]{new TanimGuardian(), new HabhabBandit(), new LanggonisaLord()}, null);
+                new Enemy[]{new TanimGuardian(player), new HabhabBandit(player), new LanggonisaLord(player)}, null);
 
         Town lucena = new Town("Lucena", lucenaDescription,
-                new Enemy[]{new PortRat(), new LucenaPirate()}, new HarborSentinel());
+                new Enemy[]{new PortRat(player), new LucenaPirate(player)}, new HarborSentinel(player));
 
         Town sariaya = new Town("Sariaya", sariayaDescription,
-                new Enemy[]{new BakeryGremlin(), new HeritageWraith(), new CoconutBrigade()}, null);
+                new Enemy[]{new BakeryGremlin(player), new HeritageWraith(player), new CoconutBrigade(player)}, null);
 
         Town candelaria = new Town("Candelaria", candelariaDescription,
-                new Enemy[]{new BibingkaElemental(), new SweetVendor(), new FlamingCandelarian()}, null);
+                new Enemy[]{new BibingkaElemental(player), new SweetVendor(player), new FlamingCandelarian(player)}, null);
 
         Town tiaong = new Town("Tiaong", tiaongDescription,
-                new Enemy[]{new PugonPhantom(), new TiaongKnight()}, new DonMariano());
+                new Enemy[]{new PugonPhantom(player), new TiaongKnight(player)}, new DonMariano(player));
 
         // Link sequence
         lucban.setNextTown(lucena);
@@ -88,21 +87,21 @@ public class WorldMap {
         return lucban;
     }
 
-    public static Town buildEastPath() {
+    public static Town buildEastPath(Player player) {
         Town gumaca = new Town("Gumaca", gumacaDescription,
-                new Enemy[]{new FestivalMask(), new KipingGolem(), new Sirena()}, null);
+                new Enemy[]{new FestivalMask(player), new KipingGolem(player), new Sirena(player)}, null);
 
         Town lopez = new Town("Lopez", lopezDescription,
-                new Enemy[]{new SumanMimic(), new LopezWolf()}, new OldTrainSpirit());
+                new Enemy[]{new SumanMimic(player), new LopezWolf(player)}, new OldTrainSpirit(player));
 
         Town calauag = new Town("Calauag", calauagDescription,
-                new Enemy[]{new FisherRogue(), new SeaWidow(), new CalauagBandit()}, null);
+                new Enemy[]{new FisherRogue(player), new SeaWidow(player), new CalauagBandit(player)}, null);
 
         Town infanta = new Town("Infanta", infantaDescription,
-                new Enemy[]{new ForestNymph(), new HoneyGuardian(), new InfantaShade()}, null);
+                new Enemy[]{new ForestNymph(player), new HoneyGuardian(player), new InfantaShade(player)}, null);
 
         Town real = new Town("Real", realDescription,
-                new Enemy[]{new WaveFiend(), new RealSpecter()}, new QueenAmihan());
+                new Enemy[]{new WaveFiend(player), new RealSpecter(player)}, new QueenAmihan(player));
 
         // Link sequence
         gumaca.setNextTown(lopez);

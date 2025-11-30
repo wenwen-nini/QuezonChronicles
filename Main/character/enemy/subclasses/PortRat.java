@@ -7,14 +7,16 @@ import Main.styles.printAlignmentHub.CenterHub;
 
 public class PortRat extends Enemy{
 
-    public PortRat(){
+    public PortRat(Player player){
         setName("Port Rat");
         // Early-mid game enemy - Town 2
-        setMaxHp(60);
-        setHp(60);
-        setAttackPower(12);
-        setDefense(4);
-        setSpeed(13);
+        double levelScaler = (player.getLevel());
+
+        setMaxHp((int) (70 + Math.floor(levelScaler * 6 * 1.3)));
+        setHp((int) (70 + Math.floor(levelScaler * 6 * 1.3)));
+        setAttackPower((int) (10 + Math.floor(levelScaler * 0.8 * 1.3)));
+        setDefense((int) (5 + Math.floor(levelScaler * 0.2 * 1.3)));
+        setSpeed(8);
 
         setExpReward(40);
 
@@ -30,11 +32,11 @@ public class PortRat extends Enemy{
     int baseDamage = getAttackPower();
     if (baseDamage < 0) baseDamage = 0;
 
-    // Critical hit mechanic
-    double critChance = 0.2;
+    // Critical hit mechanic (rarer and softer to avoid spikes)
+    double critChance = 0.08;
     double critRoll = Math.random();
     if (critRoll < critChance) {
-        baseDamage *= 2; // Critical hit doubles damage
+        baseDamage = (int)Math.round(baseDamage * 1.1); 
         centerHub.printRightTextWithTypeWriter(textColor.RED + "Critical hit!" + textColor.RESET);
     }
 

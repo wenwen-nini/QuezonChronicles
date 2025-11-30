@@ -45,7 +45,7 @@ public class GameMenu {
                 input.nextLine();
             } catch (Exception e) {
                 input.nextLine();
-                ClearScreen.clear();
+                clearScreen.clear();
                 System.out.println("Invalid input. Please enter a number.");
                 continue;
             }
@@ -60,18 +60,18 @@ public class GameMenu {
                             input.nextLine();
                         } catch (Exception e) {
                             input.nextLine();
-                            ClearScreen.clear();
+                            clearScreen.clear();
                             System.out.println("Invalid input. Please enter a number.");
                             continue;
                         }
                         if (confirmChoice1 == 1) {
-                            ClearScreen.clear();
+                            clearScreen.clear();
                             player = new Bruid(name);
                             System.out.println(textColor.GREEN + "You have selected the Bruid class." + textColor.RESET);
                             break;
                         } 
                         else if (confirmChoice1 == 2) {
-                            ClearScreen.clear();
+                            clearScreen.clear();
                             player = new Bruid(name);
                             System.out.println("======================================================================== SKILLS =====================================================================");
                             for (int i = 0; i < player.getAttackMoves().length; i++) {
@@ -82,11 +82,11 @@ public class GameMenu {
                             System.out.println("=====================================================================================================================================================");
                         } 
                         else if (confirmChoice1 == 3) {
-                            ClearScreen.clear();
+                            clearScreen.clear();
                             player = null;
                             continue;
                         } else {
-                            ClearScreen.clear();
+                            clearScreen.clear();
                             System.out.println("Invalid input. Try again.");
                         }
                     } while (confirmChoice1 != 3 && player == null);
@@ -101,18 +101,18 @@ public class GameMenu {
                             input.nextLine();
                         } catch (Exception e) {
                             input.nextLine();
-                            ClearScreen.clear();
+                            clearScreen.clear();
                             System.out.println("Invalid input. Please enter a number.");
                             continue;
                         }
                         if (confirmChoice2 == 1) {
-                            ClearScreen.clear();
+                            clearScreen.clear();
                             player = new Mage(name);
                             System.out.println(textColor.BLUE + "You have selected the Mage class." + textColor.RESET);
                             break;
                         }
                         else if (confirmChoice2 == 2) {
-                            ClearScreen.clear();
+                            clearScreen.clear();
                             player = new Mage(name);
                             System.out.println("======================================================================== SKILLS =====================================================================");
                             for (int i = 0; i < player.getAttackMoves().length; i++) {
@@ -123,11 +123,11 @@ public class GameMenu {
                             System.out.println("=====================================================================================================================================================");
                         } 
                         else if (confirmChoice2 == 3) {
-                            ClearScreen.clear();
+                            clearScreen.clear();
                             player = null;
                             continue;
                         } else {
-                            ClearScreen.clear();
+                            clearScreen.clear();
                             System.out.println("Invalid input. Try again.");
                         }
                     } while (confirmChoice2 != 3 && player == null);
@@ -142,18 +142,18 @@ public class GameMenu {
                             input.nextLine();
                         } catch (Exception e) {
                             input.nextLine();
-                            ClearScreen.clear();
+                            clearScreen.clear();
                             System.out.println("Invalid input. Please enter a number.");
                             continue;
                         }
                         if (confirmChoice3 == 1) {
-                            ClearScreen.clear();
+                            clearScreen.clear();
                             player = new TagalogMonk(name);
                             System.out.println(textColor.ORANGE + "You have selected the Tagalog Monk class." + textColor.RESET);
                         break;
                         }
                         else if (confirmChoice3 == 2) {
-                            ClearScreen.clear();
+                            clearScreen.clear();
                             player = new TagalogMonk(name);
                             System.out.println("======================================================================== SKILLS =====================================================================");
                             for (int i = 0; i < player.getAttackMoves().length; i++) {
@@ -164,12 +164,12 @@ public class GameMenu {
                             System.out.println("=====================================================================================================================================================");
                         } 
                         else if (confirmChoice3 == 3) {
-                            ClearScreen.clear();
+                            clearScreen.clear();
                             player = null;
                             continue;
                         } 
                         else {
-                            ClearScreen.clear();
+                            clearScreen.clear();
                             System.out.println("Invalid input. Try again.");
                         }
                     } while (confirmChoice3 != 3 && player == null);
@@ -184,18 +184,18 @@ public class GameMenu {
                             input.nextLine();
                         } catch (Exception e) {
                             input.nextLine();
-                            ClearScreen.clear();
+                            clearScreen.clear();
                             System.out.println("Invalid input. Please enter a number.");
                             continue;
                         }
                         if (confirmChoice4 == 1) {
-                            ClearScreen.clear();
+                            clearScreen.clear();
                             player = new Thief(name);
                             System.out.println(textColor.PURPLE + "You have selected the Thief class." + textColor.RESET);
                             break;
                         }
                         else if (confirmChoice4 == 2) {
-                            ClearScreen.clear();
+                            clearScreen.clear();
                             player = new Thief(name);
                             System.out.println("======================================================================== SKILLS =====================================================================");
                             for (int i = 0; i < player.getAttackMoves().length; i++) {
@@ -206,12 +206,12 @@ public class GameMenu {
                             System.out.println("=====================================================================================================================================================");
                         } 
                         else if (confirmChoice4 == 3) {
-                            ClearScreen.clear();
+                            clearScreen.clear();
                             player = null;
                             continue;
                         } 
                         else {
-                            ClearScreen.clear();
+                            clearScreen.clear();
                             System.out.println("Invalid input. Try again.");
                         }
                     } while (confirmChoice4 != 3 && player == null);
@@ -226,18 +226,18 @@ public class GameMenu {
                             input.nextLine();
                         } catch (Exception e) {
                             input.nextLine();
-                            ClearScreen.clear();
+                            clearScreen.clear();
                             System.out.println("Invalid input. Please enter a number.");
                             continue;
                         }
                         if (confirmChoice5 == 1) {
-                            ClearScreen.clear();
+                            clearScreen.clear();
                             player = new Warrior(name);
                             System.out.println(textColor.RED + "You have selected the Warrior class." + textColor.RESET);
                             break;
                         }
                         else if (confirmChoice5 == 2) {
-                            ClearScreen.clear();
+                            clearScreen.clear();
                             player = new Warrior(name);
                             System.out.println("======================================================================== SKILLS =====================================================================");
                             for (int i = 0; i < player.getAttackMoves().length; i++) {
@@ -248,19 +248,19 @@ public class GameMenu {
                             System.out.println("=====================================================================================================================================================");
                         } 
                         else if (confirmChoice5 == 3) {
-                            ClearScreen.clear();
+                            clearScreen.clear();
                             player = null;
                             continue;
                         } 
                         else {
-                            ClearScreen.clear();
+                            clearScreen.clear();
                             System.out.println("Invalid input. Try again.");
                         }
                     } while (confirmChoice5 != 3 && player == null);
                     break;
 
                 default:
-                    ClearScreen.clear();
+                    clearScreen.clear();
                     System.out.println("Invalid input. Try again.");
                     break;
             }
@@ -284,7 +284,7 @@ public class GameMenu {
                 input.nextLine();
             } catch (Exception e) {
                 input.nextLine();
-                ClearScreen.clear();
+                clearScreen.clear();
                 System.out.println("Invalid input. Please enter a number.");
                 continue;
             }
@@ -295,12 +295,12 @@ public class GameMenu {
                     break;
 
                 case 2:
-                    ClearScreen.clear();
+                    clearScreen.clear();
                     player.showStats();
                     break;
 
                 case 3:
-                    ClearScreen.clear();
+                    clearScreen.clear();
                     Item[] inventory = player.getInventory();
                     boolean isEmpty = true;
                     if (inventory != null && inventory.length > 0) {
@@ -324,7 +324,7 @@ public class GameMenu {
                     break;
 
                 default:
-                    ClearScreen.clear();
+                    clearScreen.clear();
                     System.out.println("Invalid choice. Please try again.");
                     break;     
             }
@@ -377,7 +377,7 @@ public class GameMenu {
 
     public void choosePath() {
         
-        ClearScreen.clear();
+        clearScreen.clear();
         
         // Check if player has already chosen a path
         if (player.getChosenPath() != null) {
@@ -387,7 +387,7 @@ public class GameMenu {
             System.out.println("=====================================================================================================================================================");
             
             Town resumeTown = player.getChosenPath().equals("west") ? 
-                worldMap.buildWestPath() : worldMap.buildEastPath();
+                worldMap.buildWestPath(player) : worldMap.buildEastPath(player);
             
             // Navigate to the current town
             Town currentTown = resumeTown;
@@ -423,30 +423,30 @@ public class GameMenu {
             input.nextLine();
         } catch (Exception e) {
             input.nextLine();
-            ClearScreen.clear();
+            clearScreen.clear();
             typeWriter.typeWriterFast("Invalid input. Defaulting to West Side.");
             choice = 1;
         }
         Town startingTown;
 
         if (choice == 1) {
-            ClearScreen.clear();
+            clearScreen.clear();
             typeWriter.typeWriterFast(textColor.RED + "You chose the West Side path!" + textColor.RESET);
             player.setChosenPath("west");
             player.setCurrentTownIndex(0);
-            startingTown = worldMap.buildWestPath();
+            startingTown = worldMap.buildWestPath(player);
         } else if (choice == 2) {
-            ClearScreen.clear();
+            clearScreen.clear();
             typeWriter.typeWriterFast(textColor.BLUE + "You chose the East Side path!" + textColor.RESET);
             player.setChosenPath("east");
             player.setCurrentTownIndex(0);
-            startingTown = worldMap.buildEastPath();
+            startingTown = worldMap.buildEastPath(player);
         } else {
-            ClearScreen.clear();
+            clearScreen.clear();
             typeWriter.typeWriterFast("Invalid choice. Defaulting to West Side.");
             player.setChosenPath("west");
             player.setCurrentTownIndex(0);
-            startingTown = worldMap.buildWestPath();
+            startingTown = worldMap.buildWestPath(player);
         }
 
         startingTown.enterTown(player, 0);
@@ -454,14 +454,13 @@ public class GameMenu {
 
     public void spawnPointMessager() {
 
-        centerHub.printCenteredText(":::::::::  :::::::::   ::::::::  :::        ::::::::   ::::::::  :::    ::: ::::::::::"); 
-        centerHub.printCenteredText(":+:    :+: :+:    :+: :+:    :+: :+:       :+:    :+: :+:    :+: :+:    :+: :+:       ");        
-        centerHub.printCenteredText("+:+    +:+ +:+    +:+ +:+    +:+ +:+       +:+    +:+ +:+        +:+    +:+ +:+       ");        
-        centerHub.printCenteredText("+#++:++#+  +#++:++#:  +#+    +:+ +#+       +#+    +:+ +#+        +#+    +:+ +#++:++#  ");   
-        centerHub.printCenteredText("+#+        +#+    +#+ +#+    +#+ +#+       +#+    +#+ +#+   +#+# +#+    +#+ +#+       ");        
-        centerHub.printCenteredText("#+#        #+#    #+# #+#    #+# #+#       #+#    #+# #+#    #+# #+#    #+# #+#       ");        
-        centerHub.printCenteredText("###        ###    ###  ########  ########## ########   ########   ########  ##########");
+        centerHub.printCenteredText("@@@@@@@  @@@@@@@   @@@@@@  @@@       @@@@@@  @@@  @@@  @@@@@@@  @@@@@@@@ "); 
+        centerHub.printCenteredText("@@!  @@@ @@!  @@@ @@!  @@@ @@!      @@!  @@@ @@!  @@@ !@@       @@!      ");        
+        centerHub.printCenteredText("@!@@!@!  @!@!!@!  @!@  !@! @!!      @!@  !@! @!@  !@! !@! @!@!@ @!!!:!   ");        
+        centerHub.printCenteredText("!!:      !!: :!!  !!:  !!! !!:      !!:  !!! !!:  !!! :!!   !!: !!:      ");   
+        centerHub.printCenteredText(" :        :   : :  : :. :  : ::.: :  : :. :   :.:: :   :: :: :  : :: ::  ");        
         System.out.println();
+        System.out.println();   
         System.out.println("====================================================================== " + textColor.GREEN + "ATIMONAN" + textColor.RESET + " ===================================================================\n");
         String text = "Atimonan rests peacefully between the rising cliffs of the Sierra mountain pass and the gentle waves of the eastern gulf, serving as a calm\n" + 
                       "refuge for travelers beginning their journey. The town is known for its quiet coastal mornings, where fishermen cast their nets at dawn\n" + 

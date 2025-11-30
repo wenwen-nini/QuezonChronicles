@@ -7,14 +7,22 @@ import Main.styles.printAlignmentHub.CenterHub;
 
 public class SeaWidow extends Enemy {
 
-    public SeaWidow() {
+    public SeaWidow(Player player) {
         setName("Sea Widow");
+        double levelScaler = (player.getLevel());
         // Mid game enemy - Town 3 (East)
-        setMaxHp(85);
-        setHp(85);
-        setAttackPower(18); 
-        setDefense(6);
-        setSpeed(7);
+<<<<<<< HEAD
+        setMaxHp((int) (70 + Math.floor(levelScaler * 6 * 1.6)));
+        setHp((int) (70 + Math.floor(levelScaler * 6 * 1.6)));
+        setAttackPower((int) (15 + Math.floor(levelScaler * 0.8 * 1.6)));
+        setDefense((int) (6 + Math.floor(levelScaler * 0.2 * 1.6)));
+=======
+        setMaxHp((int) (85 + Math.floor(levelScaler * 6 * 1.3)));
+        setHp((int) (85 + Math.floor(levelScaler * 6 * 1.3)));
+        setAttackPower((int) (12 + Math.floor(levelScaler * 0.8 * 1.3)));
+        setDefense((int) (6 + Math.floor(levelScaler * 0.2 * 1.3)));
+>>>>>>> 2388a47946fb0ebdc282c68dddf68351cafdfd99
+        setSpeed(8);
 
         setExpReward(70);
 
@@ -29,9 +37,9 @@ public class SeaWidow extends Enemy {
 
         int attackPower = getAttackPower();
 
-        double weakenChance = 0.3; // 30% chance
+        double weakenChance = 0.1; // 10% chance
         if (Math.random() < weakenChance) {
-        player.applyDebuff("attack down", 2); // or any value you want to decrease
+            player.applyDebuff("attack down", 2); // or any value you want to decrease
         }
 
         player.takeDamage(attackPower);

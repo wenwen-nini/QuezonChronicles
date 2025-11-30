@@ -15,8 +15,8 @@ public class Budin extends Item {
         int attackPowerBoost = 2;
         int duration = 2;
 
-        System.out.println(player.getName() + " drinks the Pugon Coffee!");
-        System.out.println(player.getName() + " has temporarily increased their Attack Power by 2");
+        text = player.getName() + " ate the budin";
+        typeWriter.typeWriterFast(text);
         player.addTemporaryAttackBoost(attackPowerBoost, duration);
     }
 }

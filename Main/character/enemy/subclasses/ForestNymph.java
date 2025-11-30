@@ -7,14 +7,15 @@ import Main.styles.printAlignmentHub.CenterHub;
 
 public class ForestNymph extends Enemy {
 
-    public ForestNymph() {
+    public ForestNymph(Player player) {
         setName("Forest Nymph");
+        double levelScaler = (player.getLevel());
         // Mid-late game enemy - Town 4 (East)
-        setMaxHp(95);
-        setHp(95);
-        setAttackPower(20); 
-        setDefense(8);
-        setSpeed(10);
+        setMaxHp((int) (100 + Math.floor(levelScaler * 6 *1.9)));
+        setHp((int) (100 + Math.floor(levelScaler * 6 *1.9)));
+        setAttackPower((int) (21 + Math.floor(levelScaler * 0.8 * 1.9)));
+        setDefense((int) (8 + Math.floor(levelScaler * 0.2 * 1.9)));
+        setSpeed(9);
 
         setExpReward(85);
 
@@ -28,7 +29,7 @@ public class ForestNymph extends Enemy {
         centerHub.printRightTextWithTypeWriter(text);
 
         //healherself
-        heal(18);
+        heal(12);
         player.takeDamage(getAttackPower());
     }
 }

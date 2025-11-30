@@ -8,15 +8,16 @@ import Main.styles.textColor.TextColorHub;
 
 public class Alwynn extends Enemy{
 
-    public Alwynn() {
+    public Alwynn(int townIndex) {
+        double levelScaler = (townIndex + 1.0) / 2.0;
         setName("All in Alwynn");
-        setMaxHp(80);
-        setHp(80);
-        setAttackPower(4);
+        setMaxHp((int)Math.floor(85.0 * levelScaler));
+        setHp((int)Math.floor(85.0 * levelScaler));
+        setAttackPower((int)Math.floor(10.0 * levelScaler));
         setDefense(6);
         setSpeed(8);
 
-        setExpReward(60);
+        setExpReward(300);
 
         // Possible loot
         setPossibleLoot(new Item[]{new Chami(), new CocoJam()});
@@ -25,16 +26,17 @@ public class Alwynn extends Enemy{
     @Override
     public void enemyMove(Player player) {
         String text = getName() + " uses Quezon Zigzag Fury!";
-        centerHub.printRightTextWithTypeWriter(text);
+        centerHub.printRightTextWithTypeWriter(textColor.GREEN + text + textColor.RESET);
         
         String confuseText = getName() + " dashes in a chaotic zigzag pattern, confusing " + player.getName() + " before striking multiple times!";
-        centerHub.printRightTextWithTypeWriter(confuseText);
+        centerHub.printRightTextWithTypeWriter(textColor.GREEN + confuseText + textColor.RESET);
+        centerHub.printRightTextWithTypeWriter(textColor.GREEN + "Marceline toh boy!" + textColor.RESET);
 
         int numberOfHits = 3;
         int totalDamage = 0;
 
         // High critical hit chance
-        double critChance = 0.4;
+        double critChance = 0.28;
 
         for (int i = 0; i < numberOfHits; i++) {
             int baseDamage = getAttackPower();

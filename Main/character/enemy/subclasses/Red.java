@@ -10,16 +10,18 @@ public class Red extends Enemy{
 
     //PLAYERS MUST KILL THIS ENEMY BEFORE THE TIMER HITS 0 for balance have a lot of health
     private int tickingTimer = 5; // Countdown timer before explosion
+    private boolean hasExploded = false; // Track if explosion occurred
 
-    public Red() {
+    public Red(int townIndex) {
+        double levelScaler = (townIndex + 1.0) / 2.0;
         setName("Bomb Devil Red");
-        setMaxHp(100);
-        setHp(100);
-        setAttackPower(16);
+        setMaxHp((int)Math.floor(85.0 * levelScaler));
+        setHp((int)Math.floor(85.0 * levelScaler));
+        setAttackPower((int)Math.floor(16.0 * levelScaler));
         setDefense(6);
         setSpeed(8);
 
-        setExpReward(60);
+        setExpReward(300);
 
         // Possible loot
         setPossibleLoot(new Item[]{new Lambanog(), new PugonCoffee()});
@@ -62,8 +64,13 @@ public class Red extends Enemy{
             
             // Red also dies from the explosion
             setHp(0);
+            hasExploded = true;
             String suicideText = getName() + " perishes in the explosion!";
             centerHub.printRightTextWithTypeWriter(textColor.YELLOW + suicideText + textColor.RESET);
         }
+    }
+
+    public boolean hasExploded() {
+        return hasExploded;
     }
 }

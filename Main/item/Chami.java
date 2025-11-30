@@ -15,7 +15,8 @@ public class Chami extends Item {
     public void useItem(Player player) {
     int healBoost = 40;
 
-    System.out.println(player.getName() + " eats a Chami and restores a +40 HP!");
+    text = player.getName() + " eats a Chami and restores a +40 HP!";
+    typeWriter.typeWriterFast(text);
     player.heal(healBoost);
     }
 }

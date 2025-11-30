@@ -37,6 +37,7 @@ Main/character/enemy/subclasses/OldTrainSpirit.java
 Main/character/enemy/subclasses/KipingGolem.java
 Main/character/enemy/subclasses/LopezWolf.java
 Main/character/enemy/subclasses/RealSpecter.java
+Main/character/enemy/subclasses/Nell.java
 Main/character/enemy/subclasses/Jm.java
 Main/character/enemy/subclasses/LanggonisaLord.java
 Main/character/enemy/subclasses/TiaongKnight.java
@@ -46,9 +47,12 @@ Main/character/enemy/subclasses/PugonPhantom.java
 Main/character/enemy/subclasses/HarborSentinel.java
 Main/character/enemy/subclasses/QueenAmihan.java
 Main/character/enemy/subclasses/PortRat.java
+Main/character/enemy/subclasses/Eduard.java
+Main/character/enemy/subclasses/Red.java
 Main/character/enemy/subclasses/HoneyGuardian.java
 Main/character/enemy/subclasses/FlamingCandelarian.java
 Main/character/enemy/subclasses/Sirena.java
+Main/character/enemy/subclasses/Alwynn.java
 Main/character/enemy/subclasses/CalauagBandit.java
 Main/character/enemy/subclasses/BibingkaElemental.java
 Main/character/enemy/subclasses/HabhabBandit.java

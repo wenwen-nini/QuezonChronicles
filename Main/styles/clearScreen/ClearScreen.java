@@ -2,7 +2,7 @@ package Main.styles.clearScreen;
 
 public class ClearScreen {
 
-    public static void clear() {
+    public void clear() {
     try {
         if (System.getProperty("os.name").contains("Windows")) {
             new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();

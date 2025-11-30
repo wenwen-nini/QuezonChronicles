@@ -9,24 +9,24 @@ public class Warrior extends Player{
 
     private CenterHub centerHub = new CenterHub();
 
-    public static int skillUsedTurn;
+    public int skillUsedTurn;
 
     public Warrior(String name){
         setName(name);
-        // Balanced base stats for Warrior (tank)
-        setMaxHp(140);
-        setHp(140);
-        setStamina(50);
-        setMaxStamina(50);
-        setDefense(12);
-        setAttackPower(18);
-        setSpeed(5);
+        
+        setMaxHp(135);
+        setHp(135);
+        setStamina(70);
+        setMaxStamina(70);
+        setDefense(10);
+        setAttackPower(17);
+        setSpeed(7);
         description =
                 "Forged in battle and tempered by hardship, the Warrior stands as the steadfast heart of every fight. Born from the rugged hills and wide plains,\n" +
                 "Warriors embody the courage of those who fight not for glory, but for karangalan (honor) and kapwa (others).";
 
         // Capture base stats for proper reset behavior
-        setBaseStats(140, 50, 50, 0, 0, 12, 18, 5);
+        setBaseStats(135, 70, 70, 0, 0, 10, 17, 7);
         setUsesMp(false);
 
         setMoves(new String[] {"1. Slash(Basic + no stamina required.)",
@@ -47,11 +47,11 @@ public class Warrior extends Player{
                 break;
 
             case 2:
-                if (getStamina() >= 5){
+                if (getStamina() >= 8){
                     text = "\n" + getName() + " used Cleave!";
                     typeWriter.typeWriterFast(text);
                     setStamina(getStamina() - 5);
-                    target.takeDamage((int) (getAttackPower() * 1.5));
+                    target.takeDamage((int) Math.floor((getAttackPower() * 1.5)));
                     skillUsedTurn();
                     setLastActionSucceeded(true);
                     break;
@@ -63,13 +63,13 @@ public class Warrior extends Player{
                 break;
 
             case 3:
-                if (getStamina() >= 3){
+                if (getStamina() >= 5){
                     text = "\n" + getName() + " used Shield Bash!";
                     typeWriter.typeWriterFast(text);
-                    target.takeDamage((int) (getAttackPower() * 0.5));
+                    target.takeDamage((int) (getAttackPower() * 1.5));
                     double stunChance = 0.25;
                     if(Math.random() <= stunChance){
-                        target.applyDebuff("stun", 3);
+                        target.applyDebuff("stun", 4);
                     }
                     setStamina(getStamina() - 3);
                     setLastActionSucceeded(true);
@@ -94,7 +94,7 @@ public class Warrior extends Player{
                     typeWriter.typeWriterFast(text);
                     heal(15);
                     addStamina(10);
-                    skillUsedTurn = 3;
+                    skillUsedTurn = 2;
                     setLastActionSucceeded(true);
                     break;
                 }
@@ -129,24 +129,24 @@ public class Warrior extends Player{
 	@Override 
 	public void levelStats() {
         // Warrior grows in HP and stamina quickly, modest increases in damage and defense
-        setMaxHp(getMaxHp() + 10);
-        setHp(getHp() + 10);
+        setMaxHp(getMaxHp() + 14);
+        setHp(getHp() + 14);
         setStamina(getStamina() + 5);
         setMaxStamina(getMaxStamina() + 5);
-        setDefense(getDefense() + 1);
+        setDefense(getDefense() + 2);
         setAttackPower(getAttackPower() + 2);
-        setSpeed(getSpeed() + 0);
+        setSpeed(getSpeed() + 2);
 	}
 
 
-    public static void skillUsedTurn() {
+    public void skillUsedTurn() {
       if (skillUsedTurn <= 0) {
          skillUsedTurn = 0;
       }
       else {
          skillUsedTurn--;
          if (skillUsedTurn == 0) {
-            System.out.println("Second Wind is ready!");
+            typeWriter.typeWriterFast("Second Wind is ready!");
          }
       }
    }

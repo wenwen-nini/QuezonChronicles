@@ -7,20 +7,20 @@ import Main.styles.textColor.TextColorHub;
 
 public class Thief extends Player{
 
-    private CenterHub centerHub = new CenterHub();
-
-    public static int skillUsedTurn;
+    public int skillUsedTurnForSkill3 = 0;
+    public int skillUsedTurnForSkill4 = 0;
+	private CenterHub centerHub = new CenterHub();
 
     public Thief(String name){
         setName(name);
         // Balanced base stats for Thief (high speed & crit, glassy)
-        setMaxHp(85);
-        setHp(85);
-        setStamina(60);
-        setMaxStamina(60);
-        setDefense(5);
-        setAttackPower(22);
-        setSpeed(14);
+        setMaxHp(100);
+        setHp(100);
+        setStamina(70);
+        setMaxStamina(70);
+        setDefense(6);
+        setAttackPower(18);
+        setSpeed(10);
         description =
                 "Swift, sly, and sharp as a blade hidden beneath a cloak, the Thief dances between the lines of law and survival.\n" +
                 "Born from the bustling streets, back alleys, and midnight markets, Thieves are experts in deception, timing, and taking what the world refuses to give.\n\n" +
@@ -29,12 +29,12 @@ public class Thief extends Player{
                 "In a world ruled by power, the Thief survives through diskarte.";
 
         // Capture base stats for proper reset behavior
-        setBaseStats(85, 60, 60, 0, 0, 5, 22, 14);
+        setBaseStats(100, 70, 70, 0, 0, 6, 18, 10);
         setUsesMp(false);
 
         setMoves(new String[] {"1. Stab (Basic + no stamina required)",
                                 "2. Critical Edge (One strong hit that always lands critical damage (Cost: 10 Stamina))",
-                                "3. Vanish (Become invisible for 2 turns. Avoid all attacks (Cost: 15 Stamina))",
+                                "3. Vanish (Throws Smoke Bomb that vanishes the Thief, giving 80% to dodge all attacks for 2 turns. (Cost: 15 Stamina))",
                                 "4. Looter's Instinct (regains small HP/stamina on successful steals)"});
         }   
 
@@ -45,7 +45,8 @@ public class Thief extends Player{
                 String text = "\n" + getName() + " used Stab!";
                 typeWriter.typeWriterFast(text);
                 target.takeDamage(getAttackPower());
-                skillUsedTurn();
+                skillUsedTurnForSkill3();
+                skillUsedTurnForSkill4();
                 setLastActionSucceeded(true);
                 break;
 
@@ -54,8 +55,9 @@ public class Thief extends Player{
                     text = "\n" + getName() + " used Critical Edge!";
                     typeWriter.typeWriterFast(text);
                     setStamina(getStamina() - 10);
-                    target.takeDamage(getAttackPower() * 2);
-                    skillUsedTurn();
+                    target.takeDamage((int)(getAttackPower() * 1.6));
+                    skillUsedTurnForSkill3();
+                    skillUsedTurnForSkill4();
                     setLastActionSucceeded(true);
                 }
                 else {
@@ -65,11 +67,20 @@ public class Thief extends Player{
 
             case 3:
                 if (getStamina() >= 15){
+                    if (skillUsedTurnForSkill3 > 0){
+                        text = "You just used Vanish. Cannot use for " + skillUsedTurnForSkill3 + " more turn(s).";
+                        typeWriter.typeWriterFast(text);
+                        setLastActionSucceeded(false);
+                        break;
+                    }
+                    setStamina(getStamina() - 15);
                     text = "\n" + getName() + " used Vanish!";
                     typeWriter.typeWriterFast(text);
-                    addTemporaryDefenseBoost(100, 2);
-                    setStamina(getStamina() - 15);
-                    skillUsedTurn();
+                    text = getName() + " threw a Smoke Bomb and vanished from sight, giving 80% to dodge all attacks for 2 turns!";
+                    typeWriter.typeWriterFast(text);
+                    addDodgeTurns(2);
+                    skillUsedTurnForSkill3 = 2;
+                    skillUsedTurnForSkill4();
                     setLastActionSucceeded(true);
                 }
                 else {
@@ -78,21 +89,22 @@ public class Thief extends Player{
                 break;
 
             case 4:
-                if(skillUsedTurn > 0){
-               text = "You just used Looter's Instinct. Cannot use for " + skillUsedTurn + " more turn(s).";
-               typeWriter.typeWriterFast(text);
-               setLastActionSucceeded(false);
-               break;
-            }
-            else{
-                text = "\n" + getName() + " used Looter's Instinct!";
-                typeWriter.typeWriterFast(text);
-                heal(8);
-                addStamina(15);
-                skillUsedTurn = 2;
-                setLastActionSucceeded(true);
-                break;
-            }
+                if(skillUsedTurnForSkill4 > 0){
+                    text = "You just used Looter's Instinct. Cannot use for " + skillUsedTurnForSkill4 + " more turn(s).";
+                    typeWriter.typeWriterFast(text);
+                    setLastActionSucceeded(false);
+                    break;
+                }
+                else{
+                    text = "\n" + getName() + " used Looter's Instinct!";
+                    typeWriter.typeWriterFast(text);
+                    heal(10 + (getLevel() * 2));
+                    addStamina(15 + (getLevel() * 2));
+                    skillUsedTurnForSkill4 = 2;
+                    skillUsedTurnForSkill3();
+                    setLastActionSucceeded(true);
+                    break;
+                }
 
             default:
                 typeWriter.typeWriterFast("Invalid move number!");
@@ -125,25 +137,37 @@ public class Thief extends Player{
 	@Override 
 	public void levelStats() {
         // Thief gains small max HP and stamina but grows in speed and critical damage
-        setMaxHp(getMaxHp() + 6);
-        setHp(getHp() + 6);
-        setStamina(getStamina() + 3);
-        setMaxStamina(getMaxStamina() + 3);
-        setDefense(getDefense() + 0);
+        setMaxHp(getMaxHp() + 10);
+        setHp(getHp() + 10);
+        setStamina(getStamina() + 8);
+        setMaxStamina(getMaxStamina() + 8);
+        setDefense(getDefense() + 2);
         setAttackPower(getAttackPower() + 2);
         setSpeed(getSpeed() + 1);
 	}
 
-    public static void skillUsedTurn() {
-    if (skillUsedTurn <= 0) {
-        skillUsedTurn = 0;
-    }
-    else {
-        skillUsedTurn--;
-        if (skillUsedTurn == 0) {
-            System.out.println("Looter's Instinct is ready!");
-        }
+    public void skillUsedTurnForSkill3() {
+      if (skillUsedTurnForSkill3 <= 0) {
+         skillUsedTurnForSkill3 = 0;
       }
+      else {
+         skillUsedTurnForSkill3--;
+         if (skillUsedTurnForSkill3 == 0) {
+            typeWriter.typeWriterFast("Vanish is ready!");
+         }
+      }
+   }
+
+   public void skillUsedTurnForSkill4() {
+	  if (skillUsedTurnForSkill4 <= 0) {
+		 skillUsedTurnForSkill4 = 0;
+	  }
+	  else {
+		 skillUsedTurnForSkill4--;
+		 if (skillUsedTurnForSkill4 == 0) {
+			typeWriter.typeWriterFast("Looter's Instinct is ready!");
+		 }
+	  }
    }
 }
 

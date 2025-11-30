@@ -7,16 +7,17 @@ import Main.styles.printAlignmentHub.CenterHub;
 
 public class HeritageWraith extends Enemy{
 
-    public HeritageWraith() {
+    public HeritageWraith(Player player) {
         setName("Heritage Wraith");
+        double levelScaler = (player.getLevel());
         // Mid game enemy - Town 3
-        setMaxHp(85);
-        setHp(85);
-        setAttackPower(18);
-        setDefense(6);
-        setSpeed(9);
+        setMaxHp((int) (70 + Math.floor(levelScaler * 6 *1.3)));
+        setHp((int) (70 + Math.floor(levelScaler * 6 * 1.3)));
+        setAttackPower((int) (10 + Math.floor(levelScaler * 0.8 * 1.3)));
+        setDefense((int) (4 + Math.floor(levelScaler * 0.2 * 1.3)));
+        setSpeed(8);
 
-        setExpReward(70);
+        setExpReward(100);
 
         // Possible loot
         setPossibleLoot(new Item[]{new Pinagong(), new Budin()});
@@ -31,10 +32,10 @@ public class HeritageWraith extends Enemy{
     if (baseDamage < 0) baseDamage = 0;
 
     // Critical hit mechanic
-    double critChance = 0.2;
+    double critChance = 0.14;
     double critRoll = Math.random();
     if (critRoll < critChance) {
-        baseDamage *= 2; // Critical hit doubles damage
+        baseDamage = (int)Math.floor(baseDamage * 1.2); // Critical hit doubles damage
         centerHub.printRightTextWithTypeWriter(textColor.RED + "Critical hit!" + textColor.RESET);
     }
 

@@ -14,8 +14,10 @@ public class Bibingka extends Item {
     public void useItem(Player player) {
         int healBoost = 25;
 
-        System.out.println(player.getName() + " eats a Bibingka!");
-        System.out.println(player.getName() + " restores a +25 HP and clear all debuffs!");
+        text = player.getName() + " eats a Bibingka!";
+        typeWriter.typeWriterFast(text);
+        text = player.getName() + " restores a +25 HP and clear all debuffs!";
+        typeWriter.typeWriterFast(text);
         player.heal(healBoost);
         player.removeDebuff();
     }

@@ -7,19 +7,20 @@ import Main.styles.printAlignmentHub.CenterHub;
 
 public class SumanMimic extends Enemy {
 
-    public SumanMimic() {
+    public SumanMimic(Player player) {
         setName("Suman Mimic");
+        double levelScaler = (player.getLevel());
         // Early-mid game enemy - Town 2 (East)
-        setMaxHp(60);
-        setHp(60);
-        setAttackPower(12);
-        setDefense(4);
-        setSpeed(6);
+        setMaxHp((int) (70 + Math.floor(levelScaler * 6 * 1.3)));
+        setHp((int) (70 + Math.floor(levelScaler * 6 * 1.3)));
+        setAttackPower((int) (14 + Math.floor(levelScaler * 0.8 * 1.3)));
+        setDefense((int) (5 + Math.floor(levelScaler * 0.2 * 1.3)));
+        setSpeed(8);
 
         setExpReward(40);
 
         // Possible loot
-        setPossibleLoot(new Item[]{new Tinuto(), new PugonCoffee()});
+        setPossibleLoot(new Item[]{new SumanIbos(), new LopezCocoaDrink()});
     }
 
     @Override
@@ -31,9 +32,8 @@ public class SumanMimic extends Enemy {
         player.takeDamage(damage);
 
         int healAmount = 2;
-        heal(healAmount);
-
         String text = getName() + " absorbs energy from the hit and heals " + healAmount + " HP!";
         centerHub.printRightTextWithTypeWriter(text);
+        heal(healAmount);
     }
 }

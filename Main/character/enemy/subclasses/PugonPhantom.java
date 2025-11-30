@@ -7,16 +7,17 @@ import Main.styles.printAlignmentHub.CenterHub;
 
 public class PugonPhantom extends Enemy {
 
-    public PugonPhantom() {
+    public PugonPhantom(Player player) {
         setName("Pugon Phantom");
+        double levelScaler = (player.getLevel());
         // Late game enemy - Town 5
-        setMaxHp(115);
-        setHp(115);
-        setAttackPower(24);
-        setDefense(10);
+        setMaxHp((int) (100 + Math.floor(levelScaler * 6 * 2.2)));
+        setHp((int) (100 + Math.floor(levelScaler * 6 * 2.2)));
+        setAttackPower((int) (19 + Math.floor(levelScaler * 0.8 * 2.2)));
+        setDefense((int) (7 + Math.floor(levelScaler * 0.2 * 2.2)));
         setSpeed(10);
         
-        setExpReward(110);
+        setExpReward(150);
 
         // Possible loot
         setPossibleLoot(new Item[]{new Tinuto(), new PugonCoffee()});

@@ -37,7 +37,7 @@ public class Eduard extends Enemy{
         player.takeDamage(baseDamage);
 
         // 50% chance to stun player for 2 turns (only if not already stunned and skill is not on cooldown)
-        double stunChance = 0.5;
+        double stunChance = 0.3;
         double stunRoll = Math.random();
         if (stunRoll < stunChance && getSkillUsedTurn() <= 0) {
             // Check if player already has stun debuff

@@ -7,12 +7,12 @@ public class AdobongPusit extends Item {
 
     public AdobongPusit() {
         setName(textColor.GREEN + "Adobong Pusit" + textColor.RESET);
-        setDescription("(A savory squid dish that restores +10hp and grants +3 Defense Boost per turn for 2 turns.)");
+        setDescription("(A savory squid dish that restores +30hp and grants +3 Defense Boost per turn for 2 turns.)");
     }
 
     @Override
     public void useItem(Player player) {
-        int healthBoost = 10;
+        int healthBoost = 30;
         int defenseBoost = 3;
         int duration = 2;
 

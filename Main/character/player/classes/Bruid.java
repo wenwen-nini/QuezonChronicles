@@ -14,13 +14,13 @@ public class Bruid extends Player {
 
 	public Bruid(String name) {
 		setName(name);
-		// Balanced base stats for Bruid (support / hybrid)
-		setMaxHp(110);
-		setHp(110);
-		setMp(90);
-		setMaxMp(90);
-		setDefense(9);
-		setAttackPower(17);
+		// Nerfed base stats for Bruid (support / hybrid) - weak damage, strong defense and support
+		setMaxHp(125);
+		setHp(125);
+		setMp(105);
+		setMaxMp(105);
+		setDefense(13);
+		setAttackPower(11);
 		setSpeed(9);
 		description = 
 				"Half forest guardian, half Bisakol wonder, the Bruid is a nature-touched warrior who draws strength from the sacred punò ng saging (banana tree).\n" +
@@ -28,7 +28,7 @@ public class Bruid extends Player {
 				"They are both protectors and pranksters of the wild, often seen communing with their leafy kin while humming folk tunes from the provinces.";
 
 		// Capture base stats for proper reset behavior
-		setBaseStats(110, 0, 0, 90, 90, 9, 17, 9);
+		setBaseStats(125, 0, 0, 105, 105, 13, 11, 9);
 		setUsesMp(true);
 
 		
@@ -62,7 +62,7 @@ public class Bruid extends Player {
 				text = "\n" + getName() + " used Front Shield!";
 				typeWriter.typeWriterFast(text);
 				setMp(getMp() - 10);
-				addTemporaryDefenseBoost((int)(getDefense() * 0.25), 2);
+				addTemporaryDefenseBoost((int)(getDefense() * 0.55), 2);
 				setLastActionSucceeded(true);
 				skillUsedTurnForSkill2 = 2;
 				skillUsedTurnForSkill3();
@@ -82,7 +82,7 @@ public class Bruid extends Player {
             else{
                text = "\n" + getName() + " cast a Mana Grove!";
                typeWriter.typeWriterFast(text);
-               addMp(25);
+               addMp(25 + (getLevel() * 2));
                skillUsedTurnForSkill3 = 2;
 			   skillUsedTurnForSkill2();
                setLastActionSucceeded(true); 
@@ -139,13 +139,13 @@ public class Bruid extends Player {
 
 	@Override 
 	public void levelStats() {
-		// Bruid grows moderately in HP & MP and increases defense and attack steadily
-		setMaxHp(getMaxHp() + 12);
-		setHp(getHp() + 12);
-		setMp(getMp() + 10);
-		setMaxMp(getMaxMp() + 10);
+		// Bruid grows moderately in HP & MP with strong defense scaling
+		setMaxHp(getMaxHp() + 13);
+		setHp(getHp() + 13);
+		setMp(getMp() + 11);
+		setMaxMp(getMaxMp() + 11);
 		setDefense(getDefense() + 2);
-		setAttackPower(getAttackPower() + 2);
+		setAttackPower(getAttackPower() + 1);
 		setSpeed(getSpeed() + 2);
 	}
 

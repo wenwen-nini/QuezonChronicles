@@ -13,14 +13,14 @@ import Main.styles.animationHub.TypeWriter;
 import Main.styles.textColor.TextColorHub;
 
 public abstract class Enemy extends Character {
+    
+    private int expReward;
+    private Item[] possibleLoot = new Item[2];
+    private int skillUsedTurn;
 
     protected CenterHub centerHub = new CenterHub();
     protected TypeWriter typeWriter = new TypeWriter();
     protected TextColorHub textColor = new TextColorHub();
-
-    private int expReward;
-    private Item[] possibleLoot = new Item[2];
-    private int skillUsedTurn;
 
     // Scaling support
     private boolean baseStatsCaptured = false;

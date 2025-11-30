@@ -332,6 +332,12 @@ Level: 2
 
 ---
 
+
+## 👤 Author & Acknowledgement
+
+### Development
+Developed as a comprehensive Java educational project demonstrating OOP principles, design patterns, and game architecture.
+
 ### Information Table
 
 | | Name | Role |

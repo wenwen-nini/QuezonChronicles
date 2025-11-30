@@ -39,7 +39,7 @@ public abstract class Player extends Character {
   protected TextColorHub textColor = new TextColorHub();
   protected TypeWriter typeWriter = new TypeWriter();
 
-	public abstract void showStats();
+  public abstract void showStats();
   public abstract void levelStats();
   public abstract void useMoves(int moveNumber, Character target);
 

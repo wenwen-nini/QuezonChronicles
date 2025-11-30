@@ -11,9 +11,9 @@ public class SeaWidow extends Enemy {
         setName("Sea Widow");
         double levelScaler = (player.getLevel());
         // Mid game enemy - Town 3 (East)
-        setMaxHp((int) (85 + Math.floor(levelScaler * 6 * 1.6)));
-        setHp((int) (85 + Math.floor(levelScaler * 6 * 1.6)));
-        setAttackPower((int) (16 + Math.floor(levelScaler * 0.8 * 1.6)));
+        setMaxHp((int) (70 + Math.floor(levelScaler * 6 * 1.6)));
+        setHp((int) (70 + Math.floor(levelScaler * 6 * 1.6)));
+        setAttackPower((int) (15 + Math.floor(levelScaler * 0.8 * 1.6)));
         setDefense((int) (6 + Math.floor(levelScaler * 0.2 * 1.6)));
         setSpeed(8);
 

@@ -11,8 +11,8 @@ public class KipingGolem extends Enemy {
         setName("Kiping Golem");
         double levelScaler = (player.getLevel());
         // Early game enemy - Town 1 (East)
-        setMaxHp((int) (45 + Math.floor(levelScaler * 6 * 1.0)));
-        setHp((int ) (45 + Math.floor(levelScaler * 6 * 1.0)));
+        setMaxHp((int) (55 + Math.floor(levelScaler * 6 * 1.0)));
+        setHp((int ) (55 + Math.floor(levelScaler * 6 * 1.0)));
         setAttackPower((int) (8 + Math.floor(levelScaler * 0.8 * 1.0)));
         setDefense((int)(2 + Math.floor(levelScaler * 0.2 * 1.0)));
         setSpeed(5);

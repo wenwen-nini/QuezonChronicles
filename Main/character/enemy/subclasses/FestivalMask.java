@@ -11,8 +11,8 @@ public class FestivalMask extends Enemy {
         setName("Festival Mask");
         double levelScaler = (player.getLevel());
         // Early game enemy - Town 1 (East)
-        setMaxHp(45);
-        setHp(45);
+        setMaxHp(50);
+        setHp(50);
         setAttackPower(8);
         setDefense(2);
         setSpeed(5);

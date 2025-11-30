@@ -7,10 +7,9 @@ import Main.styles.textColor.TextColorHub;
 
 public class Thief extends Player{
 
-    private CenterHub centerHub = new CenterHub();
-
     public int skillUsedTurnForSkill3 = 0;
     public int skillUsedTurnForSkill4 = 0;
+	private CenterHub centerHub = new CenterHub();
 
     public Thief(String name){
         setName(name);

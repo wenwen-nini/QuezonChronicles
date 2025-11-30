@@ -104,7 +104,7 @@ public abstract class Enemy extends Character {
         if (player instanceof Mage) {
             hpBias = 0.94;
             atkBias = 0.80;
-            defBias = 0.92;
+            defBias = 0.90;
             spdBias = 1.05;
         } else if (player instanceof Thief) {
             hpBias = 0.96;
@@ -135,7 +135,7 @@ public abstract class Enemy extends Character {
         int capped = Math.max(0, Math.min(townIndex, 4));
         double[] hpMultipliers = {0.65, 0.85, 1.0, 1.08, 1.18};
         double[] atkMultipliers = {0.7, 0.88, 1.03, 1.1, 1.2};
-        double[] defMultipliers = {0.85, 0.95, 1.05, 1.12, 1.18};
+        double[] defMultipliers = {0.85, 0.95, 1.01, 1.12, 1.18};
         return new double[]{hpMultipliers[capped], atkMultipliers[capped], defMultipliers[capped]};
     }
 
@@ -149,7 +149,7 @@ public abstract class Enemy extends Character {
 
     private double getDamageMultiplierForTown(int townIndex) {
         int capped = Math.max(0, Math.min(townIndex, 4));
-        double[] multipliers = {0.82, 0.88, 0.94, 0.60, 0.50};
+        double[] multipliers = {0.82, 0.88, 0.85, 0.60, 0.50};
         return multipliers[capped];
     }
     public Item dropLoot() {
